@@ -1,0 +1,18 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Nowo\TagInputBundle\Form\TagType:
+    arguments:
+      $defaultValueFormat: '%nowo_tag_input.value_format%'
+      $defaultTrim: '%nowo_tag_input.trim%'
+      $defaultPattern: '%nowo_tag_input.pattern%'
+      $defaultWhitelist: '%nowo_tag_input.whitelist%'
+      $defaultDuplicates: '%nowo_tag_input.duplicates%'
+      $defaultMaxTags: '%nowo_tag_input.max_tags%'
+      $defaultDropdownEnabled: '%nowo_tag_input.dropdown_enabled%'
+      $defaultPlaceholder: '%nowo_tag_input.placeholder%'
+    tags:
+      - { name: form.type }

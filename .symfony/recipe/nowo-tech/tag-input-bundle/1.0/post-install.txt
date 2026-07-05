@@ -1,0 +1,2 @@
+  * Run <comment>php bin/console assets:install public</> to publish Tagify assets.
+  * Include <comment>bundles/nowotaginput/tag-input.css</> and <comment>tag-input.js</> in your layout or form template.

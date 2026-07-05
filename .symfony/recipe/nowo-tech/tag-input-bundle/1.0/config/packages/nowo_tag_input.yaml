@@ -1,0 +1,7 @@
+nowo_tag_input:
+    value_format: array
+    trim: true
+    duplicates: false
+    dropdown_enabled: true
+    placeholder: ''
+    form_theme: 'form_div_layout.html.twig'

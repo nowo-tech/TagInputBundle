@@ -1,0 +1,8 @@
+{% use "form_div_layout.html.twig" %}
+
+{% block nowo_tag_input_widget %}
+    <div class="{{ tag_container_class }}"
+         data-nowo-tag-container="1">
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}

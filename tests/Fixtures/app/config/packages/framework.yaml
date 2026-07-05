@@ -1,0 +1,11 @@
+framework:
+    secret: 'integration_test_secret'
+    test: true
+    http_method_override: false
+    handle_all_throwables: true
+    csrf_protection: false
+    form: true
+    session:
+        storage_factory_id: session.storage.factory.mock_file
+    php_errors:
+        log: true
