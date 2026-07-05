@@ -50,7 +50,7 @@ Supported values:
 
 Translation domain: **`NowoTagInputBundle`** (CamelCase, matching the bundle name).
 
-The bundle ships YAML files for `en` and `es` under `src/Resources/translations/`. Symfony loads application translations first; missing keys fall back to the bundle.
+The bundle ships YAML files for `en`, `es`, `de`, `fr`, `it`, `nl`, and `pt` under `src/Resources/translations/`. Symfony loads application translations first; missing keys fall back to the bundle.
 
 ### How to override (application)
 

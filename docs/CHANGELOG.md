@@ -14,6 +14,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Removed
 
+## [1.0.1] - 2026-07-05
+
+### Added
+
+- Translations for `de`, `fr`, `it`, `nl`, and `pt` in the `NowoTagInputBundle` domain.
+- `intl` PHP extension in demo Dockerfiles (`demo/symfony7`, `demo/symfony8`) for Symfony intl features.
+
+### Changed
+
+- Dev toolchain (contributors only): TypeScript **6.0.3**, Vite **8.1.3**, happy-dom **20.10.6**.
+- GitHub Actions: `actions/checkout@v7`, `actions/cache@v6`, `actions/github-script@v9`.
+- [CONFIGURATION.md](CONFIGURATION.md): translation locales list updated (`en`, `es`, `de`, `fr`, `it`, `nl`, `pt`).
+
+### Fixed
+
+- None.
+
 ## [1.0.0] - 2026-07-05
 
 First public release of **TagInputBundle** on [GitHub](https://github.com/nowo-tech/TagInputBundle).
@@ -34,4 +51,5 @@ First public release of **TagInputBundle** on [GitHub](https://github.com/nowo-t
 - CI (PHPUnit, PHP-CS-Fixer, PHPStan, Rector dry-run, coverage), release workflows, Dependabot (Composer, GitHub Actions, npm), and Scrutinizer integration.
 - Alignment with Nowo bundle standards (`REQ-*` traceability, Makefile `release-check`, Engram MCP).
 
+[1.0.1]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.0.1
 [1.0.0]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.0.0

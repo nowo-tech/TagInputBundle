@@ -25,6 +25,16 @@ This document describes upgrade notes for `TagInputBundle`.
 
 Per-field options override globals; see [Configuration](CONFIGURATION.md) and [Usage](USAGE.md).
 
+## 1.0.1 (2026-07-05)
+
+Maintenance release. **No breaking changes** for bundle consumers.
+
+- New placeholder translations: `de`, `fr`, `it`, `nl`, `pt` (domain `NowoTagInputBundle`).
+- Demo Docker images install the `intl` PHP extension (demo infrastructure only).
+- Contributor toolchain bumps: TypeScript 6, Vite 8, happy-dom 20, and updated GitHub Actions pins.
+
+Upgrade from `1.0.0` with `composer update nowo-tech/tag-input-bundle` — no application code changes required.
+
 ## 1.0.0 (2026-07-05)
 
 Initial public release. There is no earlier tagged version to migrate from.
@@ -38,7 +48,7 @@ After `composer require nowo-tech/tag-input-bundle`:
 
 ## Breaking changes
 
-No breaking changes are documented after `1.0.0`.
+No breaking changes are documented after `1.0.0` (including `1.0.1`).
 
 When a future release introduces BC breaks, this file will include:
 
