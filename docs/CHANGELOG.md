@@ -1,0 +1,37 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+
+## [Unreleased]
+
+### Added
+
+### Changed
+
+### Fixed
+
+### Removed
+
+## [1.0.0] - 2026-07-05
+
+First public release of **TagInputBundle** on [GitHub](https://github.com/nowo-tech/TagInputBundle).
+
+### Added
+
+- `TagType` Symfony form type with Tagify UI for multi-tag text inputs.
+- `TagsToValueTransformer` mapping Tagify JSON payloads to model values as `array<string>` or comma-separated `string` (`ValueFormat` enum).
+- Global defaults and form theme selection via `nowo_tag_input` configuration (`value_format`, `trim`, `pattern`, `whitelist`, `duplicates`, `max_tags`, `dropdown_enabled`, `placeholder`, `form_theme`).
+- Twig form themes for div, table, Bootstrap 3–5 (incl. horizontal), Foundation 5–6, and Tailwind 2 layouts.
+- TypeScript + Vite assets (`tag-input.ts`, `logger.ts`) built to `src/Resources/public/tag-input.js` and `tag-input.css`.
+- Translations (`NowoTagInputBundle` domain) for `en` and `es`.
+- Symfony Flex recipe (`.symfony/recipe/nowo-tech/tag-input-bundle/1.0/`).
+- FrankenPHP demos under `demo/symfony7` and `demo/symfony8` with Web Profiler, debug toolbar, and Twig Inspector.
+- PHPUnit suite (`tests/Unit`, `tests/Integration`) with **100%** PHP line coverage; Vitest suite for frontend assets.
+- Documentation set (`INSTALLATION`, `CONFIGURATION`, `USAGE`, `SECURITY`, `UPGRADING`, `RELEASE`, `ENGRAM`, `SPEC-DRIVEN-DEVELOPMENT`, `DEMO-FRANKENPHP`).
+- Twig and translation override procedures in [CONFIGURATION.md](CONFIGURATION.md).
+- CI (PHPUnit, PHP-CS-Fixer, PHPStan, Rector dry-run, coverage), release workflows, Dependabot (Composer, GitHub Actions, npm), and Scrutinizer integration.
+- Alignment with Nowo bundle standards (`REQ-*` traceability, Makefile `release-check`, Engram MCP).
+
+[1.0.0]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.0.0
