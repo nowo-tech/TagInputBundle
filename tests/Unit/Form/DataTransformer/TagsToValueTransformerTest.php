@@ -143,7 +143,7 @@ final class TagsToValueTransformerTest extends TestCase
     public function testTransformIgnoresUnsupportedModelValues(): void
     {
         $transformer = new TagsToValueTransformer(ValueFormat::ARRAY);
-        $value = 42;
+        $value       = 42;
 
         // @phpstan-ignore argument.type (invalid model value)
         self::assertSame('', $transformer->transform($value));
@@ -152,7 +152,7 @@ final class TagsToValueTransformerTest extends TestCase
     public function testTransformSkipsNonStringArrayItems(): void
     {
         $transformer = new TagsToValueTransformer(ValueFormat::ARRAY);
-        $value = ['php', 42, null];
+        $value       = ['php', 42, null];
 
         // @phpstan-ignore argument.type (mixed tag list)
         self::assertSame('["php"]', $transformer->transform($value));
