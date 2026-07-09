@@ -25,6 +25,16 @@ This document describes upgrade notes for `TagInputBundle`.
 
 Per-field options override globals; see [Configuration](CONFIGURATION.md) and [Usage](USAGE.md).
 
+## 1.0.2 (2026-07-09)
+
+Documentation and maintainer-tooling release. **No breaking changes** for bundle consumers.
+
+- GitHub Spec Kit baseline (`.specify/`, `specs/001-baseline/`, Cursor skills) and new [`SPEC-KIT.md`](SPEC-KIT.md).
+- [`SECURITY.md`](SECURITY.md) and [`SPEC-DRIVEN-DEVELOPMENT.md`](SPEC-DRIVEN-DEVELOPMENT.md) corrected for TagInputBundle (removed stale OTP-input wording).
+- Demo Makefile variable rename (`DOCKER_COMPOSE`); demo lock-file cleanup.
+
+Upgrade from `1.0.1` with `composer update nowo-tech/tag-input-bundle` — no application code changes required.
+
 ## 1.0.1 (2026-07-05)
 
 Maintenance release. **No breaking changes** for bundle consumers.
@@ -48,7 +58,7 @@ After `composer require nowo-tech/tag-input-bundle`:
 
 ## Breaking changes
 
-No breaking changes are documented after `1.0.0` (including `1.0.1`).
+No breaking changes are documented after `1.0.0` (including `1.0.1` and `1.0.2`).
 
 When a future release introduces BC breaks, this file will include:
 

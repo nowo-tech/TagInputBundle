@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 // This file is auto-generated and is for apps only. Bundles SHOULD NOT rely on its content.
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
@@ -741,9 +739,14 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     excluded_ajax_paths?: scalar|Param|null, // Default: "^/((index|app(_[\\w]+)?)\\.php/)?_wdt"
  * }
  * @psalm-type NowoTagInputConfig = array{
- *     length?: int|Param, // Default: 6
- *     numeric_only?: bool|Param, // Default: true
- *     uppercase?: bool|Param, // Default: true
+ *     value_format?: "array"|"string"|Param, // Default: "array"
+ *     trim?: bool|Param, // Default: true
+ *     pattern?: scalar|Param|null, // Default: null
+ *     whitelist?: list<scalar|Param|null>,
+ *     duplicates?: bool|Param, // Default: false
+ *     max_tags?: int|Param, // Default: null
+ *     dropdown_enabled?: bool|Param, // Default: true
+ *     placeholder?: scalar|Param|null, // Default: ""
  *     form_theme?: scalar|Param|null, // Default: "form_div_layout.html.twig"
  * }
  * @psalm-type NowoTwigInspectorConfig = array{

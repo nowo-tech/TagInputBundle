@@ -27,6 +27,7 @@ FrankenPHP worker mode: Not declared as supported for this bundle at the moment.
 - [Security](docs/SECURITY.md)
 - [Engram](docs/ENGRAM.md)
 - [Spec-driven development](docs/SPEC-DRIVEN-DEVELOPMENT.md)
+- [GitHub Spec Kit](docs/SPEC-KIT.md)
 
 ### Additional documentation
 
@@ -58,7 +59,7 @@ The submitted value is an array of strings by default, e.g. `['php', 'symfony']`
 
 ## Version information
 
-Current stable release: **v1.0.1** ([changelog](docs/CHANGELOG.md)).
+Current stable release: **v1.0.2** ([changelog](docs/CHANGELOG.md)).
 
 ## Tests and coverage
 
