@@ -30,7 +30,7 @@ This bundle provides:
 - one Symfony form type (`TagType`)
 - one data transformer (`TagsToValueTransformer`)
 - Twig form theme templates
-- a TypeScript behavior that syncs visible Tag inputs with one hidden form value
+- a TypeScript behavior that syncs visible Tag inputs with one hidden form value (Tagify JSON)
 
 There are no HTTP controllers, no API endpoints, no persistence layer, and no cryptographic operations in this bundle.
 
@@ -38,13 +38,12 @@ There are no HTTP controllers, no API endpoints, no persistence layer, and no cr
 
 - **Input normalization**
   - Tag values are normalized server-side through `TagsToValueTransformer`.
-  - Non-allowed characters are removed (`numeric_only` or alphanumeric mode).
-  - Value length is bounded by configuration (`length`, min 3, max 12).
-  - Optional uppercase normalization is applied.
+  - Optional `pattern` (regex) and `whitelist` restrict allowed values.
+  - Optional `max_tags` bounds the number of tags per field.
+  - `trim` removes leading/trailing whitespace (default: true).
+  - `duplicates` controls whether repeated tags are kept.
 - **Frontend constraints**
-  - The browser-side script sanitizes per-character input and pasted values.
-  - Hidden field value is derived from sanitized visible inputs.
-  - Frontend checks improve UX only; server-side normalization remains the trust boundary.
+  - The browser-side script improves UX; server-side normalization remains the trust boundary.
 - **XSS**
   - The bundle does not inject untrusted HTML.
   - Twig templates render standard form inputs and escaped attributes.
@@ -70,12 +69,11 @@ Before tagging a release, confirm:
 | **`.gitignore` and `.env`** | `.env` and local env files are ignored; no committed secrets. |
 | **No secrets in repo** | No API keys, passwords, or tokens in tracked files. |
 | **Recipe / Flex** | Default recipe or installer templates do not ship production secrets. |
-| **Input / output** | Tag input normalization and allowed-character rules are preserved; outputs escaped in Twig/templates where user-controlled. |
+| **Input / output** | Tag `pattern`, `whitelist`, and `max_tags` behave as documented; outputs escaped in Twig/templates. |
 | **Dependencies** | `composer audit` run; issues triaged. |
 | **Logging** | Logs do not print secrets, tokens, or session identifiers unnecessarily. |
-| **Cryptography** | If used: keys from secure config; never hardcoded. |
-| **Permissions / exposure** | Routes and admin features documented; roles configured for production. |
-| **Limits / DoS** | Timeouts, size limits, rate limits where applicable. |
+| **Cryptography** | N/A — no custom cryptography in this bundle. |
+| **Permissions / exposure** | Form fields inherit host-app authorization; no public routes in bundle. |
+| **Limits / DoS** | Use `max_tags` and application-level payload limits for large submissions. |
 
 Record confirmation in the release PR or tag notes.
-

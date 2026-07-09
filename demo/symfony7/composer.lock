@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b42955f2365095a0677daa60421029a9",
+    "content-hash": "dd07be225bce16cca69f2f91506f303f",
     "packages": [
         {
-            "name": "nowo-tech/otp-input-bundle",
+            "name": "nowo-tech/tag-input-bundle",
             "version": "dev-main",
             "dist": {
                 "type": "path",
-                "url": "/var/otp-input-bundle",
-                "reference": "434658382f64dd5da9f656220d222c230591e340"
+                "url": "/var/tag-input-bundle",
+                "reference": "a2cfaa6fff9f38de7a484b3c255a3b134dc5b416"
             },
             "require": {
                 "php": ">=8.1 <8.6",
@@ -38,12 +38,12 @@
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
-                    "Nowo\\OtpInputBundle\\": "src/"
+                    "Nowo\\TagInputBundle\\": "src/"
                 }
             },
             "autoload-dev": {
                 "psr-4": {
-                    "Nowo\\OtpInputBundle\\Tests\\": "tests/"
+                    "Nowo\\TagInputBundle\\Tests\\": "tests/"
                 }
             },
             "archive": {
@@ -94,22 +94,21 @@
                     "homepage": "https://nowo.tech"
                 }
             ],
-            "description": "Symfony OTP FormType with multi-input UI mapped to a single field value.",
-            "homepage": "https://github.com/nowo-tech/OtpInputBundle",
+            "description": "Symfony Tag FormType with Tagify UI for multi-tag text inputs.",
+            "homepage": "https://github.com/nowo-tech/TagInputBundle",
             "keywords": [
-                "2fa",
                 "form",
                 "form-type",
-                "one-time-password",
-                "otp",
                 "symfony",
                 "symfony-bundle",
+                "tagify",
+                "tags",
                 "typescript",
                 "vite"
             ],
             "support": {
-                "issues": "https://github.com/nowo-tech/OtpInputBundle/issues",
-                "source": "https://github.com/nowo-tech/OtpInputBundle"
+                "issues": "https://github.com/nowo-tech/TagInputBundle/issues",
+                "source": "https://github.com/nowo-tech/TagInputBundle"
             },
             "transport-options": {
                 "relative": false
@@ -3713,16 +3712,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v3.27.1",
+            "version": "v3.28.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "ae2071bffb38f04847fc0864d730c94b9cb8ab74"
+                "reference": "597c12ed286fb9d1701a36684ce6e0cbe28ebc8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ae2071bffb38f04847fc0864d730c94b9cb8ab74",
-                "reference": "ae2071bffb38f04847fc0864d730c94b9cb8ab74",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/597c12ed286fb9d1701a36684ce6e0cbe28ebc8b",
+                "reference": "597c12ed286fb9d1701a36684ce6e0cbe28ebc8b",
                 "shasum": ""
             },
             "require": {
@@ -3777,7 +3776,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-                "source": "https://github.com/twigphp/Twig/tree/v3.27.1"
+                "source": "https://github.com/twigphp/Twig/tree/v3.28.0"
             },
             "funding": [
                 {
@@ -3789,22 +3788,22 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-30T17:09:26+00:00"
+            "time": "2026-07-03T20:44:34+00:00"
         }
     ],
     "packages-dev": [
         {
             "name": "nowo-tech/twig-inspector-bundle",
-            "version": "v1.0.33",
+            "version": "v1.0.34",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nowo-tech/TwigInspectorBundle.git",
-                "reference": "4c681ef6f8d17e50cd1b6417b63f6a6bbbf7032b"
+                "reference": "e926c092b6df59edaded71ec011075e67190c783"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nowo-tech/TwigInspectorBundle/zipball/4c681ef6f8d17e50cd1b6417b63f6a6bbbf7032b",
-                "reference": "4c681ef6f8d17e50cd1b6417b63f6a6bbbf7032b",
+                "url": "https://api.github.com/repos/nowo-tech/TwigInspectorBundle/zipball/e926c092b6df59edaded71ec011075e67190c783",
+                "reference": "e926c092b6df59edaded71ec011075e67190c783",
                 "shasum": ""
             },
             "require": {
@@ -3893,7 +3892,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-06-30T09:51:13+00:00"
+            "time": "2026-07-07T14:45:27+00:00"
         },
         {
             "name": "symfony/debug-bundle",
@@ -4064,7 +4063,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "nowo-tech/otp-input-bundle": 20
+        "nowo-tech/tag-input-bundle": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

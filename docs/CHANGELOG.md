@@ -14,6 +14,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Removed
 
+## [1.0.2] - 2026-07-09
+
+### Added
+
+- [GitHub Spec Kit](https://github.com/github/spec-kit) baseline: `.specify/`, Cursor Agent skills (`.cursor/skills/speckit-*`), and [`specs/001-baseline/`](../specs/001-baseline/) with full `src/` code inventory.
+- [`docs/SPEC-KIT.md`](SPEC-KIT.md): installation, structure, and maintainer usage manual.
+
+### Changed
+
+- [`docs/SPEC-DRIVEN-DEVELOPMENT.md`](SPEC-DRIVEN-DEVELOPMENT.md): three-layer model (Spec Kit + product behavior + `REQ-*` traceability); user stories aligned with tag-input domain.
+- [`docs/SECURITY.md`](SECURITY.md): threat model and release checklist corrected for Tagify/tag options (`pattern`, `whitelist`, `max_tags`) — removed stale OTP-bundle wording.
+- Demo Makefiles (`demo/symfony7`, `demo/symfony8`): `COMPOSE` renamed to `DOCKER_COMPOSE` (Nowo standard).
+- README: link to `docs/SPEC-KIT.md` in the canonical `## Documentation` section.
+- Composer lock files refreshed (bundle root and demos).
+
+### Fixed
+
+- Demo `symfony.lock` (symfony7): removed stale `nowo-tech/otp-input-bundle` entry.
+
 ## [1.0.1] - 2026-07-05
 
 ### Added
@@ -51,5 +70,6 @@ First public release of **TagInputBundle** on [GitHub](https://github.com/nowo-t
 - CI (PHPUnit, PHP-CS-Fixer, PHPStan, Rector dry-run, coverage), release workflows, Dependabot (Composer, GitHub Actions, npm), and Scrutinizer integration.
 - Alignment with Nowo bundle standards (`REQ-*` traceability, Makefile `release-check`, Engram MCP).
 
+[1.0.2]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.0.2
 [1.0.1]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.0.1
 [1.0.0]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.0.0
