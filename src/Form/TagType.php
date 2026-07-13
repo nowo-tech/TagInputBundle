@@ -82,7 +82,7 @@ final class TagType extends AbstractType
             if (is_array($modelData) && $modelData !== []) {
                 $view->vars['value'] = json_encode(array_values($modelData), JSON_THROW_ON_ERROR);
             } elseif (is_string($modelData) && $modelData !== '') {
-                $tags                = array_map('trim', explode(',', $modelData));
+                $tags                = array_map(trim(...), explode(',', $modelData));
                 $view->vars['value'] = json_encode(array_values(array_filter($tags, static fn (string $tag): bool => $tag !== '')), JSON_THROW_ON_ERROR);
             }
         }

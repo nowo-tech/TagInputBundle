@@ -85,12 +85,12 @@ final class TagsToValueTransformer implements DataTransformerInterface
      */
     private function normalizeModelTags(mixed $value): array
     {
-        if ($value === null || $value === '' || $value === []) {
+        if (in_array($value, [null, '', []], true)) {
             return [];
         }
 
         if (is_string($value)) {
-            $items = array_map('trim', explode(',', $value));
+            $items = array_map(trim(...), explode(',', $value));
         } elseif (is_array($value)) {
             $items = $value;
         } else {
@@ -140,7 +140,7 @@ final class TagsToValueTransformer implements DataTransformerInterface
             return $this->extractTagsFromDecoded(is_array($decoded) ? $decoded : []);
         }
 
-        return array_map('trim', explode(',', $trimmed));
+        return array_map(trim(...), explode(',', $trimmed));
     }
 
     /**
@@ -205,9 +205,7 @@ final class TagsToValueTransformer implements DataTransformerInterface
 
     private function normalizeTag(string $tag): string
     {
-        $tag = $this->trim ? trim($tag) : $tag;
-
-        return $tag;
+        return $this->trim ? trim($tag) : $tag;
     }
 
     /**

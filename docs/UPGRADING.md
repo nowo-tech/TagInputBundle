@@ -25,6 +25,16 @@ This document describes upgrade notes for `TagInputBundle`.
 
 Per-field options override globals; see [Configuration](CONFIGURATION.md) and [Usage](USAGE.md).
 
+## 1.0.3 (2026-07-13)
+
+Maintenance release. **No breaking changes** for bundle consumers.
+
+- Contributor toolchain: `@types/node` 26, `codecov/codecov-action` v7.
+- Composer lock refresh (php-cs-fixer, rector; demo `twig-inspector-bundle` v1.0.35).
+- Rector skips Symfony test fixture cache (`tests/Fixtures/app/var`).
+
+Upgrade from `1.0.2` with `composer update nowo-tech/tag-input-bundle` — no application code changes required.
+
 ## 1.0.2 (2026-07-09)
 
 Documentation and maintainer-tooling release. **No breaking changes** for bundle consumers.
@@ -58,7 +68,7 @@ After `composer require nowo-tech/tag-input-bundle`:
 
 ## Breaking changes
 
-No breaking changes are documented after `1.0.0` (including `1.0.1` and `1.0.2`).
+No breaking changes are documented after `1.0.0` (including `1.0.1`, `1.0.2`, and `1.0.3`).
 
 When a future release introduces BC breaks, this file will include:
 

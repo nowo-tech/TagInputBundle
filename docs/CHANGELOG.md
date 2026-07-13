@@ -14,6 +14,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Removed
 
+## [1.0.3] - 2026-07-13
+
+### Changed
+
+- Contributor toolchain (dev only): `@types/node` **26.1.0**.
+- GitHub Actions: `codecov/codecov-action@v7`.
+- Composer lock refresh: `friendsofphp/php-cs-fixer` **v3.95.13**, `rector/rector` **2.5.6**; demo locks updated for `nowo-tech/twig-inspector-bundle` **v1.0.35**.
+- `.gitignore`: ignore `.cursor/sandbox.json` (machine-specific Cursor sandbox config).
+- Rector: skip `tests/Fixtures/app/var` (Symfony test cache; aligned with PHPStan exclusions).
+- Internal refactors from Rector **2.5.6** (first-class callables, reflection cleanup); no behavior change.
+
 ## [1.0.2] - 2026-07-09
 
 ### Added
@@ -70,6 +81,7 @@ First public release of **TagInputBundle** on [GitHub](https://github.com/nowo-t
 - CI (PHPUnit, PHP-CS-Fixer, PHPStan, Rector dry-run, coverage), release workflows, Dependabot (Composer, GitHub Actions, npm), and Scrutinizer integration.
 - Alignment with Nowo bundle standards (`REQ-*` traceability, Makefile `release-check`, Engram MCP).
 
+[1.0.3]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.0.3
 [1.0.2]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.0.2
 [1.0.1]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.0.1
 [1.0.0]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.0.0
