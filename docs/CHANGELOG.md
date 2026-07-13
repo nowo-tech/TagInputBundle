@@ -18,7 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
-- Contributor toolchain (dev only): `@types/node` **26.1.0**.
+- Contributor toolchain (dev only): `@types/node` **26.1.1**.
 - GitHub Actions: `codecov/codecov-action@v7`.
 - Composer lock refresh: `friendsofphp/php-cs-fixer` **v3.95.13**, `rector/rector` **2.5.6**; demo locks updated for `nowo-tech/twig-inspector-bundle` **v1.0.35**.
 - `.gitignore`: ignore `.cursor/sandbox.json` (machine-specific Cursor sandbox config).
