@@ -21,7 +21,7 @@
     "@yaireo/tagify": "^4.35.6"
   },
   "devDependencies": {
-    "@types/node": "^26.1.0",
+    "@types/node": "^26.1.1",
     "@vitest/coverage-v8": "^2.1.9",
     "happy-dom": "^20.10.6",
     "typescript": "^6.0.3",
