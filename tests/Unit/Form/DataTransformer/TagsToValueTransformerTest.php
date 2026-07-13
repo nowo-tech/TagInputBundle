@@ -183,7 +183,6 @@ final class TagsToValueTransformerTest extends TestCase
     {
         $transformer = new TagsToValueTransformer(ValueFormat::ARRAY);
         $method      = new ReflectionMethod(TagsToValueTransformer::class, 'parseSubmittedTags');
-        $method->setAccessible(true);
 
         self::assertSame([], $method->invoke($transformer, '   '));
     }

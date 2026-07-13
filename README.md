@@ -59,7 +59,7 @@ The submitted value is an array of strings by default, e.g. `['php', 'symfony']`
 
 ## Version information
 
-Current stable release: **v1.0.2** ([changelog](docs/CHANGELOG.md)).
+Current stable release: **v1.0.3** ([changelog](docs/CHANGELOG.md)).
 
 ## Tests and coverage
 

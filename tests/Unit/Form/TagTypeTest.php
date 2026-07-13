@@ -168,7 +168,6 @@ final class TagTypeTest extends TestCase
 
         $reflection = new ReflectionClass(\Symfony\Component\OptionsResolver\OptionsResolver::class);
         $property   = $reflection->getProperty('normalizers');
-        $property->setAccessible(true);
         /** @var array<string, list<callable>> $normalizers */
         $normalizers = $property->getValue($resolver);
         $normalizer  = $normalizers['empty_data'][0];
