@@ -12,7 +12,7 @@
             "dist": {
                 "type": "path",
                 "url": "/var/tag-input-bundle",
-                "reference": "af7df3866edc980d7c31b240fe680c3b6edd65cc"
+                "reference": "ae718df005cdb69fb3955c5824c488e270052294"
             },
             "require": {
                 "php": ">=8.1 <8.6",
