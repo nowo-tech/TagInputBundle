@@ -13,7 +13,7 @@ Use this checklist when cutting a new version. The workflow [.github/workflows/r
 
 3. **Run release-check**
    - From the bundle root: `make release-check`.
-   - Current chain: `ensure-up`, `composer-sync`, `cs-fix`, `cs-check`, `rector-dry`, `phpstan`, `test-coverage`, `release-check-demos`, `test-ts` (alias `assets-test`).
+   - Current chain: `check-no-cursor-coauthor`, `ensure-up`, `composer-sync`, `cs-fix`, `cs-check`, `rector-dry`, `phpstan`, `test-coverage`, `release-check-demos`, `test-ts` (alias `assets-test`).
 
 4. **Optional checks**
    - `make validate-translations` (YAML translation files under `src/Resources/translations/`).
@@ -45,6 +45,8 @@ git push origin vX.Y.Z
 - Tag format must be **`vX.Y.Z`** (e.g. `v1.0.0`) so the workflow and Packagist recognize it.
 - After the push, GitHub Actions creates the release and appends the changelog entry for that version to the release body.
 - Packagist will pick up the new tag automatically.
+
+After creating the release commit and tag, run `make check-no-cursor-coauthor` again **before** `git push` (REQ-GIT-001). The release commit itself is not covered by an earlier `release-check` run.
 
 ### Example for v1.0.0
 

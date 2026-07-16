@@ -14,6 +14,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Removed
 
+## [1.0.4] - 2026-07-16
+
+### Added
+
+- [`CODE_OF_CONDUCT.md`](../CODE_OF_CONDUCT.md) (Contributor Covenant) and links from README / Contributing.
+- [`docs/GITHUB_CI.md`](GITHUB_CI.md): REQ-GIT-001 (no Cursor co-author trailers in git history).
+- Local git hygiene: `.githooks/commit-msg`, `.scripts/check-no-cursor-coauthor.sh`, `.scripts/strip-cursor-coauthor-from-history.sh`, Cursor rule `.cursor/rules/01-git-commits.mdc`.
+- CI job `git-hygiene` and Makefile targets `setup-hooks`, `check-no-cursor-coauthor`, `strip-cursor-coauthor-from-history` (wired into `release-check`).
+
+### Changed
+
+- Contributor toolchain (dev only): `@types/node` **26.1.1**.
+- Composer lock refresh: `friendsofphp/php-cs-fixer` **v3.95.15**, `rector/rector` **2.5.7**; demo locks updated for `nowo-tech/twig-inspector-bundle` **v1.0.36**.
+- [`docs/CONTRIBUTING.md`](CONTRIBUTING.md) and [`docs/RELEASE.md`](RELEASE.md): document REQ-GIT-001 hooks and pre-push co-author check.
+
 ## [1.0.3] - 2026-07-13
 
 ### Changed
@@ -81,6 +96,7 @@ First public release of **TagInputBundle** on [GitHub](https://github.com/nowo-t
 - CI (PHPUnit, PHP-CS-Fixer, PHPStan, Rector dry-run, coverage), release workflows, Dependabot (Composer, GitHub Actions, npm), and Scrutinizer integration.
 - Alignment with Nowo bundle standards (`REQ-*` traceability, Makefile `release-check`, Engram MCP).
 
+[1.0.4]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.0.4
 [1.0.3]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.0.3
 [1.0.2]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.0.2
 [1.0.1]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.0.1

@@ -17,10 +17,12 @@ FrankenPHP worker mode: Not declared as supported for this bundle at the moment.
 
 ## Documentation
 
+- [GitHub Actions CI requirements](docs/GITHUB_CI.md)
 - [Installation](docs/INSTALLATION.md)
 - [Configuration](docs/CONFIGURATION.md)
 - [Usage](docs/USAGE.md)
 - [Contributing](docs/CONTRIBUTING.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
 - [Changelog](docs/CHANGELOG.md)
 - [Upgrading](docs/UPGRADING.md)
 - [Release](docs/RELEASE.md)
@@ -59,7 +61,7 @@ The submitted value is an array of strings by default, e.g. `['php', 'symfony']`
 
 ## Version information
 
-Current stable release: **v1.0.3** ([changelog](docs/CHANGELOG.md)).
+Current stable release: **v1.0.4** ([changelog](docs/CHANGELOG.md)).
 
 ## Tests and coverage
 
