@@ -8,4 +8,27 @@ The **repository root** `docker-compose.yml` is for **bundle** development (PHP,
 
 To run a demo, follow the README inside `demo/symfony7` or `demo/symfony8`.
 
-FrankenPHP worker mode is not declared as supported for this bundle at the moment; see the main [README](../README.md).
+This bundle is **FrankenPHP worker mode friendly**. Demos default to `FRANKENPHP_MODE=worker`.
+
+## Demo smoke (REQ-TEST-011)
+
+From the repository root:
+
+```bash
+make demo-smoke
+```
+
+Boots `demo/symfony8`, asserts **HTTP 200** on `http://127.0.0.1:<PORT>/demo` (from `.env` / `.env.example`, default **8011**), then tears down. CI: `.github/workflows/demo-smoke.yml`.
+
+Per-demo: `make -C demo/symfony7 verify` or `make -C demo/symfony8 verify`.
+
+## Switching classic vs worker (`FRANKENPHP_MODE`)
+
+Demos select the FrankenPHP runtime via **`FRANKENPHP_MODE`** in `.env` / `.env.example` (not a Dockerfile `ENV`):
+
+| Value | Behaviour |
+| --- | --- |
+| **`worker`** (default) | Keep the worker Caddyfile (`php_server { worker ... }`) |
+| **`classic`** | Entrypoint copies `Caddyfile.dev` (plain `php_server`, hot-reload friendly) |
+
+Compose passes `FRANKENPHP_MODE=${FRANKENPHP_MODE:-worker}` into the PHP service. After changing `.env`, run `docker compose up -d` (or `make up`) so the container is **recreated** — a plain `restart` does not reload env. No image rebuild is required.

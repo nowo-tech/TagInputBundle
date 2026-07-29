@@ -25,6 +25,29 @@ This document describes upgrade notes for `TagInputBundle`.
 
 Per-field options override globals; see [Configuration](CONFIGURATION.md) and [Usage](USAGE.md).
 
+## 1.0.5 (2026-07-29)
+
+Named Symfony asset package and compliance remedia. **Template update recommended** if you load Tagify assets via Twig.
+
+### Asset package (REQ-ASSETS-004)
+
+- The bundle registers package `nowo_tag_input` (`base_path` `/bundles/nowotaginput`).
+- Prefer:
+
+```twig
+<link rel="stylesheet" href="{{ asset('tag-input.css', 'nowo_tag_input') }}">
+<script src="{{ asset('tag-input.js', 'nowo_tag_input') }}"></script>
+```
+
+instead of `asset('bundles/nowotaginput/tag-input.css')` (still works after `assets:install`, but the named package is the supported path).
+
+### Other
+
+- FrankenPHP worker mode is declared friendly; demo Symfony 8 uses PHP **8.5**.
+- Contributors: PHPStan + `phpstan-frankenphp` rulesets after `composer install`.
+
+Upgrade from `1.0.4` with `composer update nowo-tech/tag-input-bundle` — no form/config API changes.
+
 ## 1.0.4 (2026-07-16)
 
 Maintainer / community-docs release. **No breaking changes** for bundle consumers.
@@ -73,7 +96,7 @@ After `composer require nowo-tech/tag-input-bundle`:
 
 1. Enable the bundle (Flex recipe or manual registration in `config/bundles.php`).
 2. Review `config/packages/nowo_tag_input.yaml` if the recipe was applied.
-3. Run `php bin/console assets:install public` and include `bundles/nowotaginput/tag-input.css` and `tag-input.js` in your layout.
+3. Run `php bin/console assets:install public` and include assets via the named package: `asset('tag-input.css', 'nowo_tag_input')` and `asset('tag-input.js', 'nowo_tag_input')`.
 4. Use `TagType::class` in forms; model data is `array<string>` unless you set `value_format` to `string`.
 
 ## Breaking changes

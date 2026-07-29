@@ -45,6 +45,18 @@ final class NowoTagInputExtension extends Extension implements PrependExtensionI
 
     public function prepend(ContainerBuilder $container): void
     {
+        if ($container->hasExtension('framework')) {
+            $container->prependExtensionConfig('framework', [
+                'assets' => [
+                    'packages' => [
+                        Configuration::ALIAS => [
+                            'base_path' => '/bundles/nowotaginput',
+                        ],
+                    ],
+                ],
+            ]);
+        }
+
         if (!$container->hasExtension('twig')) {
             return;
         }

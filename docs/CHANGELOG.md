@@ -6,13 +6,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [1.0.5] - 2026-07-29
+
 ### Added
+
+- Named Symfony assets package `nowo_tag_input` (`base_path` `/bundles/nowotaginput`) registered via DI `prepend` (REQ-ASSETS-004); require `symfony/asset`.
+- `make demo-smoke` / per-demo `make verify` (HTTP 200) and `.github/workflows/demo-smoke.yml` (REQ-TEST-011 / REQ-MAKE-003).
+- `make down-dev`; absolute `DOCKER_BIN` in Makefiles (REQ-MAKE-010).
+- FrankenPHP-friendly banner under `docs/images/` (REQ-DOCS-017 / DEMO-008).
+- PHPStan CI job; explicit `ignoreErrors: []` in `phpstan.neon.dist` (REQ-CS-006).
+- **REQ-CS-005:** `nowo-tech/phpstan-frankenphp` in `require-dev` with classic + worker rulesets.
 
 ### Changed
 
-### Fixed
-
-### Removed
+- PHPUnit / CI: `SYMFONY_DEPRECATIONS_HELPER=max[direct]=0` (REQ-SF-005).
+- `demo/symfony8` image: `dunglas/frankenphp:1-php8.5-alpine` (REQ-DEMO-010).
+- Composer keywords: `php`, `frankenphp` (REQ-PKG-004).
+- Docs: use `asset('…', 'nowo_tag_input')`; README Documentation order; GitHub About (REQ-DOCS-018).
+- Declared FrankenPHP worker mode friendly (was “not supported”).
 
 ## [1.0.4] - 2026-07-16
 

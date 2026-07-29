@@ -1,9 +1,12 @@
 <?php
 
 declare(strict_types=1);
+use Nowo\TagInputBundle\NowoTagInputBundle;
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
+use Symfony\Bundle\TwigBundle\TwigBundle;
 
 return [
-    Symfony\Bundle\FrameworkBundle\FrameworkBundle::class => ['all' => true],
-    Symfony\Bundle\TwigBundle\TwigBundle::class           => ['all' => true],
-    Nowo\TagInputBundle\NowoTagInputBundle::class         => ['all' => true],
+    FrameworkBundle::class    => ['all' => true],
+    TwigBundle::class         => ['all' => true],
+    NowoTagInputBundle::class => ['all' => true],
 ];

@@ -7,6 +7,7 @@ namespace Nowo\TagInputBundle\Tests\Unit\DependencyInjection;
 use Nowo\TagInputBundle\DependencyInjection\NowoTagInputExtension;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\Extension;
 
 /**
  * @covers \Nowo\TagInputBundle\DependencyInjection\NowoTagInputExtension
@@ -56,6 +57,27 @@ final class NowoTagInputExtensionTest extends TestCase
         $extension->prepend($container);
 
         self::assertSame([], $container->getExtensionConfig('twig'));
+        self::assertSame([], $container->getExtensionConfig('framework'));
+    }
+
+    public function testPrependConfiguresAssetsPackage(): void
+    {
+        $extension = new NowoTagInputExtension();
+        $container = new ContainerBuilder();
+        $container->registerExtension(new class extends Extension {
+            public function load(array $configs, ContainerBuilder $container): void
+            {
+            }
+
+            public function getAlias(): string
+            {
+                return 'framework';
+            }
+        });
+
+        $extension->prepend($container);
+        $configs = $container->getExtensionConfig('framework');
+        self::assertSame('/bundles/nowotaginput', $configs[0]['assets']['packages']['nowo_tag_input']['base_path']);
     }
 
     public function testPrependAddsMappedTwigThemeAndFallback(): void
@@ -63,7 +85,7 @@ final class NowoTagInputExtensionTest extends TestCase
         $extension = new NowoTagInputExtension();
 
         $container = new ContainerBuilder();
-        $container->registerExtension(new class extends \Symfony\Component\DependencyInjection\Extension\Extension {
+        $container->registerExtension(new class extends Extension {
             public function load(array $configs, ContainerBuilder $container): void
             {
             }
@@ -82,7 +104,7 @@ final class NowoTagInputExtensionTest extends TestCase
         self::assertSame('@NowoTagInputBundle/Form/tag_input_theme_bootstrap5.html.twig', $twigConfigs[0]['form_themes'][0]);
 
         $container2 = new ContainerBuilder();
-        $container2->registerExtension(new class extends \Symfony\Component\DependencyInjection\Extension\Extension {
+        $container2->registerExtension(new class extends Extension {
             public function load(array $configs, ContainerBuilder $container): void
             {
             }

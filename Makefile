@@ -1,7 +1,14 @@
-.PHONY: help up down build shell ensure-up install assets assets-test test test-coverage test-ts cs-check cs-fix phpstan rector rector-dry qa composer-sync release-check release-check-demos validate-translations clean update validate setup-hooks check-no-cursor-coauthor strip-cursor-coauthor-from-history
+.PHONY: help up down down-dev build shell ensure-up install assets assets-test test test-coverage test-ts cs-check cs-fix phpstan rector rector-dry qa composer-sync release-check release-check-demos demo-smoke validate-translations clean update validate setup-hooks check-no-cursor-coauthor strip-cursor-coauthor-from-history
 
 COMPOSE_FILE ?= docker-compose.yml
-COMPOSE     ?= docker-compose -f $(COMPOSE_FILE)
+# Prefer Compose V2; absolute docker path avoids shadowing by local docker/ when PATH has "." (REQ-MAKE-010).
+DOCKER_BIN := $(shell PATH="/usr/local/bin:/usr/bin:/bin:$$PATH" command -v docker 2>/dev/null)
+ifeq ($(DOCKER_BIN),)
+COMPOSE_BIN ?= docker-compose
+else
+COMPOSE_BIN ?= $(shell $(DOCKER_BIN) compose version >/dev/null 2>&1 && echo "$(DOCKER_BIN) compose" || echo "docker-compose")
+endif
+COMPOSE     ?= $(COMPOSE_BIN) -f $(COMPOSE_FILE)
 SERVICE_PHP ?= php
 
 help:
@@ -9,9 +16,9 @@ help:
 	@echo ""
 	@echo "Usage: make <target>"
 	@echo ""
-	@echo "Container: up down build shell"
+	@echo "Container: up down down-dev build shell"
 	@echo "Dependencies: install assets"
-	@echo "Tests: test test-coverage test-ts"
+	@echo "Tests: test test-coverage test-ts demo-smoke"
 	@echo "Quality: cs-check cs-fix rector rector-dry phpstan qa validate-translations"
 	@echo "Release: release-check composer-sync"
 	@echo "Cleanup: clean"
@@ -26,6 +33,9 @@ up:
 
 down:
 	$(COMPOSE) down
+
+down-dev:
+	$(COMPOSE) down --remove-orphans
 
 build:
 	$(COMPOSE) build --no-cache
@@ -84,6 +94,9 @@ composer-sync: ensure-up
 release-check-demos:
 	@if [ -d demo ]; then $(MAKE) -C demo release-check; fi
 
+demo-smoke:
+	@$(MAKE) -C demo demo-smoke
+
 release-check: check-no-cursor-coauthor ensure-up composer-sync cs-fix cs-check rector-dry phpstan test-coverage release-check-demos test-ts
 
 clean:
@@ -107,7 +120,8 @@ setup-hooks:
 
 # REQ-MAKE-008: update-deps (REQ-MAKE-008)
 BUNDLE_ROOT := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
-include $(BUNDLE_ROOT)/../.scripts/Makefile.update-deps.mk
+# Optional: monorepo helper absent on standalone GitHub Actions checkout (REQ-MAKE-009).
+-include $(BUNDLE_ROOT)/../.scripts/Makefile.update-deps.mk
 check-no-cursor-coauthor:
 	@chmod +x .scripts/check-no-cursor-coauthor.sh
 	@./.scripts/check-no-cursor-coauthor.sh HEAD

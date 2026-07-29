@@ -31,8 +31,8 @@ php bin/console assets:install public
 ```
 
 ```twig
-<link rel="stylesheet" href="{{ asset('bundles/nowotaginput/tag-input.css') }}">
-<script src="{{ asset('bundles/nowotaginput/tag-input.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('tag-input.css', 'nowo_tag_input') }}">
+<script src="{{ asset('tag-input.js', 'nowo_tag_input') }}"></script>
 ```
 
 ## Customization

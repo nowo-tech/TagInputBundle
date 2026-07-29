@@ -8,10 +8,12 @@ use Nowo\TagInputBundle\Form\TagType;
 use Nowo\TagInputBundle\Form\ValueFormat;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @covers \Nowo\TagInputBundle\Form\TagType
@@ -81,7 +83,7 @@ final class TagTypeTest extends TestCase
     {
         $type = new TagType();
 
-        self::assertSame(\Symfony\Component\Form\Extension\Core\Type\TextType::class, $type->getParent());
+        self::assertSame(TextType::class, $type->getParent());
         self::assertSame('nowo_tag_input', $type->getBlockPrefix());
     }
 
@@ -163,10 +165,10 @@ final class TagTypeTest extends TestCase
 
     public function testEmptyDataNormalizerUsesEmptyStringForStringFormatOption(): void
     {
-        $resolver = new \Symfony\Component\OptionsResolver\OptionsResolver();
+        $resolver = new OptionsResolver();
         (new TagType())->configureOptions($resolver);
 
-        $reflection = new ReflectionClass(\Symfony\Component\OptionsResolver\OptionsResolver::class);
+        $reflection = new ReflectionClass(OptionsResolver::class);
         $property   = $reflection->getProperty('normalizers');
         /** @var array<string, list<callable>> $normalizers */
         $normalizers = $property->getValue($resolver);

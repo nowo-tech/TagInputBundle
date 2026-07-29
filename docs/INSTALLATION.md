@@ -38,11 +38,11 @@ The bundle ships built assets at `src/Resources/public/tag-input.js` and `tag-in
 php bin/console assets:install public
 ```
 
-Include them in your layout or form template:
+The bundle registers the Symfony assets package `nowo_tag_input` (`base_path` `/bundles/nowotaginput`). Include assets in your layout or form template:
 
 ```twig
-<link rel="stylesheet" href="{{ asset('bundles/nowotaginput/tag-input.css') }}">
-<script src="{{ asset('bundles/nowotaginput/tag-input.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('tag-input.css', 'nowo_tag_input') }}">
+<script src="{{ asset('tag-input.js', 'nowo_tag_input') }}"></script>
 ```
 
 Contributors rebuild frontend assets with:
