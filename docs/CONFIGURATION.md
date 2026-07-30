@@ -73,19 +73,4 @@ tag:
 
 ## Twig overrides
 
-Application templates under `templates/bundles/NowoTagInputBundle/` **always win** over the copies inside the package. The bundle registers paths via `TwigPathsPass` so Symfony resolves app overrides first.
-
-| Bundle path | Override in your app |
-|-------------|----------------------|
-| `@NowoTagInputBundle/Form/tag_input_theme.html.twig` | `templates/bundles/NowoTagInputBundle/Form/tag_input_theme.html.twig` |
-| `@NowoTagInputBundle/Form/tag_input_theme_bootstrap5.html.twig` | `templates/bundles/NowoTagInputBundle/Form/tag_input_theme_bootstrap5.html.twig` |
-| `@NowoTagInputBundle/Form/tag_input_theme_bootstrap4.html.twig` | `templates/bundles/NowoTagInputBundle/Form/tag_input_theme_bootstrap4.html.twig` |
-| `@NowoTagInputBundle/Form/tag_input_theme_bootstrap3.html.twig` | `templates/bundles/NowoTagInputBundle/Form/tag_input_theme_bootstrap3.html.twig` |
-| `@NowoTagInputBundle/Form/tag_input_theme_table.html.twig` | `templates/bundles/NowoTagInputBundle/Form/tag_input_theme_table.html.twig` |
-| `@NowoTagInputBundle/Form/tag_input_theme_foundation5.html.twig` | `templates/bundles/NowoTagInputBundle/Form/tag_input_theme_foundation5.html.twig` |
-| `@NowoTagInputBundle/Form/tag_input_theme_foundation6.html.twig` | `templates/bundles/NowoTagInputBundle/Form/tag_input_theme_foundation6.html.twig` |
-| `@NowoTagInputBundle/Form/tag_input_theme_tailwind2.html.twig` | `templates/bundles/NowoTagInputBundle/Form/tag_input_theme_tailwind2.html.twig` |
-
-Horizontal Bootstrap variants follow the same pattern (`tag_input_theme_bootstrap5_horizontal.html.twig`, etc.).
-
-Theme selection follows `form_theme` in `config/packages/nowo_tag_input.yaml`; override the row that matches your active layout.
+**REQ-TWIG-001.** Namespace: **`NowoTagInputBundle`**. Full procedure, freeze rule, and the overridable `<subpath>` table: [USAGE.md — Overriding templates](USAGE.md#overriding-templates-req-twig-001). Theme selection follows `form_theme` — [form_theme](#form_theme).

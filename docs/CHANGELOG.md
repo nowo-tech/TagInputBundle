@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [1.0.6] - 2026-07-30
+
+### Documentation
+
+- USAGE: **Overriding templates (REQ-TWIG-001)** — TOC, freeze rule, prefer `form_theme` over full-file forks, full `<subpath>` table for form themes.
+- CONFIGURATION: Twig overrides section points to USAGE (single source of truth).
+
+### Changed
+
+- Demo / fixture `reference.php` refresh (php-cs-fixer).
+
 ## [1.0.5] - 2026-07-29
 
 ### Added
@@ -107,6 +118,9 @@ First public release of **TagInputBundle** on [GitHub](https://github.com/nowo-t
 - CI (PHPUnit, PHP-CS-Fixer, PHPStan, Rector dry-run, coverage), release workflows, Dependabot (Composer, GitHub Actions, npm), and Scrutinizer integration.
 - Alignment with Nowo bundle standards (`REQ-*` traceability, Makefile `release-check`, Engram MCP).
 
+[Unreleased]: https://github.com/nowo-tech/TagInputBundle/compare/v1.0.6...HEAD
+[1.0.6]: https://github.com/nowo-tech/TagInputBundle/compare/v1.0.5...v1.0.6
+[1.0.5]: https://github.com/nowo-tech/TagInputBundle/compare/v1.0.4...v1.0.5
 [1.0.4]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.0.4
 [1.0.3]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.0.3
 [1.0.2]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.0.2

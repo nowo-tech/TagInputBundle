@@ -25,6 +25,18 @@ This document describes upgrade notes for `TagInputBundle`.
 
 Per-field options override globals; see [Configuration](CONFIGURATION.md) and [Usage](USAGE.md).
 
+# Upgrading
+
+## 1.0.6 (2026-07-30)
+
+Documentation polish for Twig form-theme overrides (REQ-TWIG-001 freeze rule). **No config or API migration.**
+
+```bash
+composer require nowo-tech/tag-input-bundle:^1.0.6
+```
+
+See [USAGE.md — Overriding templates](USAGE.md#overriding-templates-req-twig-001). Hosts already on **1.0.5** need no application changes.
+
 ## 1.0.5 (2026-07-29)
 
 Named Symfony asset package and compliance remedia. **Template update recommended** if you load Tagify assets via Twig.
