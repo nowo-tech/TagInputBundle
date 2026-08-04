@@ -1,4 +1,4 @@
-.PHONY: help up down down-dev build shell ensure-up install assets assets-test test test-coverage test-ts cs-check cs-fix phpstan rector rector-dry qa composer-sync release-check release-check-demos demo-smoke validate-translations clean update validate setup-hooks check-no-cursor-coauthor strip-cursor-coauthor-from-history
+.PHONY: help up down down-dev build shell ensure-up install assets assets-test test test-coverage test-ts cs-check cs-fix phpstan rector rector-dry qa composer-sync release-check release-check-demos demo-smoke validate-translations clean update validate setup-hooks check-no-cursor-coauthor strip-cursor-coauthor-from-history check-twig-extra
 
 COMPOSE_FILE ?= docker-compose.yml
 # Prefer Compose V2; absolute docker path avoids shadowing by local docker/ when PATH has "." (REQ-MAKE-010).
@@ -85,7 +85,7 @@ rector: ensure-up
 rector-dry: ensure-up
 	$(COMPOSE) exec -T $(SERVICE_PHP) composer rector-dry
 
-qa: cs-check test
+qa: cs-check twig-lint test
 
 composer-sync: ensure-up
 	$(COMPOSE) exec -T $(SERVICE_PHP) composer validate --strict
@@ -97,7 +97,11 @@ release-check-demos:
 demo-smoke:
 	@$(MAKE) -C demo demo-smoke
 
-release-check: check-no-cursor-coauthor ensure-up composer-sync cs-fix cs-check rector-dry phpstan test-coverage release-check-demos test-ts
+
+check-twig-extra:
+	@chmod +x .scripts/check-twig-extra.sh
+	@./.scripts/check-twig-extra.sh
+release-check: check-no-cursor-coauthor check-twig-extra ensure-up composer-sync cs-fix cs-check rector-dry phpstan test-coverage release-check-demos test-ts
 
 clean:
 	rm -rf vendor coverage coverage-ts .phpunit.cache coverage-php.txt coverage-ts.txt
@@ -129,3 +133,6 @@ check-no-cursor-coauthor:
 strip-cursor-coauthor-from-history:
 	@chmod +x .scripts/strip-cursor-coauthor-from-history.sh
 	@./.scripts/strip-cursor-coauthor-from-history.sh main
+
+twig-lint: ensure-up
+	@$(COMPOSE) exec -T $(SERVICE_PHP) composer twig:lint || $(COMPOSE) exec -T $(SERVICE_PHP) ./vendor/bin/twig-cs-fixer lint --config=.twig-cs-fixer.php
