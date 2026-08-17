@@ -20,7 +20,7 @@ This bundle is **FrankenPHP worker mode friendly**.
 
 ## Version information
 
-Current stable release: **v1.0.5** ([changelog](docs/CHANGELOG.md)).
+Current stable release: **v1.1.0** ([changelog](docs/CHANGELOG.md)).
 
 ## Quick usage
 
