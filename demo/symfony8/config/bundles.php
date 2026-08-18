@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Nowo\TagInputBundle\NowoTagInputBundle;
+use Nowo\HotReloadBundle\NowoHotReloadBundle;
 use Nowo\TwigInspectorBundle\NowoTwigInspectorBundle;
 use Symfony\Bundle\DebugBundle\DebugBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
@@ -16,6 +17,7 @@ return [
     DebugBundle::class             => ['dev' => true],
     WebProfilerBundle::class       => ['dev' => true],
     NowoTagInputBundle::class      => ['all' => true],
+    NowoHotReloadBundle::class => ['dev' => true, 'test' => true],
     NowoTwigInspectorBundle::class => ['dev' => true, 'test' => true],
     TwigExtraBundle::class         => ['all' => true],
 ];

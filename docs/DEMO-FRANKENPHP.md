@@ -1,12 +1,14 @@
 # Demo notes
 
-This bundle includes `demo/symfony7` and `demo/symfony8` with sample Symfony applications.
+**REQ-DEMO-001:** FrankenPHP demos must install **Nowo Twig Inspector** and **Nowo Hot Reload** together (`nowo-tech/twig-inspector-bundle` + `nowo-tech/hot-reload-bundle` in `require-dev`). Caddyfile: Mercure + `hot_reload` (and `worker { file …; watch }` in worker mode). Do not enable Hot Reload in production.
+
+This bundle includes `demo/symfony8` and `demo/symfony8` with sample Symfony applications.
 
 Each demo has its own `docker-compose.yml`, `Dockerfile`, and `docker/frankenphp/` (Caddyfile variants) for local development.
 
 The **repository root** `docker-compose.yml` is for **bundle** development (PHP, Composer, pnpm/Vite, tests). It is not the same as launching a demo as a standalone hosted app.
 
-To run a demo, follow the README inside `demo/symfony7` or `demo/symfony8`.
+To run a demo, follow the README inside `demo/symfony8` or `demo/symfony8`.
 
 This bundle is **FrankenPHP worker mode friendly**. Demos default to `FRANKENPHP_MODE=worker`.
 
@@ -20,7 +22,7 @@ make demo-smoke
 
 Boots `demo/symfony8`, asserts **HTTP 200** on `http://127.0.0.1:<PORT>/demo` (from `.env` / `.env.example`, default **8011**), then tears down. CI: `.github/workflows/demo-smoke.yml`.
 
-Per-demo: `make -C demo/symfony7 verify` or `make -C demo/symfony8 verify`.
+Per-demo: `make -C demo/symfony8 verify` or `make -C demo/symfony8 verify`.
 
 ## Switching classic vs worker (`FRANKENPHP_MODE`)
 
