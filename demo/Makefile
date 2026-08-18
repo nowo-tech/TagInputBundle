@@ -1,60 +1,45 @@
-DEMOS := symfony7 symfony8
+DEMOS := symfony8
 
 .PHONY: help up down test test-coverage release-check verify demo-smoke $(foreach demo,$(DEMOS),up-$(demo) down-$(demo) test-$(demo) test-coverage-$(demo) verify-$(demo))
 
 help:
 	@echo "Tag Input Bundle Demo"
-	@echo "make up-symfony7 | up-symfony8 | down-symfony7 | down-symfony8"
+	@echo "make up-symfony8 | down-symfony8"
 	@echo "make verify DEMO=symfony8 | demo-smoke"
-
-up-symfony7:
-	@$(MAKE) -C symfony7 up
 
 up-symfony8:
 	@$(MAKE) -C symfony8 up
 
-down-symfony7:
-	@$(MAKE) -C symfony7 down
-
 down-symfony8:
 	@$(MAKE) -C symfony8 down
-
-test-symfony7:
-	@$(MAKE) -C symfony7 test
 
 test-symfony8:
 	@$(MAKE) -C symfony8 test
 
-test-coverage-symfony7:
-	@$(MAKE) -C symfony7 test-coverage
-
 test-coverage-symfony8:
 	@$(MAKE) -C symfony8 test-coverage
-
-verify-symfony7:
-	@$(MAKE) -C symfony7 verify
 
 verify-symfony8:
 	@$(MAKE) -C symfony8 verify
 
 up:
-	@[ -n "$(DEMO)" ] || { echo "Usage: make up DEMO=symfony7|symfony8"; exit 1; }
+	@[ -n "$(DEMO)" ] || { echo "Usage: make up DEMO=symfony8"; exit 1; }
 	@$(MAKE) -C $(DEMO) up
 
 down:
-	@[ -n "$(DEMO)" ] || { echo "Usage: make down DEMO=symfony7|symfony8"; exit 1; }
+	@[ -n "$(DEMO)" ] || { echo "Usage: make down DEMO=symfony8"; exit 1; }
 	@$(MAKE) -C $(DEMO) down
 
 test:
-	@[ -n "$(DEMO)" ] || { echo "Usage: make test DEMO=symfony7|symfony8"; exit 1; }
+	@[ -n "$(DEMO)" ] || { echo "Usage: make test DEMO=symfony8"; exit 1; }
 	@$(MAKE) -C $(DEMO) test
 
 test-coverage:
-	@[ -n "$(DEMO)" ] || { echo "Usage: make test-coverage DEMO=symfony7|symfony8"; exit 1; }
+	@[ -n "$(DEMO)" ] || { echo "Usage: make test-coverage DEMO=symfony8"; exit 1; }
 	@$(MAKE) -C $(DEMO) test-coverage
 
 verify:
-	@[ -n "$(DEMO)" ] || { echo "Usage: make verify DEMO=symfony7|symfony8"; exit 1; }
+	@[ -n "$(DEMO)" ] || { echo "Usage: make verify DEMO=symfony8"; exit 1; }
 	@$(MAKE) verify-$(DEMO)
 
 # REQ-TEST-011: boot primary demo + one HTTP 200
@@ -72,9 +57,10 @@ demo-smoke:
 	echo "symfony8 OK (HTTP $$code)"
 
 release-check:
-	@$(MAKE) -C symfony7 release-check
 	@$(MAKE) -C symfony8 release-check
 
+update-bundle:
+	@$(MAKE) -C symfony8 update-bundle
 
 # REQ-MAKE-008: update-deps-all (REQ-MAKE-008)
 BUNDLE_ROOT := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/..)
