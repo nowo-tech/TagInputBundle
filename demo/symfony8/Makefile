@@ -1,15 +1,28 @@
-.PHONY: help up down build install shell logs test test-coverage cache-clear link-bundle update-bundle ensure-up restart release-check verify
+.PHONY: help up down composer-install build install shell logs test test-coverage cache-clear link-bundle update-bundle ensure-up restart release-check verify
 
 help:
 	@echo "Symfony 8 Demo - Tag Input Bundle"
 
+composer-install:
+	@echo "Installing Composer dependencies (ephemeral container)..."
+	$(DC) run --rm --no-deps --entrypoint "" -e COMPOSER_MEMORY_LIMIT=-1 php \
+		composer install --no-interaction
+
 up:
 	@if [ ! -f .env ]; then cp .env.example .env 2>/dev/null || true; fi
-	$(DOCKER_COMPOSE) up -d
-	@echo "Waiting for container to be ready..."
-	@sleep 5
-	@echo "Installing dependencies..."
-	@$(DOCKER_COMPOSE) exec -T -e COMPOSER_MEMORY_LIMIT=-1 php composer install --no-interaction
+	@$(MAKE) composer-install
+	$(DC) up -d
+	@echo "Waiting for FrankenPHP to stay up..."
+	@ok=0; \
+	for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do \
+		if $(DOCKER_COMPOSE) exec -T php true 2>/dev/null; then ok=1; break; fi; \
+		sleep 2; \
+	done; \
+	if [ "$$ok" != "1" ]; then \
+		echo "Demo php container failed to stay up. Recent logs:"; \
+		$(DOCKER_COMPOSE) logs --tail=100 php || true; \
+		exit 1; \
+	fi
 	@$(MAKE) link-bundle
 	@PORT=$$(grep "^PORT=" .env 2>/dev/null | cut -d= -f2 | tr -d '\r'); \
 	[ -z "$$PORT" ] && PORT=$$(grep "^PORT=" .env.example 2>/dev/null | cut -d= -f2 | tr -d '\r'); \
@@ -71,6 +84,8 @@ DOCKER_COMPOSE ?= docker-compose
 else
 DOCKER_COMPOSE ?= $(shell $(DOCKER_BIN) compose version >/dev/null 2>&1 && echo "$(DOCKER_BIN) compose" || echo "docker-compose")
 endif
+DC := :; $(DOCKER_COMPOSE)
+COMPOSE := $(DOCKER_COMPOSE)
 SERVICE_PHP := php
 # Optional: monorepo helper absent on standalone GitHub Actions checkout (REQ-MAKE-009).
 -include $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../../.scripts/Makefile.demo-update-deps.mk)

@@ -49,9 +49,13 @@ demo-smoke:
 	[ -z "$$PORT" ] && PORT=8011; \
 	echo "Demo smoke: symfony8 (http://127.0.0.1:$$PORT/demo)"; \
 	$(MAKE) -C symfony8 up || exit 1; \
-	sleep 12; \
-	code=$$(curl -s -o /dev/null -w "%{http_code}" "http://127.0.0.1:$$PORT/demo" || true); \
-	[ -z "$$code" ] && code=000; \
+	code=000; \
+	for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do \
+		code=$$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 "http://127.0.0.1:$$PORT/demo" || true); \
+		[ -z "$$code" ] && code=000; \
+		if [ "$$code" = "200" ]; then break; fi; \
+		sleep 2; \
+	done; \
 	$(MAKE) -C symfony8 down 2>/dev/null || true; \
 	if [ "$$code" != "200" ]; then echo "symfony8 failed with HTTP $$code"; exit 1; fi; \
 	echo "symfony8 OK (HTTP $$code)"
