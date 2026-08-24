@@ -83,6 +83,8 @@ php bin/console assets:install public
 <script src="{{ asset('tag-input.js', 'nowo_tag_input') }}"></script>
 ```
 
+The widget is `<nowo-tag-input>` (light DOM: native input wrapped by Tagify). Legacy `[data-nowo-tag-container="1"]` hosts still initialize.
+
 ## Customization
 
 - `value_format`: `array` (default) or `string`

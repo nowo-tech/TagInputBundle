@@ -8,7 +8,9 @@ function setReadyState(value: DocumentReadyState): void {
 }
 
 describe('tag-input entrypoint', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
+    const { stopObserving } = await import('./tag-input-lib');
+    stopObserving();
     vi.resetModules();
     document.body.innerHTML = '';
     setReadyState('complete');
