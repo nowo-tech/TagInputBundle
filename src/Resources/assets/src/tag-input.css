@@ -1,7 +1,10 @@
+nowo-tag-input,
 .nowo-tag-input {
+  display: block;
   width: 100%;
 }
 
+nowo-tag-input .tagify,
 .nowo-tag-input .tagify {
   width: 100%;
 }

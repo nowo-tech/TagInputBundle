@@ -9,7 +9,11 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text', 'text-summary', 'html'],
       reportsDirectory: './coverage-ts',
-      include: ['src/Resources/assets/src/tag-input.ts'],
+      include: [
+        'src/Resources/assets/src/tag-input.ts',
+        'src/Resources/assets/src/tag-input-lib.ts',
+        'src/Resources/assets/src/nowo-tag-input-element.ts',
+      ],
       exclude: ['**/*.test.ts', '**/node_modules/**'],
     },
   },

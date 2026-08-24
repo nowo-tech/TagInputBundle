@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- **Web Component:** the form theme now renders `<nowo-tag-input>` (light DOM). `tag-input.js` defines the custom element and still initializes fields with `data-controller="nowo-tag-input"`.
+
 
 ## [1.1.3] - 2026-08-24
 

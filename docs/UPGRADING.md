@@ -2,7 +2,12 @@
 
 ## Table of contents
 
+- [Unreleased](#unreleased)
 - [From 1.1.2 to 1.1.3](#from-112-to-113)
+
+## Unreleased
+
+The default form theme now wraps the field in `<nowo-tag-input>`. Include the same `tag-input.js` / `tag-input.css` assets as before. Custom theme overrides that copied `tag_input_theme.html.twig` should switch the outer `<div>` to `<nowo-tag-input>` (legacy wrappers and `data-controller="nowo-tag-input"` fields still initialize).
 
 ## From 1.1.2 to 1.1.3
 
