@@ -1,5 +1,27 @@
 # Upgrading
 
+## Table of contents
+
+- [From 1.1.2 to 1.1.3](#from-112-to-113)
+
+## From 1.1.2 to 1.1.3
+
+Review the [CHANGELOG](CHANGELOG.md) entry. PHP **8.2+** may now be required.
+
+```bash
+composer update nowo-tech/tag-input-bundle
+```
+
+## From 1.1.2 to 1.1.3
+
+Review the [CHANGELOG](CHANGELOG.md) entry. PHP **8.2+** may now be required.
+
+```bash
+composer update nowo-tech/tag-input-bundle
+```
+
+# Upgrading
+
 This document describes upgrade notes for `TagInputBundle`.
 
 ## Current compatibility baseline
