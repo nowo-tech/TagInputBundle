@@ -6,10 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-09-03
+
 ### Changed
 
 - **Web Component:** the form theme now renders `<nowo-tag-input>` (light DOM). `tag-input.js` defines the custom element and still initializes fields with `data-controller="nowo-tag-input"`.
+- **Deps (dev):** bump `rector/rector`, `friendsofphp/php-cs-fixer`, `@types/node`, `happy-dom`; refresh Composer lockfiles.
 
+### Notes
+
+- Integrators: keep the same `tag-input.js` asset. Custom theme overrides should use `<nowo-tag-input>` as the outer host.
+
+[1.2.0]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.2.0
 
 ## [1.1.3] - 2026-08-24
 

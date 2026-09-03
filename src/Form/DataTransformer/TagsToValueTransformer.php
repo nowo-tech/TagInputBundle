@@ -27,18 +27,18 @@ use const JSON_THROW_ON_ERROR;
  *
  * @implements DataTransformerInterface<array<int, string>|string, string>
  */
-final class TagsToValueTransformer implements DataTransformerInterface
+final readonly class TagsToValueTransformer implements DataTransformerInterface
 {
     /**
      * @param list<string> $whitelist
      */
     public function __construct(
-        private readonly ValueFormat $valueFormat,
-        private readonly bool $trim = true,
-        private readonly ?string $pattern = null,
-        private readonly array $whitelist = [],
-        private readonly bool $duplicates = false,
-        private readonly ?int $maxTags = null,
+        private ValueFormat $valueFormat,
+        private bool $trim = true,
+        private ?string $pattern = null,
+        private array $whitelist = [],
+        private bool $duplicates = false,
+        private ?int $maxTags = null,
     ) {
     }
 

@@ -8,6 +8,11 @@
 **Related docs**: [`docs/SPEC-DRIVEN-DEVELOPMENT.md`](../../docs/SPEC-DRIVEN-DEVELOPMENT.md), [`docs/CONFIGURATION.md`](../../docs/CONFIGURATION.md), [`docs/USAGE.md`](../../docs/USAGE.md)  
 **Code inventory (traceability)**: [`code-inventory.md`](code-inventory.md)
 
+
+## Notes / release sync
+
+- **2026-09-03:** Widget host is `<nowo-tag-input>` (custom element, light DOM); Stimulus `data-controller="nowo-tag-input"` still initializes.
+
 ---
 
 ## User Scenarios & Testing
