@@ -2,7 +2,7 @@
 
 **Baseline spec**: [`spec.md`](spec.md)  
 **Package**: `nowo-tech/tag-input-bundle`  
-**Last audited**: 2026-07-07
+**Last audited**: 2026-09-25
 
 This file proves that **every production source artifact** under `src/` is referenced by the baseline specification. Vitest sources (`*.test.ts`) and demo trees are out of Packagist scope.
 
@@ -14,8 +14,8 @@ This file proves that **every production source artifact** under `src/` is refer
 | `DependencyInjection/Configuration.php` | Config tree | FR-CFG-001 |
 | `DependencyInjection/NowoTagInputExtension.php` | DI extension | FR-CFG-002 |
 | `DependencyInjection/Compiler/TwigPathsPass.php` | Twig namespace path | FR-TWIG-001 |
-| `Form/TagType.php` | Tag form type | FR-FORM-001 |
-| `Form/DataTransformer/TagsToValueTransformer.php` | Model/view transform | FR-FORM-002 |
+| `Form/TagType.php` | Tag form type | FR-FORM-001, FR-FP-001 |
+| `Form/DataTransformer/TagsToValueTransformer.php` | Model/view transform | FR-FORM-002, FR-FP-001 |
 | `Form/ValueFormat.php` | Value format enum | FR-FORM-003 |
 
 ## TypeScript & CSS production (`src/Resources/assets/src/`)
@@ -23,6 +23,8 @@ This file proves that **every production source artifact** under `src/` is refer
 | Source file | Spec section | Requirement IDs |
 | --- | --- | --- |
 | `tag-input.ts` | Tagify widget init | FR-UI-001 |
+| `tag-input-lib.ts` | Shared Tagify settings / init helpers | FR-UI-001 |
+| `nowo-tag-input-element.ts` | `<nowo-tag-input>` custom element | FR-UI-004 |
 | `tag-input.css` | Widget styling | FR-UI-002 |
 | `logger.ts` | Debug logging | FR-UI-003 |
 
@@ -72,11 +74,11 @@ This file proves that **every production source artifact** under `src/` is refer
 | Category | Files | Mapped |
 | --- | ---: | ---: |
 | PHP classes | 7 | 7 |
-| TS/CSS production | 3 | 3 |
+| TS/CSS production | 5 | 5 |
 | Legacy JS/CSS | 2 | 2 |
 | YAML config | 1 | 1 |
 | Twig themes | 11 | 11 |
 | Translations | 7 | 7 |
-| **Total production sources** | **31** | **31** |
+| **Total production sources** | **33** | **33** |
 
-Excluded from count: `Resources/assets/src/tag-input.test.ts` (Vitest only).
+Excluded from count: `Resources/assets/src/*.test.ts` (Vitest only).

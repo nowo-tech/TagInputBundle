@@ -57,7 +57,8 @@ The sections below state **behavior**; this subsection states **intent** in back
 
 | ID | Where | What it marks |
 | --- | --- | --- |
-| REQ-MAKE-008 | Root `Makefile`, `demo/Makefile`, `demo/symfony8/Makefile`, `demo/symfony8/Makefile` | `update-deps` / `update-deps-all`: Composer dependency updates for bundle and demos. |
+| REQ-MAKE-008 | Root `Makefile`, `demo/Makefile`, `demo/symfony8/Makefile` | `update-deps` / `update-deps-all`: Composer dependency updates for bundle and demos. |
+| REQ-FP-001 | `docs/FRANKENPHP-WORKER-AUDIT.md`, `phpstan.neon.dist`, `TagTypeTest::testSharedInstanceDoesNotLeakOptionsAcrossConsecutiveBuilds` | FrankenPHP worker + `FRANKENPHP_RESET_KERNEL=false` (Scenario B): no per-request state in shared services; PHPStan classic + worker-strict + hardening. |
 
 When you change scripted behavior, **update the existing `REQ-*` comment** if the ID still matches the rule, or **add a new `REQ-*`** and document it here and in the PR description.
 

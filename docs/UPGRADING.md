@@ -2,9 +2,20 @@
 
 ## Table of contents
 
+- [From 1.2.0 to 1.2.1](#from-120-to-121)
 - [From 1.1.3 to 1.2.0](#from-113-to-120)
 - [From 1.1.2 to 1.1.3](#from-112-to-113)
 
+
+## From 1.2.0 to 1.2.1
+
+Confirmed **100% compatible** with FrankenPHP **worker** mode when the host runs with **`FRANKENPHP_RESET_KERNEL=false`** (sticky Kernel). See [FRANKENPHP-WORKER-AUDIT.md](FRANKENPHP-WORKER-AUDIT.md).
+
+No application upgrade steps.
+
+```bash
+composer update nowo-tech/tag-input-bundle
+```
 
 ## From 1.1.3 to 1.2.0
 
@@ -23,22 +34,15 @@ Review the [CHANGELOG](CHANGELOG.md) entry. PHP **8.2+** may now be required.
 composer update nowo-tech/tag-input-bundle
 ```
 
-## From 1.1.2 to 1.1.3
-
-Review the [CHANGELOG](CHANGELOG.md) entry. PHP **8.2+** may now be required.
-
-```bash
-composer update nowo-tech/tag-input-bundle
-```
-
 # Upgrading
 
 This document describes upgrade notes for `TagInputBundle`.
 
 ## Current compatibility baseline
 
-- PHP: `>=8.1` (<8.6). Symfony **8.0** and **8.1** require **PHP 8.4+**.
+- PHP: `>=8.2` (<8.6). Symfony **8.0** and **8.1** require **PHP 8.4+**.
 - Symfony components: `^6.0 || ^7.0 || ^8.0` (CI matrix tests **7.4**, **8.0**, **8.1**).
+- FrankenPHP: **100% compatible** with worker mode and `FRANKENPHP_RESET_KERNEL=false` (see [FRANKENPHP-WORKER-AUDIT.md](FRANKENPHP-WORKER-AUDIT.md)).
 
 ## Public API reminders
 
@@ -146,7 +150,7 @@ After `composer require nowo-tech/tag-input-bundle`:
 
 ## Breaking changes
 
-No breaking changes are documented after `1.0.0` (including `1.0.1`, `1.0.2`, `1.0.3`, and `1.0.4`).
+No breaking changes are documented after `1.0.0` (including through `1.2.1`).
 
 When a future release introduces BC breaks, this file will include:
 

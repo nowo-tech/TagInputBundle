@@ -6,6 +6,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [1.2.1] - 2026-09-25
+
+### Added
+
+- FrankenPHP worker audit for sticky Kernel (`FRANKENPHP_RESET_KERNEL=false`): [FRANKENPHP-WORKER-AUDIT.md](FRANKENPHP-WORKER-AUDIT.md) — verdict **100% compatible** (Scenario B).
+- Unit regression `TagTypeTest::testSharedInstanceDoesNotLeakOptionsAcrossConsecutiveBuilds` (REQ-FP-001).
+
+### Changed
+
+- PHPStan: `ruleset-classic` + `ruleset-worker-strict` + `ruleset-hardening` (was classic + worker).
+- README / demo docs: claim **100% compatible** with worker + `reset_kernel: false`.
+- Specs / code inventory: Web Component sources (`nowo-tag-input-element.ts`, `tag-input-lib.ts`) and REQ-FP-001.
+- Contributor toolchain (dev only): Dependabot bumps since `1.2.0` (`@types/node`, `happy-dom`, `vite`, `rector`, `phpstan`, `php-cs-fixer`, `twig-cs-fixer`, `twig/extra-bundle`).
+
+### Notes
+
+- **No API or configuration changes** for integrators. Hosts may run FrankenPHP workers with `FRANKENPHP_RESET_KERNEL=false` without bundle-specific reset hooks.
+
+[1.2.1]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.2.1
+
 ## [1.2.0] - 2026-09-03
 
 ### Changed

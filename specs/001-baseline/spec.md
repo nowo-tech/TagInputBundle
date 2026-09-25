@@ -12,6 +12,7 @@
 ## Notes / release sync
 
 - **2026-09-03:** Widget host is `<nowo-tag-input>` (custom element, light DOM); Stimulus `data-controller="nowo-tag-input"` still initializes.
+- **2026-09-25:** Confirmed **100% compatible** with FrankenPHP worker + `FRANKENPHP_RESET_KERNEL=false` (Scenario B). Shared `TagType` stays stateless (`readonly` defaults); see [`docs/FRANKENPHP-WORKER-AUDIT.md`](../../docs/FRANKENPHP-WORKER-AUDIT.md) and REQ-FP-001.
 
 ---
 
@@ -86,9 +87,14 @@ As an integrator, I pick a Symfony form theme matching my CSS framework and load
 
 ### Frontend widget
 
-- **FR-UI-001**: `tag-input.ts` MUST scan inputs with `data-controller` containing `nowo-tag-input`, parse data attributes into Tagify settings (maxTags, whitelist, pattern, duplicates, dropdown, placeholder), and sync Tagify value back to the native input on change.
+- **FR-UI-001**: `tag-input.ts` / `tag-input-lib.ts` MUST scan inputs with `data-controller` containing `nowo-tag-input`, parse data attributes into Tagify settings (maxTags, whitelist, pattern, duplicates, dropdown, placeholder), and sync Tagify value back to the native input on change.
 - **FR-UI-002**: `tag-input.css` MUST style Tagify container to align with bundle form themes.
 - **FR-UI-003**: `logger.ts` MUST provide namespaced debug logging gated by build-time flags.
+- **FR-UI-004**: `nowo-tag-input-element.ts` MUST define the `<nowo-tag-input>` custom element (light DOM) used by form themes.
+
+### FrankenPHP worker (sticky Kernel)
+
+- **FR-FP-001**: Shared services (`TagType`) MUST remain free of per-request mutable state so the bundle is safe under FrankenPHP worker with `FRANKENPHP_RESET_KERNEL=false`. See [`docs/FRANKENPHP-WORKER-AUDIT.md`](../../docs/FRANKENPHP-WORKER-AUDIT.md).
 
 ### Legacy & i18n
 
@@ -110,10 +116,11 @@ As an integrator, I pick a Symfony form theme matching my CSS framework and load
 
 ## Success Criteria
 
-- **SC-001**: 100% of production files in `src/` appear in [`code-inventory.md`](code-inventory.md) with requirement IDs (31/31 mapped; `*.test.ts` excluded).
+- **SC-001**: 100% of production files in `src/` appear in [`code-inventory.md`](code-inventory.md) with requirement IDs (33/33 mapped; `*.test.ts` excluded).
 - **SC-002**: Documented config keys match `Configuration.php`.
 - **SC-003**: `composer qa` passes (PHPUnit, PHPStan, Vitest).
 - **SC-004**: Tag field round-trips array and string formats in demo apps.
+- **SC-005**: Shared `TagType` does not leak options across consecutive builds (worker Scenario B).
 
 ---
 

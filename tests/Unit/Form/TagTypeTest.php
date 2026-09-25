@@ -203,4 +203,62 @@ final class TagTypeTest extends TestCase
         self::assertSame('["existing"]', $view->vars['value']);
         self::assertTrue($view->vars['tag_disabled']);
     }
+
+    /**
+     * Simulates FrankenPHP worker with FRANKENPHP_RESET_KERNEL=false: one shared
+     * TagType instance must not leak per-field options into the next form build.
+     */
+    public function testSharedInstanceDoesNotLeakOptionsAcrossConsecutiveBuilds(): void
+    {
+        $type = new TagType(
+            ValueFormat::ARRAY->value,
+            true,
+            null,
+            ['default-only'],
+            false,
+            10,
+            true,
+            'Default placeholder',
+        );
+        $factory = Forms::createFormFactoryBuilder()
+            ->addType($type)
+            ->getFormFactory();
+
+        $view1 = $factory->create(TagType::class, [], [
+            'max_tags'         => 2,
+            'whitelist'        => ['php', 'symfony'],
+            'pattern'          => '^[a-z]+$',
+            'duplicates'       => true,
+            'dropdown_enabled' => false,
+            'placeholder'      => 'Request one',
+        ])->createView();
+
+        $view2 = $factory->create(TagType::class, [])->createView();
+
+        self::assertSame('2', $view1->vars['attr']['data-nowo-tag-input-max-tags-value']);
+        self::assertSame('["php","symfony"]', $view1->vars['attr']['data-nowo-tag-input-whitelist-value']);
+        self::assertSame('^[a-z]+$', $view1->vars['attr']['data-nowo-tag-input-pattern-value']);
+        self::assertSame('1', $view1->vars['attr']['data-nowo-tag-input-duplicates-value']);
+        self::assertSame('0', $view1->vars['attr']['data-nowo-tag-input-dropdown-enabled-value']);
+        self::assertSame('Request one', $view1->vars['attr']['data-nowo-tag-input-placeholder-value']);
+
+        self::assertSame('10', $view2->vars['attr']['data-nowo-tag-input-max-tags-value']);
+        self::assertSame('["default-only"]', $view2->vars['attr']['data-nowo-tag-input-whitelist-value']);
+        self::assertArrayNotHasKey('data-nowo-tag-input-pattern-value', $view2->vars['attr']);
+        self::assertSame('0', $view2->vars['attr']['data-nowo-tag-input-duplicates-value']);
+        self::assertSame('1', $view2->vars['attr']['data-nowo-tag-input-dropdown-enabled-value']);
+        self::assertSame('Default placeholder', $view2->vars['attr']['data-nowo-tag-input-placeholder-value']);
+
+        $form1 = $factory->create(TagType::class, [], [
+            'whitelist' => ['php'],
+            'max_tags'  => 1,
+        ]);
+        $form1->submit('["php","symfony"]');
+        self::assertTrue($form1->isSynchronized());
+        self::assertSame(['php'], $form1->getData());
+
+        $form2 = $factory->create(TagType::class, []);
+        $form2->submit('["default-only","other"]');
+        self::assertFalse($form2->isSynchronized());
+    }
 }

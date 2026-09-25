@@ -8,7 +8,7 @@ Symfony `FormType` for multi-tag text inputs powered by [Tagify](https://github.
 
 ![FrankenPHP Friendly Worker Mode](docs/images/frankenphp-friendly.png)
 
-This bundle is **FrankenPHP worker mode friendly**.
+This bundle is **100% compatible** with FrankenPHP **worker** mode when the host runs with **`FRANKENPHP_RESET_KERNEL=false`** (sticky Kernel). See the [worker audit](docs/FRANKENPHP-WORKER-AUDIT.md).
 
 ## Features
 
@@ -20,7 +20,7 @@ This bundle is **FrankenPHP worker mode friendly**.
 
 ## Version information
 
-Current stable release: **v1.1.0** ([changelog](docs/CHANGELOG.md)).
+Current stable release: **v1.2.1** ([changelog](docs/CHANGELOG.md)).
 
 ## Quick usage
 
@@ -58,6 +58,7 @@ The submitted value is an array of strings by default, e.g. `['php', 'symfony']`
 - [Upgrading](docs/UPGRADING.md)
 - [Release](docs/RELEASE.md)
 - [Security](docs/SECURITY.md)
+- [FrankenPHP worker audit (`reset_kernel: false`)](docs/FRANKENPHP-WORKER-AUDIT.md)
 - [Engram](docs/ENGRAM.md)
 - [Spec-driven development](docs/SPEC-DRIVEN-DEVELOPMENT.md)
 - [GitHub Spec Kit](docs/SPEC-KIT.md)
