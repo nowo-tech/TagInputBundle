@@ -13,12 +13,12 @@ This bundle is **100% compatible** with FrankenPHP **worker** mode when the host
 <table>
   <tr>
     <td align="center" width="50%">
-      <img src="docs/images/demo/overview.png" alt="Tag input with existing tags and empty entry field" />
-      <br /><sub>Tagify tags + input</sub>
+      <img src="docs/images/demo/overview.png" alt="Demo navbar and tag input with existing tags" />
+      <br /><sub>Full demo — existing tags</sub>
     </td>
     <td align="center" width="50%">
-      <img src="docs/images/demo/interaction.png" alt="Tag input after adding a new tag" />
-      <br /><sub>New tag added</sub>
+      <img src="docs/images/demo/interaction.png" alt="Demo navbar and tag input after adding a new tag" />
+      <br /><sub>Full demo — new tag added</sub>
     </td>
   </tr>
 </table>

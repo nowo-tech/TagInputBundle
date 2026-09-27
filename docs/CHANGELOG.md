@@ -8,7 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
-- **REQ-DEMO-013:** Playwright e2e under `demo/symfony8/e2e/` (`make test-e2e`), `demo-screenshots` target, and README gallery cropped to <nowo-tag-input> (`docs/images/demo/overview.png`, `interaction.png`).
+- **REQ-DEMO-013:** Playwright e2e under `demo/symfony8/e2e/` (`make test-e2e`), `demo-screenshots` target, and README gallery with full demo context (navbar + tag card + WebProfiler; `docs/images/demo/overview.png`, `interaction.png`).
+
+### Changed
+
+- **Demo screenshots:** capture navbar + main + profiler instead of a card-only crop.
 
 ## [1.2.2] - 2026-09-27
 

@@ -23,11 +23,13 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-dark bg-dark mb-4">
+    <nav class="navbar navbar-dark bg-dark mb-0">
         <div class="container">
             <a class="navbar-brand" href="{{ path('app_demo_index') }}">Tag Input Bundle Demo</a>
         </div>
     </nav>
-    {% block body %}{% endblock %}
+    <main>
+        {% block body %}{% endblock %}
+    </main>
 </body>
 </html>
