@@ -1,4 +1,4 @@
-.PHONY: help up down down-dev build shell ensure-up install assets assets-test test test-coverage test-ts cs-check cs-fix phpstan rector rector-dry qa composer-sync release-check release-check-demos demo-smoke validate-translations clean update validate setup-hooks check-no-cursor-coauthor strip-cursor-coauthor-from-history check-twig-extra
+.PHONY: help up down down-dev build shell ensure-up install assets assets-test test test-coverage test-ts cs-check cs-fix phpstan igor rector rector-dry qa composer-sync release-check release-check-demos demo-smoke validate-translations clean update validate setup-hooks check-no-cursor-coauthor strip-cursor-coauthor-from-history check-twig-extra
 
 COMPOSE_FILE ?= docker-compose.yml
 # Prefer Compose V2; absolute docker path avoids shadowing by local docker/ when PATH has "." (REQ-MAKE-010).
@@ -101,7 +101,11 @@ demo-smoke:
 check-twig-extra:
 	@chmod +x .scripts/check-twig-extra.sh
 	@./.scripts/check-twig-extra.sh
-release-check: check-no-cursor-coauthor check-twig-extra ensure-up composer-sync cs-fix cs-check rector-dry phpstan test-coverage release-check-demos test-ts
+
+# Run Igor worker-state audit (REQ-CS-008)
+igor: ensure-up
+	$(COMPOSE) exec -T php composer igor
+release-check: check-no-cursor-coauthor check-twig-extra ensure-up composer-sync cs-fix cs-check rector-dry phpstan igor test-coverage release-check-demos test-ts
 
 clean:
 	rm -rf vendor coverage coverage-ts .phpunit.cache coverage-php.txt coverage-ts.txt

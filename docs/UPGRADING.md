@@ -160,6 +160,18 @@ When a future release introduces BC breaks, this file will include:
 
 ## Unreleased
 
+## To 1.2.2
+
+From **1.2.1** — REQ-CS-008 Igor FrankenPHP worker audit (igor-php require-dev, igor.json, make igor).
+
+```bash
+composer update nowo-tech/tag-input-bundle
+php bin/console cache:clear
+```
+
+- No application upgrade steps for require-dev Igor tooling (REQ-CS-008). Consumers do not pull `igor-php/igor-php` transitively.
+
+
 ## To 1.1.2
 
 No application upgrade steps.
