@@ -10,6 +10,20 @@ Symfony `FormType` for multi-tag text inputs powered by [Tagify](https://github.
 
 This bundle is **100% compatible** with FrankenPHP **worker** mode when the host runs with **`FRANKENPHP_RESET_KERNEL=false`** (sticky Kernel). See the [worker audit](docs/FRANKENPHP-WORKER-AUDIT.md).
 
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="docs/images/demo/overview.png" alt="Tag input with existing tags and empty entry field" />
+      <br /><sub>Tagify tags + input</sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="docs/images/demo/interaction.png" alt="Tag input after adding a new tag" />
+      <br /><sub>New tag added</sub>
+    </td>
+  </tr>
+</table>
+
+
 ## Features
 
 - `TagType::class` for keywords, labels, emails, skills, categories, and more.

@@ -1,6 +1,16 @@
 # Usage
 
+## Screenshots
+
+| Overview | Interaction |
+|----------|-------------|
+| ![Tag input with existing tags and empty entry field](images/demo/overview.png) | ![Tag input after adding a new tag](images/demo/interaction.png) |
+
+Regenerate with `make -C demo/symfony8 demo-screenshots` (REQ-DEMO-013).
+
 ## Table of contents
+
+- [Screenshots](#screenshots)
 
 - [Form type](#form-type)
 - [Overriding templates (REQ-TWIG-001)](#overriding-templates-req-twig-001)
