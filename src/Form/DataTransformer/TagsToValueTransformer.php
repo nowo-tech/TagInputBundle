@@ -194,10 +194,10 @@ final readonly class TagsToValueTransformer implements DataTransformerInterface
             }
 
             $normalized[] = $tag;
+        }
 
-            if ($this->maxTags !== null && count($normalized) >= $this->maxTags) {
-                break;
-            }
+        if ($this->maxTags !== null && count($normalized) > $this->maxTags) {
+            throw new TransformationFailedException(sprintf('At most %d tags are allowed.', $this->maxTags));
         }
 
         return $normalized;

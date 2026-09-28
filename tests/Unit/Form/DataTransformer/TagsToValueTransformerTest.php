@@ -95,14 +95,16 @@ final class TagsToValueTransformerTest extends TestCase
         $transformer->reverseTransform('["PHP"]');
     }
 
-    public function testMaxTagsLimitsOutput(): void
+    public function testMaxTagsRejectsOverflowOnSubmit(): void
     {
         $transformer = new TagsToValueTransformer(
             ValueFormat::ARRAY,
             maxTags: 2,
         );
 
-        self::assertSame(['php', 'symfony'], $transformer->reverseTransform('["php","symfony","twig"]'));
+        $this->expectException(TransformationFailedException::class);
+        $this->expectExceptionMessage('At most 2 tags are allowed.');
+        $transformer->reverseTransform('["php","symfony","twig"]');
     }
 
     public function testDuplicatesDisabledRemovesRepeatedTags(): void

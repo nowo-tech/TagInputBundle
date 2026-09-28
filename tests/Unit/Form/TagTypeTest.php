@@ -254,8 +254,7 @@ final class TagTypeTest extends TestCase
             'max_tags'  => 1,
         ]);
         $form1->submit('["php","symfony"]');
-        self::assertTrue($form1->isSynchronized());
-        self::assertSame(['php'], $form1->getData());
+        self::assertFalse($form1->isSynchronized());
 
         $form2 = $factory->create(TagType::class, []);
         $form2->submit('["default-only","other"]');

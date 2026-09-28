@@ -39,7 +39,7 @@ There are no HTTP controllers, no API endpoints, no persistence layer, and no cr
 - **Input normalization**
   - Tag values are normalized server-side through `TagsToValueTransformer`.
   - Optional `pattern` (regex) and `whitelist` restrict allowed values.
-  - Optional `max_tags` bounds the number of tags per field.
+  - Default `max_tags` is **50**; overflow on submit raises `TransformationFailedException` (fail-closed). Integrators may raise the limit or set it explicitly per field.
   - `trim` removes leading/trailing whitespace (default: true).
   - `duplicates` controls whether repeated tags are kept.
 - **Frontend constraints**

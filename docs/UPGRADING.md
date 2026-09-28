@@ -2,10 +2,22 @@
 
 ## Table of contents
 
+- [From 1.2.2 to 1.3.0](#from-122-to-130)
 - [From 1.2.0 to 1.2.1](#from-120-to-121)
 - [From 1.1.3 to 1.2.0](#from-113-to-120)
 - [From 1.1.2 to 1.1.3](#from-112-to-113)
 
+
+## From 1.2.2 to 1.3.0
+
+From **1.2.2** — default `max_tags` 50 (fail-closed); demo e2e.
+
+```bash
+composer update nowo-tech/tag-input-bundle
+php bin/console cache:clear
+```
+
+- Default `max_tags` is **50**; overflow fails closed. Raise the limit in config if forms legitimately need more tags.
 
 ## From 1.2.0 to 1.2.1
 
@@ -159,6 +171,17 @@ When a future release introduces BC breaks, this file will include:
 - migration steps
 
 ## Unreleased
+
+## To 1.3.0
+
+From **1.2.2** — default `max_tags` 50 (fail-closed); demo e2e.
+
+```bash
+composer update nowo-tech/tag-input-bundle
+php bin/console cache:clear
+```
+
+- Default `max_tags` is **50**; overflow fails closed. Raise the limit in config if forms legitimately need more tags.
 
 ## To 1.2.2
 

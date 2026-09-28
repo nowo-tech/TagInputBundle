@@ -732,7 +732,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     pattern?: scalar|Param|null, // Default: null
  *     whitelist?: list<scalar|Param|null>,
  *     duplicates?: bool|Param, // Default: false
- *     max_tags?: int|Param, // Default: null
+ *     max_tags?: int|Param, // Maximum tags accepted from the client (fail-closed on overflow). // Default: 50
  *     dropdown_enabled?: bool|Param, // Default: true
  *     placeholder?: scalar|Param|null, // Default: ""
  *     form_theme?: scalar|Param|null, // Default: "form_div_layout.html.twig"

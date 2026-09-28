@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-09-28
+
+### Security
+
+- Default `max_tags` is **50**; overflow on submit raises `TransformationFailedException` (fail-closed).
+
 ### Added
 
 - **REQ-DEMO-013:** Playwright e2e under `demo/symfony8/e2e/` (`make test-e2e`), `demo-screenshots` target, and README gallery with full demo context (navbar + tag card + WebProfiler; `docs/images/demo/overview.png`, `interaction.png`).
@@ -20,6 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - **REQ-CS-008:** `igor-php/igor-php` (require-dev only), root `igor.json`, Composer/`Makefile` `igor` target, and `release-check` wiring for FrankenPHP worker-state audit.
 
+[1.3.0]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.3.0
 [1.2.2]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.2.2
 
 ## [1.2.1] - 2026-09-25
