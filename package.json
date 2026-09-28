@@ -18,7 +18,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@yaireo/tagify": "^4.35.6"
+    "@yaireo/tagify": "^4.39.0"
   },
   "devDependencies": {
     "@types/node": "^26.6.1",
