@@ -12,8 +12,8 @@ importers:
   .:
     dependencies:
       '@yaireo/tagify':
-        specifier: ^4.35.6
-        version: 4.38.0(prop-types@15.8.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        specifier: ^4.39.0
+        version: 4.39.0(prop-types@15.8.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
     devDependencies:
       '@types/node':
         specifier: ^26.6.2
@@ -509,8 +509,8 @@ packages:
   '@vitest/utils@2.1.9':
     resolution: {integrity: sha512-v0psaMSkNJ3A2NMrUEHFRzJtDPFn+/VWZ5WxImB21T9fjucJRmS7xCS3ppEnARb9y11OAzaD+P2Ps+b+BGX5iQ==}
 
-  '@yaireo/tagify@4.38.0':
-    resolution: {integrity: sha512-/ZyG2NWQGNcTK4ay2aPE3ka/ZQmhTo+bUKb81SqjtQlt3VrGoxCNhmvKTV/mBJbY69BOXXeBEi+a5JLrvp6wLA==}
+  '@yaireo/tagify@4.39.0':
+    resolution: {integrity: sha512-7T/4PyjzrHj8QO5s06V1wV27AK6H6KtzTkFMPzm1lMKHs/rXioIbNBxxswKg2IkAfYrATRKLok5ZEJ6g3m262w==}
     engines: {node: '>=22', pnpm: '>=10'}
     peerDependencies:
       prop-types: '>15.5.7'
@@ -1319,7 +1319,7 @@ snapshots:
       loupe: 3.2.1
       tinyrainbow: 1.2.0
 
-  '@yaireo/tagify@4.38.0(prop-types@15.8.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
+  '@yaireo/tagify@4.39.0(prop-types@15.8.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
     dependencies:
       prop-types: 15.8.1
       react: 19.2.7
