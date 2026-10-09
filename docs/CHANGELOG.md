@@ -6,6 +6,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [1.3.1] - 2026-10-09
+
+### Changed
+
+- Rebuilt `tag-input.js` / `tag-input.css` with `@yaireo/tagify` 4.39.0 and Vite 8.3.2 (published assets were still built from tagify 4.38).
+
+### Fixed
+
+- `pnpm-lock.yaml` `vite` specifier synced with `package.json` (`^8.3.2`) so frozen-lockfile installs work again.
+
+### Dependencies
+
+- `igor-php/igor-php` require-dev constraint bumped to `^0.10.0`; npm `@yaireo/tagify` 4.39.0, `vite` 8.3.2, `@types/node` 26.6.4 (Dependabot).
+- Dev lock refreshed: Symfony 7.4.20, Twig 3.30.0, PHPStan 2.3.1, `phpstan/phpstan-symfony` 2.1.0, Rector 2.7.0, `nowo-tech/phpstan-frankenphp` 1.2.3.
+- Demo `symfony8`: Symfony 8.1.8, Twig 3.30.0.
+
+[1.3.1]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.3.1
+
 ## [1.3.0] - 2026-09-28
 
 ### Security

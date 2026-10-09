@@ -2,12 +2,23 @@
 
 ## Table of contents
 
+- [From 1.3.0 to 1.3.1](#from-130-to-131)
 - [From 1.2.2 to 1.3.0](#from-122-to-130)
 - [From 1.2.0 to 1.2.1](#from-120-to-121)
 - [From 1.1.3 to 1.2.0](#from-113-to-120)
 - [From 1.1.2 to 1.1.3](#from-112-to-113)
 
 
+## From 1.3.0 to 1.3.1
+
+Rebuilt front-end assets (tagify 4.39.0) and dependency refresh. **No breaking changes.**
+
+```bash
+composer update nowo-tech/tag-input-bundle
+php bin/console assets:install
+```
+
+- Re-run `assets:install` (or your asset pipeline) so the rebuilt `tag-input.js` / `tag-input.css` are published.
 ## From 1.2.2 to 1.3.0
 
 From **1.2.2** — default `max_tags` 50 (fail-closed); demo e2e.
