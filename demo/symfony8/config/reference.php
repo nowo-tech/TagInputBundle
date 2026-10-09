@@ -689,10 +689,10 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         signing_algorithm?: scalar|Param|null, // Default: "sha256"
  *         routing?: array<string, array{ // Default: []
  *             service?: scalar|Param|null,
- *             secret?: scalar|Param|null, // Default: ""
+ *             secret?: scalar|Param|null, // The secret used to verify incoming request signatures. It must be set in production: with an empty value, depending on the parser, requests from any sender are accepted or every request is rejected. // Default: ""
  *         }>,
  *     },
- *     remote-event?: bool|array{ // RemoteEvent configuration
+ *     remote_event?: bool|array{ // RemoteEvent configuration
  *         enabled?: bool|Param, // Default: false
  *     },
  *     json_streamer?: bool|array{ // JSON streamer configuration
@@ -757,7 +757,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     pattern?: scalar|Param|null, // Default: null
  *     whitelist?: list<scalar|Param|null>,
  *     duplicates?: bool|Param, // Default: false
- *     max_tags?: int|Param, // Default: null
+ *     max_tags?: int|Param, // Maximum tags accepted from the client (fail-closed on overflow). // Default: 50
  *     dropdown_enabled?: bool|Param, // Default: true
  *     placeholder?: scalar|Param|null, // Default: ""
  *     form_theme?: scalar|Param|null, // Default: "form_div_layout.html.twig"
