@@ -3,7 +3,7 @@
 help:
 	@echo "Symfony 8 Demo - Tag Input Bundle"
 	@echo "  make test-e2e       Playwright e2e (REQ-DEMO-013)"
-	@echo "  make demo-screenshots  Refresh docs/images/demo/*.png"
+	@echo "  make demo-screenshots  Refresh docs/images/demo/*.webp"
 
 composer-install:
 	@echo "Installing Composer dependencies (ephemeral container)..."
@@ -16,7 +16,7 @@ up:
 	$(DC) up -d
 	@echo "Waiting for FrankenPHP to stay up..."
 	@echo "  make test-e2e       Playwright e2e (REQ-DEMO-013)"
-	@echo "  make demo-screenshots  Refresh docs/images/demo/*.png"
+	@echo "  make demo-screenshots  Refresh docs/images/demo/*.webp"
 	@ok=0; \
 	for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do \
 		if $(DOCKER_COMPOSE) exec -T php true 2>/dev/null; then ok=1; break; fi; \
@@ -116,6 +116,6 @@ demo-screenshots: ensure-up
 		-e DEMO_BASE_URL=http://127.0.0.1:$$PORT \
 		-e SCREENSHOT_DIR=/screenshots \
 		$(PLAYWRIGHT_IMAGE) \
-		bash -lc 'npm install --no-fund --no-audit && npx playwright test --project=screenshots'
-	@echo "Screenshots written under docs/images/demo/"
+		bash -lc 'npm install --no-fund --no-audit && npx playwright test --project=screenshots && node scripts/to-webp.mjs /screenshots'
+	@echo "Screenshots written under docs/images/demo/ (WebP)"
 

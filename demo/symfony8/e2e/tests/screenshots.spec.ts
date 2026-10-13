@@ -50,7 +50,7 @@ async function clipDemoFrame(page: import('@playwright/test').Page): Promise<Box
 }
 
 async function prepareDemoPage(page: import('@playwright/test').Page) {
-  await page.setViewportSize({ width: 1280, height: 1200 });
+  await page.setViewportSize({ width: 1280, height: 640 });
   await page.goto('/demo/tags/basic');
   await expect(page.locator('nav.navbar .navbar-brand')).toBeVisible();
   await expect(page.locator('main .tag-demo-card nowo-tag-input').first()).toBeVisible();
@@ -70,7 +70,7 @@ test.describe('TagInput screenshots (full demo context)', () => {
     await prepareDemoPage(page);
     await expect(page.locator('nowo-tag-input .tagify__tag').first()).toBeVisible();
     const clip = await clipDemoFrame(page);
-    if (clip.height >= 500) {
+    if (clip.height >= 400) {
       await page.screenshot({ path: resolve(outDir, 'overview.png'), clip });
     } else {
       await page.screenshot({ path: resolve(outDir, 'overview.png'), fullPage: true });
@@ -88,7 +88,7 @@ test.describe('TagInput screenshots (full demo context)', () => {
       timeout: 5000,
     });
     const clip = await clipDemoFrame(page);
-    if (clip.height >= 500) {
+    if (clip.height >= 400) {
       await page.screenshot({ path: resolve(outDir, 'interaction.png'), clip });
     } else {
       await page.screenshot({ path: resolve(outDir, 'interaction.png'), fullPage: true });

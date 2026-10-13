@@ -4,7 +4,7 @@
 
 | Overview | Interaction |
 |----------|-------------|
-| ![Tag input with existing tags and empty entry field](images/demo/overview.png) | ![Tag input after adding a new tag](images/demo/interaction.png) |
+| ![Tag input with existing tags and empty entry field](images/demo/overview.webp) | ![Tag input after adding a new tag](images/demo/interaction.webp) |
 
 Regenerate with `make -C demo/symfony8 demo-screenshots` (REQ-DEMO-013).
 
