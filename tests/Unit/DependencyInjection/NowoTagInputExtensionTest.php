@@ -6,6 +6,7 @@ namespace Nowo\TagInputBundle\Tests\Unit\DependencyInjection;
 
 use Nowo\TagInputBundle\DependencyInjection\NowoTagInputExtension;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 
@@ -117,8 +118,7 @@ final class NowoTagInputExtensionTest extends TestCase
         $container2->prependExtensionConfig('nowo_tag_input', [
             'form_theme' => 'unknown_theme.html.twig',
         ]);
+        $this->expectException(InvalidConfigurationException::class);
         $extension->prepend($container2);
-        $twigConfigs2 = $container2->getExtensionConfig('twig');
-        self::assertSame('@NowoTagInputBundle/Form/tag_input_theme.html.twig', $twigConfigs2[0]['form_themes'][0]);
     }
 }

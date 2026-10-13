@@ -6,6 +6,7 @@ namespace Nowo\TagInputBundle\Tests\Unit\DependencyInjection;
 
 use Nowo\TagInputBundle\DependencyInjection\Configuration;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Definition\Processor;
 
 /**
@@ -60,5 +61,31 @@ final class ConfigurationTest extends TestCase
         self::assertFalse($config['dropdown_enabled']);
         self::assertSame('Add tags', $config['placeholder']);
         self::assertSame('bootstrap_5_layout.html.twig', $config['form_theme']);
+    }
+
+    public function testInvalidPatternIsRejected(): void
+    {
+        $this->expectException(InvalidConfigurationException::class);
+        (new Processor())->processConfiguration(new Configuration(), [['pattern' => '([a-z']]);
+    }
+
+    public function testNonStringPatternIsRejected(): void
+    {
+        $this->expectException(InvalidConfigurationException::class);
+        (new Processor())->processConfiguration(new Configuration(), [['pattern' => 42]]);
+    }
+
+    public function testPatternWithSlashAndEmptyPatternAreAccepted(): void
+    {
+        $processor = new Processor();
+
+        self::assertSame('^a/b$', $processor->processConfiguration(new Configuration(), [['pattern' => '^a/b$']])['pattern']);
+        self::assertSame('', $processor->processConfiguration(new Configuration(), [['pattern' => '']])['pattern']);
+    }
+
+    public function testUnknownFormThemeIsRejected(): void
+    {
+        $this->expectException(InvalidConfigurationException::class);
+        (new Processor())->processConfiguration(new Configuration(), [['form_theme' => 'unknown_theme.html.twig']]);
     }
 }

@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace Nowo\TagInputBundle\DependencyInjection;
 
+use Nowo\TagInputBundle\Form\TagPattern;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+
+use function array_keys;
+use function is_string;
 
 final class Configuration implements ConfigurationInterface
 {
@@ -27,6 +31,11 @@ final class Configuration implements ConfigurationInterface
                 ->end()
                 ->scalarNode('pattern')
                     ->defaultNull()
+                    ->info('Regex source without delimiters (shared with the Tagify client); must compile.')
+                    ->validate()
+                        ->ifTrue(static fn (mixed $value): bool => $value !== null && (!is_string($value) || ($value !== '' && !TagPattern::isValid($value))))
+                        ->thenInvalid('Invalid tag pattern %s: it must be a valid regular expression without delimiters.')
+                    ->end()
                 ->end()
                 ->arrayNode('whitelist')
                     ->scalarPrototype()->end()
@@ -46,7 +55,8 @@ final class Configuration implements ConfigurationInterface
                 ->scalarNode('placeholder')
                     ->defaultValue('')
                 ->end()
-                ->scalarNode('form_theme')
+                ->enumNode('form_theme')
+                    ->values(array_keys(NowoTagInputExtension::FORM_THEME_MAP))
                     ->defaultValue('form_div_layout.html.twig')
                 ->end()
             ->end();

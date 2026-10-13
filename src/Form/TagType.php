@@ -10,11 +10,14 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use function is_array;
+use function is_scalar;
 use function is_string;
 use function json_encode;
+use function sprintf;
 
 use const JSON_THROW_ON_ERROR;
 
@@ -125,6 +128,16 @@ final class TagType extends AbstractType
 
             return ValueFormat::from((string) $value);
         });
+
+        $resolver->setNormalizer('pattern', static function (mixed $options, ?string $value): ?string {
+            if ($value !== null && $value !== '' && !TagPattern::isValid($value)) {
+                throw new InvalidOptionsException(sprintf('The option "pattern" with value "%s" is not a valid regular expression (expected a regex source without delimiters).', $value));
+            }
+
+            return $value;
+        });
+
+        $resolver->setNormalizer('whitelist', static fn (mixed $options, array $value): array => array_values(array_map(static fn (mixed $item): string => is_scalar($item) ? (string) $item : '', $value)));
 
         $resolver->setNormalizer('empty_data', static function (mixed $options, mixed $value): array|string {
             $format = $options['value_format'] ?? ValueFormat::ARRAY;

@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Security
+
+- `pattern` is now compiled with an escaped delimiter and the `u` flag: a `/` in the pattern no longer breaks validation (or injects modifiers), and multibyte tags are matched per character. Invalid patterns are rejected in the bundle configuration and by the `TagType` `pattern` option instead of failing on submit.
+- `max_tags`: submission processing stops at the first tag over the limit instead of validating the whole payload first.
+
+### Fixed
+
+- Numeric `whitelist` entries (e.g. `[1, 2]` from YAML) now match submitted tags; the whitelist is compared as strings (`TagType` normalizes the option to strings).
+- docs: `max_tags` default is `50`, not `null`.
+
+### Changed
+
+- `form_theme` is now an enum of the supported layouts; an unknown value fails at configuration load instead of silently falling back to `form_div_layout.html.twig`.
+
 ## [1.3.2] - 2026-10-13
 
 ### Changed

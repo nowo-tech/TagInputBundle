@@ -188,4 +188,58 @@ final class TagsToValueTransformerTest extends TestCase
 
         self::assertSame([], $method->invoke($transformer, '   '));
     }
+
+    public function testPatternWithSlashIsEscaped(): void
+    {
+        $transformer = new TagsToValueTransformer(ValueFormat::ARRAY, pattern: '^[a-z]+/[a-z]+$');
+
+        self::assertSame(['foo/bar'], $transformer->reverseTransform('["foo/bar"]'));
+
+        $this->expectException(TransformationFailedException::class);
+        $transformer->reverseTransform('["foobar"]');
+    }
+
+    public function testPatternWithAlreadyEscapedSlashKeepsWorking(): void
+    {
+        $transformer = new TagsToValueTransformer(ValueFormat::ARRAY, pattern: '^a\\/b$');
+
+        self::assertSame(['a/b'], $transformer->reverseTransform('["a/b"]'));
+    }
+
+    public function testPatternMatchesMultibyteCharactersWithUnicodeFlag(): void
+    {
+        $transformer = new TagsToValueTransformer(ValueFormat::ARRAY, pattern: '^.{1,3}$');
+
+        self::assertSame(['ñandú'], (new TagsToValueTransformer(ValueFormat::ARRAY, pattern: '^.{5}$'))->reverseTransform('["ñandú"]'));
+
+        $this->expectException(TransformationFailedException::class);
+        $transformer->reverseTransform('["ñandú"]');
+    }
+
+    public function testMaxTagsStopsAtFirstOverflowingTag(): void
+    {
+        // The 3rd tag would fail the pattern; the overflow is reported first because processing stops early.
+        $transformer = new TagsToValueTransformer(ValueFormat::ARRAY, pattern: '^[a-z]+$', maxTags: 2);
+
+        $this->expectException(TransformationFailedException::class);
+        $this->expectExceptionMessage('At most 2 tags are allowed.');
+        $transformer->reverseTransform('["a","b","c","1"]');
+    }
+
+    public function testMaxTagsAllowsExactLimit(): void
+    {
+        $transformer = new TagsToValueTransformer(ValueFormat::ARRAY, maxTags: 2);
+
+        self::assertSame(['a', 'b'], $transformer->reverseTransform('["a","b","a"]'));
+    }
+
+    public function testNumericWhitelistEntriesMatchSubmittedStrings(): void
+    {
+        $transformer = new TagsToValueTransformer(ValueFormat::ARRAY, whitelist: [1, 2, 3.5]);
+
+        self::assertSame(['1', '3.5'], $transformer->reverseTransform('["1","3.5"]'));
+
+        $this->expectException(TransformationFailedException::class);
+        $transformer->reverseTransform('["4"]');
+    }
 }

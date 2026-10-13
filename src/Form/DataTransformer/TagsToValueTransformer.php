@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Nowo\TagInputBundle\Form\DataTransformer;
 
 use JsonException;
+use Nowo\TagInputBundle\Form\TagPattern;
 use Nowo\TagInputBundle\Form\ValueFormat;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
@@ -30,7 +31,7 @@ use const JSON_THROW_ON_ERROR;
 final readonly class TagsToValueTransformer implements DataTransformerInterface
 {
     /**
-     * @param list<string> $whitelist
+     * @param list<float|int|string> $whitelist compared as strings (submitted tags are always strings)
      */
     public function __construct(
         private ValueFormat $valueFormat,
@@ -174,6 +175,8 @@ final readonly class TagsToValueTransformer implements DataTransformerInterface
     private function normalizeSubmittedTags(array $tags): array
     {
         $normalized = [];
+        $whitelist  = array_map(strval(...), $this->whitelist);
+        $regex      = $this->pattern !== null && $this->pattern !== '' ? TagPattern::toRegex($this->pattern) : null;
 
         foreach ($tags as $tag) {
             $tag = $this->normalizeTag($tag);
@@ -181,11 +184,11 @@ final readonly class TagsToValueTransformer implements DataTransformerInterface
                 continue;
             }
 
-            if ($this->whitelist !== [] && !in_array($tag, $this->whitelist, true)) {
+            if ($whitelist !== [] && !in_array($tag, $whitelist, true)) {
                 throw new TransformationFailedException(sprintf('Tag "%s" is not allowed.', $tag));
             }
 
-            if ($this->pattern !== null && $this->pattern !== '' && preg_match('/' . $this->pattern . '/', $tag) !== 1) {
+            if ($regex !== null && preg_match($regex, $tag) !== 1) {
                 throw new TransformationFailedException(sprintf('Tag "%s" does not match the required pattern.', $tag));
             }
 
@@ -193,11 +196,12 @@ final readonly class TagsToValueTransformer implements DataTransformerInterface
                 continue;
             }
 
-            $normalized[] = $tag;
-        }
+            if ($this->maxTags !== null && count($normalized) >= $this->maxTags) {
+                // Fail as soon as the limit is exceeded instead of validating the whole payload first.
+                throw new TransformationFailedException(sprintf('At most %d tags are allowed.', $this->maxTags));
+            }
 
-        if ($this->maxTags !== null && count($normalized) > $this->maxTags) {
-            throw new TransformationFailedException(sprintf('At most %d tags are allowed.', $this->maxTags));
+            $normalized[] = $tag;
         }
 
         return $normalized;

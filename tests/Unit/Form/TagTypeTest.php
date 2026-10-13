@@ -260,4 +260,41 @@ final class TagTypeTest extends TestCase
         $form2->submit('["default-only","other"]');
         self::assertFalse($form2->isSynchronized());
     }
+
+    public function testInvalidPatternIsRejected(): void
+    {
+        $factory = Forms::createFormFactoryBuilder()
+            ->addType(new TagType())
+            ->getFormFactory();
+
+        $this->expectException(InvalidOptionsException::class);
+        $factory->create(TagType::class, [], ['pattern' => '([a-z']);
+    }
+
+    public function testPatternWithSlashIsAccepted(): void
+    {
+        $factory = Forms::createFormFactoryBuilder()
+            ->addType(new TagType())
+            ->getFormFactory();
+
+        $form = $factory->create(TagType::class, [], ['pattern' => '^[a-z]+/[a-z]+$']);
+        $form->submit('["foo/bar"]');
+
+        self::assertTrue($form->isSynchronized());
+        self::assertSame(['foo/bar'], $form->getData());
+    }
+
+    public function testNumericWhitelistIsNormalizedToStrings(): void
+    {
+        $factory = Forms::createFormFactoryBuilder()
+            ->addType(new TagType())
+            ->getFormFactory();
+
+        $form = $factory->create(TagType::class, [], ['whitelist' => [1, 2, ['x']]]);
+        self::assertSame(['1', '2', ''], $form->getConfig()->getOption('whitelist'));
+
+        $form->submit('["2"]');
+        self::assertTrue($form->isSynchronized());
+        self::assertSame(['2'], $form->getData());
+    }
 }

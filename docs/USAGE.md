@@ -100,7 +100,7 @@ The widget is `<nowo-tag-input>` (light DOM: native input wrapped by Tagify). Le
 - `value_format`: `array` (default) or `string`
 - `max_tags`: maximum number of tags
 - `whitelist`: allowed tag values (enables suggestions)
-- `pattern`: regex pattern without delimiters
+- `pattern`: regex pattern without delimiters (validated when the form is built; `/` needs no escaping; UTF-8 aware)
 - `duplicates`: allow duplicate tags
 - `dropdown_enabled`: Tagify dropdown for whitelist suggestions
 - `placeholder`: input placeholder

@@ -12,7 +12,8 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 final class NowoTagInputExtension extends Extension implements PrependExtensionInterface
 {
-    private const FORM_THEME_MAP = [
+    /** Supported `form_theme` values (base layouts) mapped to the bundle theme that extends them. */
+    public const FORM_THEME_MAP = [
         'form_div_layout.html.twig'               => '@NowoTagInputBundle/Form/tag_input_theme.html.twig',
         'form_table_layout.html.twig'             => '@NowoTagInputBundle/Form/tag_input_theme_table.html.twig',
         'bootstrap_5_layout.html.twig'            => '@NowoTagInputBundle/Form/tag_input_theme_bootstrap5.html.twig',
@@ -63,8 +64,7 @@ final class NowoTagInputExtension extends Extension implements PrependExtensionI
 
         $configs   = $container->getExtensionConfig(Configuration::ALIAS);
         $config    = $this->processConfiguration(new Configuration(), $configs);
-        $formTheme = $config['form_theme'] ?? 'form_div_layout.html.twig';
-        $themePath = self::FORM_THEME_MAP[$formTheme] ?? self::FORM_THEME_MAP['form_div_layout.html.twig'];
+        $themePath = self::FORM_THEME_MAP[$config['form_theme']];
 
         $container->prependExtensionConfig('twig', [
             'form_themes' => [$themePath],

@@ -22,17 +22,17 @@ nowo_tag_input:
 |-----|---------|-------------|
 | `value_format` | `array` | Model format: `array` or `string` (comma-separated) |
 | `trim` | `true` | Trim whitespace from each tag |
-| `pattern` | `null` | Optional regex pattern (without delimiters) |
-| `whitelist` | `[]` | Allowed tag values |
+| `pattern` | `null` | Optional regex source without delimiters (a `/` needs no escaping); matched with the PCRE `u` (UTF-8) flag on the server and as a JS `RegExp` in Tagify. Must compile, otherwise configuration / form creation fails |
+| `whitelist` | `[]` | Allowed tag values (numbers are compared as strings) |
 | `duplicates` | `false` | Allow duplicate tags |
-| `max_tags` | `null` | Maximum number of tags |
+| `max_tags` | `50` | Maximum number of tags accepted on submit (fail-closed: the submission fails as soon as the limit is exceeded) |
 | `dropdown_enabled` | `true` | Enable Tagify dropdown for whitelist |
 | `placeholder` | `''` | Default placeholder |
 | `form_theme` | `form_div_layout.html.twig` | Twig form theme base layout |
 
 ## form_theme
 
-Supported values:
+Supported values (any other value is rejected when the configuration is loaded):
 
 - `form_div_layout.html.twig`
 - `form_table_layout.html.twig`
