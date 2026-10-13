@@ -75,8 +75,20 @@ jobs:
 
       - name: Install dependencies with Symfony ${{ matrix.symfony }}
         run: |
-          composer require symfony/config:^${{ matrix.symfony }} symfony/dependency-injection:^${{ matrix.symfony }} symfony/form:^${{ matrix.symfony }} symfony/framework-bundle:^${{ matrix.symfony }} symfony/http-foundation:^${{ matrix.symfony }} symfony/http-kernel:^${{ matrix.symfony }} symfony/routing:^${{ matrix.symfony }} symfony/twig-bundle:^${{ matrix.symfony }} symfony/web-profiler-bundle:^${{ matrix.symfony }} --no-interaction --no-update
+          # Pin EVERY Symfony component of the graph (transitive ones too: console, validator, ...) to the
+          # cell constraint; otherwise e.g. the 6.4 cell mixes symfony/form 6.4 with validator/console 8.x
+          # on PHP >= 8.4 and dies on incompatible signatures.
+          components="asset browser-kit cache config console dependency-injection dom-crawler error-handler event-dispatcher filesystem finder form framework-bundle http-foundation http-kernel options-resolver process property-access property-info routing stopwatch string twig-bridge twig-bundle var-dumper var-exporter web-profiler-bundle yaml"
+          # symfony/type-info has no 6.x release (it starts at 7.1)
+          case "${{ matrix.symfony }}" in 6.*) ;; *) components="$components type-info" ;; esac
+          constraints=""
+          for c in $components; do constraints="$constraints symfony/$c:^${{ matrix.symfony }}"; done
+          composer require $constraints --no-interaction --no-update
           composer update symfony/* --with-all-dependencies --no-interaction --prefer-dist --no-progress
+          # Fail fast if any Symfony component (except contracts/polyfills) escaped the cell's major
+          major="${{ matrix.symfony }}"; major="${major%%.*}"
+          mixed=$(composer show 'symfony/*' | grep -vE '^symfony/(polyfill-|[a-z-]+-contracts )' | awk -v m="$major" '{ v = $2; sub(/^v/, "", v); split(v, a, "."); if (a[1] != m) print }')
+          if [ -n "$mixed" ]; then echo "Symfony components outside ${{ matrix.symfony }}:"; echo "$mixed"; exit 1; fi
       - name: Composer audit (Critical/High)
         run: composer audit --locked
 

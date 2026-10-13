@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 
 - The shipped `tag.placeholder` translations are now used: `TagType` translates the `placeholder` option with the field `translation_domain` before writing the `placeholder` and `data-nowo-tag-input-placeholder-value` attributes (the frontend reads the data attribute, which Twig never translated), and `nowo_tag_input.placeholder` defaults to `tag.placeholder`.
+- CI/tests: the Symfony 6.4 cell now pins every Symfony component of the graph (incl. transitive `symfony/console`, `symfony/validator`, ...) to the cell constraint and fails if any component escapes the cell major; on PHP 8.4/8.5 it previously mixed `symfony/form` 6.4 with 8.x components and died on incompatible signatures.
 
 ### Changed
 
