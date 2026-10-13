@@ -754,13 +754,13 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  * @psalm-type NowoTagInputConfig = array{
  *     value_format?: "array"|"string"|Param, // Default: "array"
  *     trim?: bool|Param, // Default: true
- *     pattern?: scalar|Param|null, // Default: null
+ *     pattern?: scalar|Param|null, // Regex source without delimiters (shared with the Tagify client); must compile. // Default: null
  *     whitelist?: list<scalar|Param|null>,
  *     duplicates?: bool|Param, // Default: false
  *     max_tags?: int|Param, // Maximum tags accepted from the client (fail-closed on overflow). // Default: 50
  *     dropdown_enabled?: bool|Param, // Default: true
- *     placeholder?: scalar|Param|null, // Default: ""
- *     form_theme?: scalar|Param|null, // Default: "form_div_layout.html.twig"
+ *     placeholder?: scalar|Param|null, // Default placeholder: a translation key or literal text, translated with the field translation_domain. Empty string disables it. // Default: "tag.placeholder"
+ *     form_theme?: "form_div_layout.html.twig"|"form_table_layout.html.twig"|"bootstrap_5_layout.html.twig"|"bootstrap_5_horizontal_layout.html.twig"|"bootstrap_4_layout.html.twig"|"bootstrap_4_horizontal_layout.html.twig"|"bootstrap_3_layout.html.twig"|"bootstrap_3_horizontal_layout.html.twig"|"foundation_5_layout.html.twig"|"foundation_6_layout.html.twig"|"tailwind_2_layout.html.twig"|Param, // Default: "form_div_layout.html.twig"
  * }
  * @psalm-type NowoHotReloadConfig = array{
  *     enabled?: bool|Param, // Master switch. When false, nothing is injected even if FRANKENPHP_HOT_RELOAD is set. // Default: true
