@@ -2,6 +2,7 @@
 
 ## Table of contents
 
+- [From 1.4.0 to 1.5.0](#from-140-to-150)
 - [From 1.3.2 to 1.4.0](#from-132-to-140)
 - [From 1.3.1 to 1.3.2](#from-131-to-132)
 - [From 1.3.0 to 1.3.1](#from-130-to-131)
@@ -9,6 +10,17 @@
 - [From 1.2.0 to 1.2.1](#from-120-to-121)
 - [From 1.1.3 to 1.2.0](#from-113-to-120)
 - [From 1.1.2 to 1.1.3](#from-112-to-113)
+
+## From 1.4.0 to 1.5.0
+
+From **1.4.0** — translated placeholder by default, Symfony >=6.4, vitest 4.
+
+```bash
+composer update nowo-tech/tag-input-bundle
+```
+
+- **Symfony 6.4+ required:** constraints are now `^6.4 || ^7.0 || ^8.0`. Apps on Symfony 6.0–6.3 must upgrade to 6.4 first.
+- **Placeholder translated by default:** `nowo_tag_input.placeholder` now defaults to the translation key `tag.placeholder`, and `TagType` translates the `placeholder` option with the field `translation_domain` (default `NowoTagInputBundle`) when a `translator` service exists. Fields without an explicit placeholder now show the bundled text (e.g. "Add tags and press Enter"). To keep the previous empty placeholder set `nowo_tag_input.placeholder: ''`. Literal placeholder texts keep working (a missing key is returned unchanged); pass `translation_domain: false` to skip translation for a field.
 
 ## From 1.3.2 to 1.4.0
 
@@ -205,9 +217,6 @@ When a future release introduces BC breaks, this file will include:
 - migration steps
 
 ## Unreleased
-
-- **Symfony 6.4+ required:** constraints are now `^6.4 || ^7.0 || ^8.0`. Apps on Symfony 6.0–6.3 must upgrade to 6.4 first.
-- **Placeholder translated by default:** `nowo_tag_input.placeholder` now defaults to the translation key `tag.placeholder`, and `TagType` translates the `placeholder` option with the field `translation_domain` (default `NowoTagInputBundle`) when a `translator` service exists. Fields without an explicit placeholder now show the bundled text (e.g. "Add tags and press Enter"). To keep the previous empty placeholder set `nowo_tag_input.placeholder: ''`. Literal placeholder texts keep working (a missing key is returned unchanged); pass `translation_domain: false` to skip translation for a field.
 
 ## To 1.3.0
 

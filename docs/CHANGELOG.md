@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-10-13
+
 ### Fixed
 
 - The shipped `tag.placeholder` translations are now used: `TagType` translates the `placeholder` option with the field `translation_domain` before writing the `placeholder` and `data-nowo-tag-input-placeholder-value` attributes (the frontend reads the data attribute, which Twig never translated), and `nowo_tag_input.placeholder` defaults to `tag.placeholder`.
@@ -14,6 +16,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Minimum Symfony version is now 6.4 (`^6.4 || ^7.0 || ^8.0`), matching what CI tests; a Symfony 6.4 cell was added to the CI matrix.
 - Development: `vitest` and `@vitest/coverage-v8` upgraded to 4.x.
+
+[1.5.0]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.5.0
 
 ## [1.4.0] - 2026-10-13
 
