@@ -2,12 +2,25 @@
 
 ## Table of contents
 
+- [From 1.3.2 to 1.4.0](#from-132-to-140)
 - [From 1.3.1 to 1.3.2](#from-131-to-132)
 - [From 1.3.0 to 1.3.1](#from-130-to-131)
 - [From 1.2.2 to 1.3.0](#from-122-to-130)
 - [From 1.2.0 to 1.2.1](#from-120-to-121)
 - [From 1.1.3 to 1.2.0](#from-113-to-120)
 - [From 1.1.2 to 1.1.3](#from-112-to-113)
+
+## From 1.3.2 to 1.4.0
+
+From **1.3.2** — security - escaped pattern delimiter, validated patterns, early max_tags, strict form_theme.
+
+```bash
+composer update nowo-tech/tag-input-bundle
+```
+
+- A `pattern` that does not compile now fails at config load / form build (it used to fail on submit). Patterns containing `/` now work.
+- An unknown `form_theme` now fails config validation (it silently fell back to the div layout).
+- Numeric whitelist entries now match string tags.
 
 ## From 1.3.1 to 1.3.2
 

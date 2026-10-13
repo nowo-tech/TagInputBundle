@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-10-13
+
 ### Security
 
 - `pattern` is now compiled with an escaped delimiter and the `u` flag: a `/` in the pattern no longer breaks validation (or injects modifiers), and multibyte tags are matched per character. Invalid patterns are rejected in the bundle configuration and by the `TagType` `pattern` option instead of failing on submit.
@@ -19,6 +21,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 
 - `form_theme` is now an enum of the supported layouts; an unknown value fails at configuration load instead of silently falling back to `form_div_layout.html.twig`.
+
+[1.4.0]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.4.0
 
 ## [1.3.2] - 2026-10-13
 
