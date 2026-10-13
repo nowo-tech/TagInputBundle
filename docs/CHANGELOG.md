@@ -6,9 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [1.3.2] - 2026-10-13
+
 ### Changed
 
 - Development: `composer.json` pins `config.platform.php` to 8.2.0 so the committed lock stays installable on the minimum PHP; CI overrides the platform per matrix cell.
+- Repository: `.twig-cs-fixer.cache` is now git-ignored.
+
+### Dependencies
+
+- `@types/node` 26.6.4 → 26.6.5 (frontend tooling; #56).
+- `vite` 8.3.2 → 8.3.4 (frontend tooling; #57).
+- `happy-dom` 20.14.5 → 20.14.6 (frontend tooling; #58).
+
+[1.3.2]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.3.2
 
 ## [1.3.1] - 2026-10-09
 
