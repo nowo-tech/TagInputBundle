@@ -14,5 +14,6 @@ services:
       $defaultMaxTags: '%nowo_tag_input.max_tags%'
       $defaultDropdownEnabled: '%nowo_tag_input.dropdown_enabled%'
       $defaultPlaceholder: '%nowo_tag_input.placeholder%'
+      $translator: '@?translator'
     tags:
       - { name: form.type }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Nowo\TagInputBundle\DependencyInjection;
 
 use Nowo\TagInputBundle\Form\TagPattern;
+use Nowo\TagInputBundle\Form\TagType;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -53,7 +54,8 @@ final class Configuration implements ConfigurationInterface
                     ->defaultTrue()
                 ->end()
                 ->scalarNode('placeholder')
-                    ->defaultValue('')
+                    ->info('Default placeholder: a translation key or literal text, translated with the field translation_domain. Empty string disables it.')
+                    ->defaultValue(TagType::DEFAULT_PLACEHOLDER_KEY)
                 ->end()
                 ->enumNode('form_theme')
                     ->values(array_keys(NowoTagInputExtension::FORM_THEME_MAP))

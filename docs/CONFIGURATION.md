@@ -12,7 +12,7 @@ nowo_tag_input:
   trim: true
   duplicates: false
   dropdown_enabled: true
-  placeholder: ''
+  placeholder: 'tag.placeholder'
   form_theme: 'bootstrap_5_layout.html.twig'
 ```
 
@@ -27,7 +27,7 @@ nowo_tag_input:
 | `duplicates` | `false` | Allow duplicate tags |
 | `max_tags` | `50` | Maximum number of tags accepted on submit (fail-closed: the submission fails as soon as the limit is exceeded) |
 | `dropdown_enabled` | `true` | Enable Tagify dropdown for whitelist |
-| `placeholder` | `''` | Default placeholder |
+| `placeholder` | `tag.placeholder` | Default placeholder: a translation key or literal text, translated with the field `translation_domain` (default `NowoTagInputBundle`) before it reaches the `placeholder` and `data-nowo-tag-input-placeholder-value` attributes. `''` disables it. Without a translator service the bundled key renders no placeholder |
 | `form_theme` | `form_div_layout.html.twig` | Twig form theme base layout |
 
 ## form_theme

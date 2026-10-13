@@ -14,6 +14,7 @@ use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @covers \Nowo\TagInputBundle\Form\TagType
@@ -296,5 +297,98 @@ final class TagTypeTest extends TestCase
         $form->submit('["2"]');
         self::assertTrue($form->isSynchronized());
         self::assertSame(['2'], $form->getData());
+    }
+
+    public function testPlaceholderIsTranslatedWithTheFieldTranslationDomain(): void
+    {
+        $translator = $this->createTranslator(['NowoTagInputBundle' => ['tag.placeholder' => 'Añade etiquetas y pulsa Enter']]);
+        $factory    = Forms::createFormFactoryBuilder()
+            ->addType(new TagType(defaultPlaceholder: TagType::DEFAULT_PLACEHOLDER_KEY, translator: $translator))
+            ->getFormFactory();
+
+        $view = $factory->create(TagType::class)->createView();
+
+        self::assertSame('Añade etiquetas y pulsa Enter', $view->vars['tag_placeholder']);
+        self::assertSame('Añade etiquetas y pulsa Enter', $view->vars['attr']['data-nowo-tag-input-placeholder-value']);
+        self::assertSame('Añade etiquetas y pulsa Enter', $view->vars['attr']['placeholder']);
+    }
+
+    public function testPlaceholderUsesCustomTranslationDomain(): void
+    {
+        $translator = $this->createTranslator(['app' => ['form.tags.placeholder' => 'Type a tag']]);
+        $factory    = Forms::createFormFactoryBuilder()
+            ->addType(new TagType(translator: $translator))
+            ->getFormFactory();
+
+        $view = $factory->create(TagType::class, null, [
+            'placeholder'        => 'form.tags.placeholder',
+            'translation_domain' => 'app',
+        ])->createView();
+
+        self::assertSame('Type a tag', $view->vars['attr']['data-nowo-tag-input-placeholder-value']);
+    }
+
+    public function testPlaceholderIsNotTranslatedWhenTranslationDomainIsFalse(): void
+    {
+        $translator = $this->createTranslator(['NowoTagInputBundle' => ['tag.placeholder' => 'translated']]);
+        $factory    = Forms::createFormFactoryBuilder()
+            ->addType(new TagType(translator: $translator))
+            ->getFormFactory();
+
+        $view = $factory->create(TagType::class, null, [
+            'placeholder'        => 'tag.placeholder',
+            'translation_domain' => false,
+        ])->createView();
+
+        self::assertSame('tag.placeholder', $view->vars['attr']['data-nowo-tag-input-placeholder-value']);
+    }
+
+    public function testBundledPlaceholderKeyIsDroppedWithoutTranslator(): void
+    {
+        $factory = Forms::createFormFactoryBuilder()
+            ->addType(new TagType(defaultPlaceholder: TagType::DEFAULT_PLACEHOLDER_KEY))
+            ->getFormFactory();
+
+        $view = $factory->create(TagType::class)->createView();
+        self::assertSame('', $view->vars['attr']['data-nowo-tag-input-placeholder-value']);
+
+        $literal = $factory->create(TagType::class, null, ['placeholder' => 'Add tags'])->createView();
+        self::assertSame('Add tags', $literal->vars['attr']['data-nowo-tag-input-placeholder-value']);
+    }
+
+    public function testEmptyPlaceholderIsNotTranslated(): void
+    {
+        $translator = $this->createTranslator(['NowoTagInputBundle' => ['' => 'should not be used']]);
+        $factory    = Forms::createFormFactoryBuilder()
+            ->addType(new TagType(translator: $translator))
+            ->getFormFactory();
+
+        $view = $factory->create(TagType::class)->createView();
+        self::assertSame('', $view->vars['attr']['data-nowo-tag-input-placeholder-value']);
+    }
+
+    /**
+     * @param array<string, array<string, string>> $catalogue
+     */
+    private function createTranslator(array $catalogue): TranslatorInterface
+    {
+        return new class($catalogue) implements TranslatorInterface {
+            /**
+             * @param array<string, array<string, string>> $catalogue
+             */
+            public function __construct(private readonly array $catalogue)
+            {
+            }
+
+            public function trans(string $id, array $parameters = [], ?string $domain = null, ?string $locale = null): string
+            {
+                return $this->catalogue[$domain ?? 'messages'][$id] ?? $id;
+            }
+
+            public function getLocale(): string
+            {
+                return 'es';
+            }
+        };
     }
 }

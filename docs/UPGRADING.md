@@ -87,7 +87,7 @@ This document describes upgrade notes for `TagInputBundle`.
 ## Current compatibility baseline
 
 - PHP: `>=8.2` (<8.6). Symfony **8.0** and **8.1** require **PHP 8.4+**.
-- Symfony components: `^6.0 || ^7.0 || ^8.0` (CI matrix tests **7.4**, **8.0**, **8.1**).
+- Symfony components: `^6.4 || ^7.0 || ^8.0` (CI matrix tests **6.4**, **7.0**, **7.4**, **8.0**, **8.1**).
 - FrankenPHP: **100% compatible** with worker mode and `FRANKENPHP_RESET_KERNEL=false` (see [FRANKENPHP-WORKER-AUDIT.md](FRANKENPHP-WORKER-AUDIT.md)).
 
 ## Public API reminders
@@ -205,6 +205,9 @@ When a future release introduces BC breaks, this file will include:
 - migration steps
 
 ## Unreleased
+
+- **Symfony 6.4+ required:** constraints are now `^6.4 || ^7.0 || ^8.0`. Apps on Symfony 6.0–6.3 must upgrade to 6.4 first.
+- **Placeholder translated by default:** `nowo_tag_input.placeholder` now defaults to the translation key `tag.placeholder`, and `TagType` translates the `placeholder` option with the field `translation_domain` (default `NowoTagInputBundle`) when a `translator` service exists. Fields without an explicit placeholder now show the bundled text (e.g. "Add tags and press Enter"). To keep the previous empty placeholder set `nowo_tag_input.placeholder: ''`. Literal placeholder texts keep working (a missing key is returned unchanged); pass `translation_domain: false` to skip translation for a field.
 
 ## To 1.3.0
 

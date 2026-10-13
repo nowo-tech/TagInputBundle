@@ -33,7 +33,7 @@ final class ConfigurationTest extends TestCase
         self::assertFalse($config['duplicates']);
         self::assertSame(50, $config['max_tags']);
         self::assertTrue($config['dropdown_enabled']);
-        self::assertSame('', $config['placeholder']);
+        self::assertSame('tag.placeholder', $config['placeholder']);
         self::assertSame('form_div_layout.html.twig', $config['form_theme']);
     }
 

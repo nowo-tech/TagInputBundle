@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 use function is_array;
 use function is_scalar;
@@ -26,6 +27,9 @@ use const JSON_THROW_ON_ERROR;
  */
 final class TagType extends AbstractType
 {
+    /** Translation key of the bundled placeholder (domain `NowoTagInputBundle`); default of `nowo_tag_input.placeholder`. */
+    public const DEFAULT_PLACEHOLDER_KEY = 'tag.placeholder';
+
     /**
      * @param list<string> $defaultWhitelist
      */
@@ -38,6 +42,7 @@ final class TagType extends AbstractType
         private readonly ?int $defaultMaxTags = null,
         private readonly bool $defaultDropdownEnabled = true,
         private readonly string $defaultPlaceholder = '',
+        private readonly ?TranslatorInterface $translator = null,
     ) {
     }
 
@@ -57,7 +62,8 @@ final class TagType extends AbstractType
     {
         $view->vars['tag_container_class'] = $options['container_class'];
         $view->vars['tag_input_class']     = $options['input_class'];
-        $view->vars['tag_placeholder']     = $options['placeholder'];
+        $placeholder                       = $this->translatePlaceholder($options['placeholder'], $view->vars['translation_domain'] ?? null);
+        $view->vars['tag_placeholder']     = $placeholder;
         $view->vars['tag_disabled']        = $options['disabled'];
 
         $view->vars['attr']['data-controller'] = trim(($view->vars['attr']['data-controller'] ?? '') . ' nowo-tag-input');
@@ -77,8 +83,8 @@ final class TagType extends AbstractType
 
         $view->vars['attr']['data-nowo-tag-input-duplicates-value']       = $options['duplicates'] ? '1' : '0';
         $view->vars['attr']['data-nowo-tag-input-dropdown-enabled-value'] = $options['dropdown_enabled'] ? '1' : '0';
-        $view->vars['attr']['data-nowo-tag-input-placeholder-value']      = $options['placeholder'];
-        $view->vars['attr']['placeholder']                                = $options['placeholder'];
+        $view->vars['attr']['data-nowo-tag-input-placeholder-value']      = $placeholder;
+        $view->vars['attr']['placeholder']                                = $placeholder;
 
         if (!isset($view->vars['value']) || !is_string($view->vars['value'])) {
             $modelData = $form->getData();
@@ -89,6 +95,23 @@ final class TagType extends AbstractType
                 $view->vars['value'] = json_encode(array_values(array_filter($tags, static fn (string $tag): bool => $tag !== '')), JSON_THROW_ON_ERROR);
             }
         }
+    }
+
+    /**
+     * Translates the placeholder with the field translation domain (the data attribute read by the
+     * frontend is not translated by Twig). Without a translator, the bundled key renders no placeholder.
+     */
+    private function translatePlaceholder(string $placeholder, mixed $translationDomain): string
+    {
+        if ($placeholder === '' || $translationDomain === false) {
+            return $placeholder;
+        }
+
+        if ($this->translator === null) {
+            return $placeholder === self::DEFAULT_PLACEHOLDER_KEY ? '' : $placeholder;
+        }
+
+        return $this->translator->trans($placeholder, [], is_string($translationDomain) ? $translationDomain : null);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
