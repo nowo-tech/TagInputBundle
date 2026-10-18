@@ -78,7 +78,7 @@ jobs:
           # Pin EVERY Symfony component of the graph (transitive ones too: console, validator, ...) to the
           # cell constraint; otherwise e.g. the 6.4 cell mixes symfony/form 6.4 with validator/console 8.x
           # on PHP >= 8.4 and dies on incompatible signatures.
-          components="asset browser-kit cache config console dependency-injection dom-crawler error-handler event-dispatcher filesystem finder form framework-bundle http-foundation http-kernel options-resolver process property-access property-info routing stopwatch string twig-bridge twig-bundle var-dumper var-exporter web-profiler-bundle yaml"
+          components="asset browser-kit cache config console dependency-injection dom-crawler error-handler event-dispatcher filesystem finder form framework-bundle http-foundation http-kernel options-resolver process property-access property-info routing stopwatch string translation twig-bridge twig-bundle var-dumper var-exporter web-profiler-bundle yaml"
           # symfony/type-info has no 6.x release (it starts at 7.1)
           case "${{ matrix.symfony }}" in 6.*) ;; *) components="$components type-info" ;; esac
           constraints=""
