@@ -29,6 +29,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Fixed
+
+- **Placeholder translated twice (profiler missing message):** `TagType` put the already translated placeholder in
+  the `placeholder` attribute, which the form theme translates again in the field domain ("Add tags and press Enter"
+  logged as missing in `NowoTagInputBundle`). The attribute now carries the untranslated option (translated once by
+  the theme); the frontend data attribute `data-nowo-tag-input-placeholder-value` stays translated by the type.
+  Without a translator, or with `translation_domain: false`, both keep the previous values. Test rendering the widget
+  with a `DataCollectorTranslator` (en / es) asserting no missing message; `symfony/translation` added to require-dev.
+
 ## [1.5.0] - 2026-10-13
 
 ### Fixed

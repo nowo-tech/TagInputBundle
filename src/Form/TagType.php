@@ -84,7 +84,11 @@ final class TagType extends AbstractType
         $view->vars['attr']['data-nowo-tag-input-duplicates-value']       = $options['duplicates'] ? '1' : '0';
         $view->vars['attr']['data-nowo-tag-input-dropdown-enabled-value'] = $options['dropdown_enabled'] ? '1' : '0';
         $view->vars['attr']['data-nowo-tag-input-placeholder-value']      = $placeholder;
-        $view->vars['attr']['placeholder']                                = $placeholder;
+        // The form theme translates the `placeholder` attribute in the field domain: hand it the untranslated option
+        // so it is translated once (the translated text was looked up again: a "missing message" in the profiler).
+        $view->vars['attr']['placeholder'] = $this->translatesPlaceholder($options['placeholder'], $view->vars['translation_domain'] ?? null)
+            ? $options['placeholder']
+            : $placeholder;
 
         if (!isset($view->vars['value']) || !is_string($view->vars['value'])) {
             $modelData = $form->getData();
@@ -107,11 +111,19 @@ final class TagType extends AbstractType
             return $placeholder;
         }
 
-        if ($this->translator === null) {
+        if (!$this->translator instanceof TranslatorInterface) {
             return $placeholder === self::DEFAULT_PLACEHOLDER_KEY ? '' : $placeholder;
         }
 
         return $this->translator->trans($placeholder, [], is_string($translationDomain) ? $translationDomain : null);
+    }
+
+    /**
+     * Whether the placeholder is a message of the field domain (non-empty, domain not disabled, translator present).
+     */
+    private function translatesPlaceholder(string $placeholder, mixed $translationDomain): bool
+    {
+        return $placeholder !== '' && $translationDomain !== false && $this->translator instanceof TranslatorInterface;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

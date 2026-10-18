@@ -310,7 +310,7 @@ final class TagTypeTest extends TestCase
 
         self::assertSame('Añade etiquetas y pulsa Enter', $view->vars['tag_placeholder']);
         self::assertSame('Añade etiquetas y pulsa Enter', $view->vars['attr']['data-nowo-tag-input-placeholder-value']);
-        self::assertSame('Añade etiquetas y pulsa Enter', $view->vars['attr']['placeholder']);
+        self::assertSame(TagType::DEFAULT_PLACEHOLDER_KEY, $view->vars['attr']['placeholder'], 'The form theme translates the attribute once.');
     }
 
     public function testPlaceholderUsesCustomTranslationDomain(): void
