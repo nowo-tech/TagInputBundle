@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## Table of contents
 
 - [[Unreleased]](#unreleased)
+- [[1.5.1] - 2026-10-18](#151---2026-10-18)
 - [[1.5.0] - 2026-10-13](#150---2026-10-13)
 - [[1.4.0] - 2026-10-13](#140---2026-10-13)
 - [[1.3.2] - 2026-10-13](#132---2026-10-13)
@@ -29,6 +30,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [1.5.1] - 2026-10-18
+
+Placeholder translated once (no missing message). See [UPGRADING](UPGRADING.md#to-151).
+
 ### Fixed
 
 - **Placeholder translated twice (profiler missing message):** `TagType` put the already translated placeholder in
@@ -37,6 +42,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   the theme); the frontend data attribute `data-nowo-tag-input-placeholder-value` stays translated by the type.
   Without a translator, or with `translation_domain: false`, both keep the previous values. Test rendering the widget
   with a `DataCollectorTranslator` (en / es) asserting no missing message; `symfony/translation` added to require-dev.
+
+[1.5.1]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.5.1
 
 ## [1.5.0] - 2026-10-13
 
@@ -307,7 +314,7 @@ First public release of **TagInputBundle** on [GitHub](https://github.com/nowo-t
 - CI (PHPUnit, PHP-CS-Fixer, PHPStan, Rector dry-run, coverage), release workflows, Dependabot (Composer, GitHub Actions, npm), and Scrutinizer integration.
 - Alignment with Nowo bundle standards (`REQ-*` traceability, Makefile `release-check`, Engram MCP).
 
-[Unreleased]: https://github.com/nowo-tech/TagInputBundle/compare/v1.1.1...HEAD
+[Unreleased]: https://github.com/nowo-tech/TagInputBundle/compare/v1.5.1...HEAD
 [1.0.6]: https://github.com/nowo-tech/TagInputBundle/compare/v1.0.5...v1.0.6
 [1.0.5]: https://github.com/nowo-tech/TagInputBundle/compare/v1.0.4...v1.0.5
 [1.0.4]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.0.4
