@@ -30,6 +30,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Documentation
+
+- Documentation: wave-1 REQ compliance — README section order (Quick usage before Version information, License section), canonical FrankenPHP claim, documentation list order (extras under Additional documentation), CONTRIBUTING Cursor Agent queue settings (REQ-IDE-006), demo compose project name `tag-input-bundle-demo-symfony-8`, tables of contents on long docs, Spec Kit inventory refresh (34/34, `TagPattern`).
+
 ## [1.5.1] - 2026-10-18
 
 Placeholder translated once (no missing message). See [UPGRADING](UPGRADING.md#to-151).

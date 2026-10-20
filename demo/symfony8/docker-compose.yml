@@ -1,4 +1,4 @@
-name: tag-input-demo-symfony8
+name: tag-input-bundle-demo-symfony-8
 
 services:
   php:

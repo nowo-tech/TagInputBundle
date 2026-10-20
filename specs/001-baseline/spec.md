@@ -13,6 +13,7 @@
 
 - **2026-09-03:** Widget host is `<nowo-tag-input>` (custom element, light DOM); Stimulus `data-controller="nowo-tag-input"` still initializes.
 - **2026-09-25:** Confirmed **100% compatible** with FrankenPHP worker + `FRANKENPHP_RESET_KERNEL=false` (Scenario B). Shared `TagType` stays stateless (`readonly` defaults); see [`docs/FRANKENPHP-WORKER-AUDIT.md`](../../docs/FRANKENPHP-WORKER-AUDIT.md) and REQ-FP-001.
+- **2026-10-20:** Inventory refreshed after v1.5.x: `Form/TagPattern.php` (FR-FORM-004) added; 34/34 production files mapped.
 
 ---
 
@@ -79,6 +80,7 @@ As an integrator, I pick a Symfony form theme matching my CSS framework and load
 - **FR-FORM-001**: `TagType` MUST extend `TextType`, expose options (`container_class`, `input_class`, `placeholder`, `value_format`, `trim`, `pattern`, `whitelist`, `duplicates`, `max_tags`, `dropdown_enabled`), attach `TagsToValueTransformer`, and set Stimulus/data attributes on the view.
 - **FR-FORM-002**: `TagsToValueTransformer` MUST convert between view string and model (`array<string>` or comma-separated string), applying trim, pattern, whitelist, duplicate, and max-tag rules.
 - **FR-FORM-003**: `ValueFormat` enum MUST define `array` and `string` backed cases used by transformer and config.
+- **FR-FORM-004**: `TagPattern` MUST turn the delimiter-less `pattern` option (shared with the Tagify client as a JS RegExp source) into a PCRE regex: unescaped `/` are escaped and the `u` flag is added so multibyte tags match per character.
 
 ### Form themes
 
@@ -116,7 +118,7 @@ As an integrator, I pick a Symfony form theme matching my CSS framework and load
 
 ## Success Criteria
 
-- **SC-001**: 100% of production files in `src/` appear in [`code-inventory.md`](code-inventory.md) with requirement IDs (33/33 mapped; `*.test.ts` excluded).
+- **SC-001**: 100% of production files in `src/` appear in [`code-inventory.md`](code-inventory.md) with requirement IDs (34/34 mapped, audited 2026-10-20; `*.test.ts` excluded).
 - **SC-002**: Documented config keys match `Configuration.php`.
 - **SC-003**: `composer qa` passes (PHPUnit, PHPStan, Vitest).
 - **SC-004**: Tag field round-trips array and string formats in demo apps.

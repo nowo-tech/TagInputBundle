@@ -16,6 +16,14 @@ nowo_tag_input:
   form_theme: 'bootstrap_5_layout.html.twig'
 ```
 
+## Table of contents
+
+- [Options](#options)
+- [form_theme](#form_theme)
+- [Translations](#translations)
+  - [How to override (application)](#how-to-override-application)
+- [Twig overrides](#twig-overrides)
+
 ## Options
 
 | Key | Default | Description |

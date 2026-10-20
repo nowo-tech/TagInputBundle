@@ -2,11 +2,11 @@
 
 **Baseline spec**: [`spec.md`](spec.md)  
 **Package**: `nowo-tech/tag-input-bundle`  
-**Last audited**: 2026-09-25
+**Last audited**: 2026-10-20
 
 This file proves that **every production source artifact** under `src/` is referenced by the baseline specification. Vitest sources (`*.test.ts`) and demo trees are out of Packagist scope.
 
-## PHP classes (`src/**/*.php`)
+## PHP classes
 
 | Source file | Spec section | Requirement IDs |
 | --- | --- | --- |
@@ -17,6 +17,7 @@ This file proves that **every production source artifact** under `src/` is refer
 | `Form/TagType.php` | Tag form type | FR-FORM-001, FR-FP-001 |
 | `Form/DataTransformer/TagsToValueTransformer.php` | Model/view transform | FR-FORM-002, FR-FP-001 |
 | `Form/ValueFormat.php` | Value format enum | FR-FORM-003 |
+| `Form/TagPattern.php` | `pattern` option → PCRE (escaped delimiter, `u` flag) | FR-FORM-004 |
 
 ## TypeScript & CSS production (`src/Resources/assets/src/`)
 
@@ -73,12 +74,12 @@ This file proves that **every production source artifact** under `src/` is refer
 
 | Category | Files | Mapped |
 | --- | ---: | ---: |
-| PHP classes | 7 | 7 |
+| PHP classes | 8 | 8 |
 | TS/CSS production | 5 | 5 |
 | Legacy JS/CSS | 2 | 2 |
 | YAML config | 1 | 1 |
 | Twig themes | 11 | 11 |
 | Translations | 7 | 7 |
-| **Total production sources** | **33** | **33** |
+| **Total production sources** | **34** | **34** |
 
-Excluded from count: `Resources/assets/src/*.test.ts` (Vitest only).
+Excluded from count: `Resources/assets/src/*.test.ts` (2 Vitest files). Audit command: `git ls-files src | grep -v '\.test\.ts$' | wc -l` → 34.

@@ -6,10 +6,6 @@
 
 Symfony `FormType` for multi-tag text inputs powered by [Tagify](https://github.com/yairEO/tagify).
 
-![FrankenPHP Friendly Worker Mode](docs/images/frankenphp-friendly.png)
-
-This bundle is **100% compatible** with FrankenPHP **worker** mode when the host runs with **`FRANKENPHP_RESET_KERNEL=false`** (sticky Kernel). See the [worker audit](docs/FRANKENPHP-WORKER-AUDIT.md).
-
 <table>
   <tr>
     <td align="center" width="50%">
@@ -23,6 +19,11 @@ This bundle is **100% compatible** with FrankenPHP **worker** mode when the host
   </tr>
 </table>
 
+![FrankenPHP Friendly Worker Mode](docs/images/frankenphp-friendly.png)
+
+This bundle is **FrankenPHP worker mode friendly**.
+
+It is **100% compatible** with FrankenPHP **worker** mode when the host runs with **`FRANKENPHP_RESET_KERNEL=false`** (sticky Kernel). See the [worker audit](docs/FRANKENPHP-WORKER-AUDIT.md).
 
 ## Features
 
@@ -31,10 +32,6 @@ This bundle is **100% compatible** with FrankenPHP **worker** mode when the host
 - Model value as `array<string>` or comma-separated `string`.
 - Whitelist, max tags, pattern validation, duplicates, and dropdown suggestions.
 - TypeScript + Vite assets bundling Tagify in `src/Resources/assets`.
-
-## Version information
-
-Current stable release: **v1.2.1** ([changelog](docs/CHANGELOG.md)).
 
 ## Quick usage
 
@@ -60,11 +57,14 @@ Run `php bin/console assets:install public` after installing the bundle.
 
 The submitted value is an array of strings by default, e.g. `['php', 'symfony']`.
 
+## Version information
+
+Current stable release: **v1.2.1** ([changelog](docs/CHANGELOG.md)).
+
 ## Documentation
 
 - [Installation](docs/INSTALLATION.md)
 - [Configuration](docs/CONFIGURATION.md)
-- [PSR evaluation (REQ-CS-007)](docs/PSR.md)
 - [Usage](docs/USAGE.md)
 - [Contributing](docs/CONTRIBUTING.md)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
@@ -72,13 +72,14 @@ The submitted value is an array of strings by default, e.g. `['php', 'symfony']`
 - [Upgrading](docs/UPGRADING.md)
 - [Release](docs/RELEASE.md)
 - [Security](docs/SECURITY.md)
-- [FrankenPHP worker audit (`reset_kernel: false`)](docs/FRANKENPHP-WORKER-AUDIT.md)
 - [Engram](docs/ENGRAM.md)
 - [Spec-driven development](docs/SPEC-DRIVEN-DEVELOPMENT.md)
 - [GitHub Spec Kit](docs/SPEC-KIT.md)
 
 ### Additional documentation
 
+- [PSR evaluation (REQ-CS-007)](docs/PSR.md)
+- [FrankenPHP worker audit (`reset_kernel: false`)](docs/FRANKENPHP-WORKER-AUDIT.md)
 - [GitHub Actions CI requirements](docs/GITHUB_CI.md)
 - [Demo notes](docs/DEMO-FRANKENPHP.md)
 
@@ -87,3 +88,7 @@ The submitted value is an array of strings by default, e.g. `['php', 'symfony']`
 - PHP: 100%
 - TS/JS: 96%
 - Python: N/A
+
+## License
+
+This bundle is released under the MIT License — see [LICENSE](LICENSE).
