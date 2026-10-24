@@ -33,6 +33,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Developer tooling: `make release-check` runs the full REQ-MAKE-002 chain with `ensure-up` first, then the
+  Cursor co-author, new `check-open-prs` (REQ-REL-003), Twig `extra` and new `check-no-raw-html-form` (REQ-TWIG-005)
+  gates, composer-sync, cs-fix, cs-check, rector-dry, phpstan, igor, test-coverage, the demo release-check and test-ts.
 - Demo: `tag_demo/show.html.twig` renders the form body through the child loop (`{% for child in form %}` +
   `not child.rendered` + `form_row(child)`) instead of `form_row(form.tags)`, per REQ-TWIG-003.
 
