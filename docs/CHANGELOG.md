@@ -31,6 +31,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- Demo: `tag_demo/show.html.twig` renders the form body through the child loop (`{% for child in form %}` +
+  `not child.rendered` + `form_row(child)`) instead of `form_row(form.tags)`, per REQ-TWIG-003.
+
 ## [1.5.2] - 2026-10-20
 
 Dependency refresh (bundle and demos), php-cs-fixer ParallelConfig(2). See [UPGRADING](UPGRADING.md#to-152).
