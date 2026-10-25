@@ -38,6 +38,21 @@ The field value is an array of strings by default, for example `['php', 'symfony
 
 Use `value_format => ValueFormat::STRING` to receive a comma-separated string instead.
 
+**Forms (REQ-TWIG-003 / REQ-TWIG-005):** host pages and the demo render the form that contains this field only through a PHP Form Type and the Twig form helpers, with the rendered-aware child loop:
+
+```twig
+{{ form_start(form) }}
+    {% for child in form %}
+        {% if not child.rendered %}
+            {{ form_row(child) }}
+        {% endif %}
+    {% endfor %}
+    <button type="submit">Save</button>
+{{ form_end(form) }}
+```
+
+Hosts and demos must not reintroduce raw `<form>` / `<input>` / `<textarea>` / `<select>` markup; `make check-no-raw-html-form` (part of `make release-check`) fails when bundle or demo Twig contains them.
+
 ## Overriding templates (REQ-TWIG-001)
 
 The bundle registers the Twig namespace **`@NowoTagInputBundle/`**. Application files under **`templates/bundles/NowoTagInputBundle/`** **always win** over the copies inside the package (`TwigPathsPass` adds the bundle views path after application paths so your copies are tried first).
