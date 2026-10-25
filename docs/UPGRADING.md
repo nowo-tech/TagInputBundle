@@ -23,6 +23,7 @@
 - [1.0.0 (2026-07-05)](#100-2026-07-05)
 - [Breaking changes](#breaking-changes)
 - [Unreleased](#unreleased)
+- [To 1.5.3](#to-153)
 - [To 1.5.2](#to-152)
 - [To 1.5.1](#to-151)
 - [To 1.3.0](#to-130)
@@ -239,6 +240,14 @@ When a future release introduces BC breaks, this file will include:
 - migration steps
 
 ## Unreleased
+
+## To 1.5.3
+
+From **1.5.2**:
+
+```bash
+composer update nowo-tech/tag-input-bundle
+```
 
 ## To 1.5.2
 

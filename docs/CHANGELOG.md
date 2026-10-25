@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## Table of contents
 
 - [[Unreleased]](#unreleased)
+- [[1.5.3] - 2026-10-25](#153---2026-10-25)
 - [[1.5.2] - 2026-10-20](#152---2026-10-20)
 - [[1.5.1] - 2026-10-18](#151---2026-10-18)
 - [[1.5.0] - 2026-10-13](#150---2026-10-13)
@@ -31,6 +32,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [1.5.3] - 2026-10-25
+
+Reproducible JS bundle: the build stamp is a hash of the sources instead of the build time. See [UPGRADING](UPGRADING.md#to-153).
+
 ### Changed
 
 - **Assets:** reproducible bundle build. `__TAG_INPUT_BUILD_TIME__` now holds a build id (a hash of the TypeScript/CSS sources and `pnpm-lock.yaml`) instead of the build time, so rebuilding unchanged sources (`make assets`, `make release-check`) no longer rewrites the committed JS; the console line reads `script loaded, build: <id>`.
@@ -39,6 +44,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   gates, composer-sync, cs-fix, cs-check, rector-dry, phpstan, igor, test-coverage, the demo release-check and test-ts.
 - Demo: `tag_demo/show.html.twig` renders the form body through the child loop (`{% for child in form %}` +
   `not child.rendered` + `form_row(child)`) instead of `form_row(form.tags)`, per REQ-TWIG-003.
+
+[1.5.3]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.5.3
 
 ## [1.5.2] - 2026-10-20
 
@@ -339,7 +346,7 @@ First public release of **TagInputBundle** on [GitHub](https://github.com/nowo-t
 - CI (PHPUnit, PHP-CS-Fixer, PHPStan, Rector dry-run, coverage), release workflows, Dependabot (Composer, GitHub Actions, npm), and Scrutinizer integration.
 - Alignment with Nowo bundle standards (`REQ-*` traceability, Makefile `release-check`, Engram MCP).
 
-[Unreleased]: https://github.com/nowo-tech/TagInputBundle/compare/v1.5.2...HEAD
+[Unreleased]: https://github.com/nowo-tech/TagInputBundle/compare/v1.5.3...HEAD
 [1.0.6]: https://github.com/nowo-tech/TagInputBundle/compare/v1.0.5...v1.0.6
 [1.0.5]: https://github.com/nowo-tech/TagInputBundle/compare/v1.0.4...v1.0.5
 [1.0.4]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.0.4
