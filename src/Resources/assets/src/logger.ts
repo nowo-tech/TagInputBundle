@@ -1,12 +1,12 @@
 /** Options for {@link createBundleLogger}. */
 export type BundleLoggerOptions = {
-  /** Optional build timestamp shown when the script loads. */
+  /** Optional build id shown when the script loads. */
   buildTime?: string;
 };
 
 /** Console logger with optional debug mode for bundle assets. */
 export type BundleLogger = {
-  /** Logs a one-time script-loaded message (includes build time when set). */
+  /** Logs a one-time script-loaded message (includes build id when set). */
   scriptLoaded: () => void;
   /** Enables or disables debug/info/warn/error output. */
   setDebug: (enabled: boolean) => void;
@@ -58,7 +58,7 @@ export function createBundleLogger(name: string, options: BundleLoggerOptions = 
     scriptLoaded(): void {
       if (buildTime !== undefined && buildTime !== '') {
         console.log(
-          `%c${EMOJI.script} ${prefix} script loaded, build time: %c${buildTime}`,
+          `%c${EMOJI.script} ${prefix} script loaded, build: %c${buildTime}`,
           STYLES.script,
           'color:#059669',
         );
