@@ -75,5 +75,6 @@ Before tagging a release, confirm:
 | **Cryptography** | N/A — no custom cryptography in this bundle. |
 | **Permissions / exposure** | Form fields inherit host-app authorization; no public routes in bundle. |
 | **Limits / DoS** | Use `max_tags` and application-level payload limits for large submissions. |
+| **AI security audit (REQ-SEC-004)** | Grade **Pass (good)** / risk **Low** (re-audit 2026-09-28: default `max_tags: 50`, submit overflow fails closed). Recorded in the Nowo monorepo `BUNDLES_SECURITY_ANALYSIS.md`. |
 
 Record confirmation in the release PR or tag notes.
