@@ -223,9 +223,9 @@ jobs:
 
       - name: Run tests with coverage
         run: |
-          echo "🧪 Running tests with coverage..."
+          echo "🧪 Running tests with coverage (gate: 100% lines/elements, REQ-TEST-003)..."
           rm -rf .phpunit.cache
-          composer test-coverage
+          composer test-coverage-100
           if [ $? -ne 0 ]; then
             echo "❌ ERROR: Tests failed"
             exit 1
@@ -245,3 +245,31 @@ jobs:
         with:
           files: coverage.xml
           fail_ci_if_error: false
+
+  frontend:
+    name: Frontend (Vitest coverage gate)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Setup pnpm
+        # Version comes from package.json "packageManager".
+        uses: pnpm/action-setup@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Install JS dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Test with coverage (REQ-TEST-003 thresholds in vitest.config.ts)
+        run: |
+          set -o pipefail
+          pnpm run test:coverage | tee coverage-ts.txt
+          ./.scripts/ts-coverage-percent.sh coverage-ts.txt
+
+      - name: Build assets
+        run: pnpm run build

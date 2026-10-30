@@ -15,8 +15,6 @@ up:
 	@$(MAKE) composer-install
 	$(DC) up -d
 	@echo "Waiting for FrankenPHP to stay up..."
-	@echo "  make test-e2e       Playwright e2e (REQ-DEMO-013)"
-	@echo "  make demo-screenshots  Refresh docs/images/demo/*.webp"
 	@ok=0; \
 	for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do \
 		if $(DOCKER_COMPOSE) exec -T php true 2>/dev/null; then ok=1; break; fi; \
@@ -73,7 +71,7 @@ verify:
 	@if [ ! -f .env ]; then cp .env.example .env 2>/dev/null || true; fi
 	@port=$$(grep '^PORT=' .env 2>/dev/null | cut -d= -f2 | tr -d '\r'); \
 	[ -z "$$port" ] && port=$$(grep '^PORT=' .env.example 2>/dev/null | cut -d= -f2 | tr -d '\r'); \
-	[ -z "$$port" ] && port=8011; \
+	[ -z "$$port" ] && port=8073; \
 	$(DOCKER_COMPOSE) up -d 2>/dev/null; sleep 8; \
 	code=$$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:$$port/demo 2>/dev/null || echo "000"); \
 	if [ "$$code" = "200" ]; then echo "OK (HTTP $$code)"; else echo "Failed (HTTP $$code)"; exit 1; fi
@@ -95,7 +93,7 @@ SERVICE_PHP := php
 -include $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../../../.scripts/Makefile.demo-update-deps.mk)
 
 # Paste into demo/symfony8/Makefile (REQ-DEMO-013). Uses official Playwright image.
-PLAYWRIGHT_IMAGE ?= mcr.microsoft.com/playwright:v1.63.0-jammy
+PLAYWRIGHT_IMAGE ?= mcr.microsoft.com/playwright:v1.64.1-jammy
 
 test-e2e: ensure-up
 	@mkdir -p e2e/node_modules

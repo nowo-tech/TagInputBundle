@@ -46,7 +46,7 @@ verify:
 demo-smoke:
 	@PORT=$$(grep "^PORT=" symfony8/.env 2>/dev/null | cut -d= -f2 | tr -d '\r'); \
 	[ -z "$$PORT" ] && PORT=$$(grep "^PORT=" symfony8/.env.example 2>/dev/null | cut -d= -f2 | tr -d '\r'); \
-	[ -z "$$PORT" ] && PORT=8011; \
+	[ -z "$$PORT" ] && PORT=8073; \
 	echo "Demo smoke: symfony8 (http://127.0.0.1:$$PORT/demo)"; \
 	$(MAKE) -C symfony8 up || exit 1; \
 	code=000; \

@@ -35,6 +35,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 
 - Docs: USAGE states that host and demo forms are Symfony Form Types rendered with `form_start` / the `not child.rendered` child loop / `form_end`, and that raw `<form>` / `<input>` must not be reintroduced; `check-no-raw-html-form` enforces it in `release-check` (REQ-TWIG-005 rule 9).
+- Tests: TypeScript coverage now measures every shipped source (including `logger.ts`) and reaches 100% lines (98.66% branches); `vitest.config.ts` enforces thresholds and CI runs a new `frontend` job (Vitest coverage gate + build) (REQ-TEST-003).
+- Tests: `composer test-coverage-100` (`.scripts/check-coverage.php`) fails below 100% Clover coverage; `make test-coverage` and the CI coverage job use it, and `make test-coverage` / `make test-ts` keep the test exit status instead of losing it in a pipe (REQ-TEST-003).
+- Tooling: `make validate-translations` runs `yaml-lint` plus `.scripts/validate-translations.php` (catalogue naming, 7 required locales, non-empty messages, key parity against `en`) and is part of `release-check` (REQ-MAKE-004).
+- Demo: the Symfony 8 demo port is 8073 everywhere (Compose fallback, `.env.test`, `DEFAULT_URI`, Makefiles, docs); Compose passes `PORT` into the container and lets `.env` override `APP_ENV` / `APP_DEBUG` (REQ-DEMO-005).
+- Demo: e2e Playwright image aligned with the locked `@playwright/test` 1.64.1.
+- Docs: `docs/DEMO-FRANKENPHP.md` documents the FrankenPHP files, starting the demo in development and in production mode, and a troubleshooting table (REQ-DEMO-002); README test coverage figures refreshed (REQ-TEST-007).
 
 ## [1.5.3] - 2026-10-25
 

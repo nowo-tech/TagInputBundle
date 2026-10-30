@@ -8,7 +8,7 @@ services:
     container_name: tag-input-demo-symfony8-php
     working_dir: /app
     ports:
-      - "${PORT:-8011}:80"
+      - "${PORT:-8073}:80"
     volumes:
       - .:/app
       - ../..:/var/tag-input-bundle
@@ -17,9 +17,10 @@ services:
       - composer-cache:/root/.composer/cache
     environment:
       - COMPOSER_ALLOW_SUPERUSER=1
-      - APP_ENV=dev
-      - APP_DEBUG=1
+      - APP_ENV=${APP_ENV:-dev}
+      - APP_DEBUG=${APP_DEBUG:-1}
       - APP_SECRET=${APP_SECRET:-demo-secret}
+      - PORT=${PORT:-8073}
       - FRANKENPHP_MODE=${FRANKENPHP_MODE:-worker}
     # Mitigate Docker/WSL DNS failures resolving repo.packagist.org (composer curl error 6).
     dns:

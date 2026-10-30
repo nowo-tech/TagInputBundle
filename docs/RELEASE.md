@@ -20,11 +20,10 @@ Use this checklist when cutting a new version. The workflow [.github/workflows/r
    - `make validate` (Composer metadata).
    - `make update-deps` (refresh Composer lock files in bundle and demos before cutting a maintenance release).
 
-   If `release-check-demos` fails because Docker cannot bind the default demo HTTP ports (`8010` / `8011`), stop the conflicting containers or run the demos with another port, for example:
+   If `release-check-demos` fails because Docker cannot bind the default demo HTTP port (`8073`), stop the conflicting containers or run the demos with another port, for example:
 
    ```bash
-   (cd demo/symfony8 && PORT=18010 make release-check)
-   (cd demo/symfony8 && PORT=18011 make release-check)
+   (cd demo/symfony8 && PORT=18073 make release-check)
    ```
 
 5. **Commit**

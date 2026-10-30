@@ -1,12 +1,15 @@
 # Tag Input Bundle — Demo (Symfony 8)
 
-This demo runs with **FrankenPHP** (Caddy, HTTP on port 80). In **dev** (`APP_ENV=dev`), worker mode is disabled so each request runs in a new PHP process and **code/template changes are visible on refresh** without restarting the container.
+This demo runs with **FrankenPHP** (Caddy, HTTP on port 80, published on the host as `PORT`, default **8073**). The runtime is
+selected by `FRANKENPHP_MODE` in `.env` (`worker` by default, `classic` for one PHP process per request); with `watch` in the
+worker Caddyfile, code/template changes are picked up on refresh. Dev/production start and troubleshooting:
+[docs/DEMO-FRANKENPHP.md](../../docs/DEMO-FRANKENPHP.md).
 
 ## Quick start
 
 ```bash
 make up
-# Open http://localhost:8011 (or the PORT set in .env)
+# Open http://localhost:8073 (or the PORT set in .env)
 ```
 
 ## Demo URLs
