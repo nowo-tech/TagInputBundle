@@ -85,8 +85,10 @@ Current stable release: **v1.2.1** ([changelog](docs/CHANGELOG.md)).
 
 ## Tests and coverage
 
-- PHP: 100%
-- TS/JS: 96%
+PHPUnit unit/integration tests (`make test`, `make test-coverage`) and Vitest + happy-dom tests for the TypeScript assets (`make test-ts`). Both suites run in CI with enforced gates (REQ-TEST-003): PHP Clover coverage must stay at 100% (`composer test-coverage-100`) and Vitest fails below the thresholds in `vitest.config.ts`.
+
+- PHP: 100% (lines)
+- TS/JS: 100% (lines; 98.66% branches)
 - Python: N/A
 
 ## License

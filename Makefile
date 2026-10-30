@@ -60,13 +60,17 @@ assets: ensure-up
 test: ensure-up
 	$(COMPOSE) exec -T $(SERVICE_PHP) composer test
 
+# REQ-TEST-003: fails when PHPUnit fails or Clover line/element coverage is below 100% (exit status kept through tee).
 test-coverage: ensure-up
-	$(COMPOSE) exec -T $(SERVICE_PHP) composer test-coverage | tee coverage-php.txt
+	bash -o pipefail -c '$(COMPOSE) exec -T $(SERVICE_PHP) composer test-coverage-100 | tee coverage-php.txt'
 	./.scripts/php-coverage-percent.sh coverage-php.txt
 
+# REQ-TEST-003: fails when Vitest coverage is under the vitest.config.ts thresholds; exit status kept (no pipe).
 test-ts: ensure-up
-	$(COMPOSE) exec -T $(SERVICE_PHP) pnpm run test:coverage | tee coverage-ts.txt
-	./.scripts/ts-coverage-percent.sh coverage-ts.txt
+	@rc=0; $(COMPOSE) exec -T -e CI=true $(SERVICE_PHP) pnpm run test:coverage > coverage-ts.txt 2>&1 || rc=$$?; \
+	cat coverage-ts.txt; \
+	./.scripts/ts-coverage-percent.sh coverage-ts.txt; \
+	exit $$rc
 
 assets-test: test-ts
 
@@ -114,7 +118,7 @@ igor: ensure-up
 	$(COMPOSE) exec -T php composer igor
 
 # REQ-MAKE-002 order.
-release-check: ensure-up check-no-cursor-coauthor check-open-prs check-twig-extra check-no-raw-html-form composer-sync cs-fix cs-check rector-dry phpstan igor test-coverage release-check-demos test-ts
+release-check: ensure-up check-no-cursor-coauthor check-open-prs check-twig-extra check-no-raw-html-form composer-sync cs-fix cs-check rector-dry phpstan igor validate-translations test-coverage release-check-demos test-ts
 
 clean:
 	rm -rf vendor coverage coverage-ts .phpunit.cache coverage-php.txt coverage-ts.txt
@@ -125,8 +129,10 @@ update: ensure-up
 validate: ensure-up
 	$(COMPOSE) exec -T $(SERVICE_PHP) composer validate --strict
 
+# REQ-MAKE-004: YAML lint + catalogue naming, required locales, non-empty messages and key parity against en.
 validate-translations: ensure-up
-	$(COMPOSE) exec -T $(SERVICE_PHP) php -r 'require "vendor/autoload.php"; foreach (glob("src/Resources/translations/*.yaml") as $$f) { Symfony\Component\Yaml\Yaml::parseFile($$f); } echo "OK\n";'
+	$(COMPOSE) exec -T $(SERVICE_PHP) php vendor/bin/yaml-lint src/Resources/translations
+	$(COMPOSE) exec -T $(SERVICE_PHP) php .scripts/validate-translations.php
 
 
 setup-hooks:

@@ -60,6 +60,40 @@ describe('tag-input entrypoint', () => {
     expect(addEventListenerSpy).toHaveBeenCalledWith('DOMContentLoaded', expect.any(Function));
   });
 
+  it('initializes fields once DOMContentLoaded fires', async () => {
+    setReadyState('loading');
+    document.body.innerHTML = '<input data-controller="nowo-tag-input" />';
+
+    await import('./tag-input');
+    const input = document.querySelector('input') as HTMLInputElement;
+    expect(input.dataset.nowoTagInputInitialized).toBeUndefined();
+
+    document.dispatchEvent(new Event('DOMContentLoaded'));
+
+    expect(input.dataset.nowoTagInputInitialized).toBe('1');
+  });
+
+  it('includes the build id in the script-loaded message when defined', async () => {
+    vi.stubGlobal('__TAG_INPUT_BUILD_TIME__', 'build-123');
+    const log = vi.spyOn(console, 'log').mockImplementation(() => undefined);
+    try {
+      await import('./tag-input');
+      expect(log.mock.calls.some((call) => String(call[1] ?? '').length > 0 && String(call[0]).includes('build-123'))).toBe(true);
+    } finally {
+      log.mockRestore();
+      vi.unstubAllGlobals();
+    }
+  });
+
+  it('exposes the public API on window.NowoTagInput', async () => {
+    const entry = await import('./tag-input');
+    const api = (window as unknown as { NowoTagInput?: Record<string, unknown> }).NowoTagInput;
+
+    expect(api?.buildSettings).toBe(entry.buildSettings);
+    expect(typeof api?.Tagify).toBe('function');
+    expect(typeof api?.runInitAndObserve).toBe('function');
+  });
+
   it('ignores invalid whitelist and pattern values', async () => {
     const { buildSettings } = await import('./tag-input');
 
