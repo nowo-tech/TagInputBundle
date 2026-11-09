@@ -42,6 +42,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Demo: e2e Playwright image aligned with the locked `@playwright/test` 1.64.1.
 - Docs: `docs/DEMO-FRANKENPHP.md` documents the FrankenPHP files, starting the demo in development and in production mode, and a troubleshooting table (REQ-DEMO-002); README test coverage figures refreshed (REQ-TEST-007).
 
+### Documentation
+
+- USAGE: new section "Using it from a DDD / hexagonal application" (where the bundle sits in a hexagonal host, the ports, events and DTOs to build an anti-corruption layer on, and the known limitations).
+
 ## [1.5.3] - 2026-10-25
 
 Reproducible JS bundle: the build stamp is a hash of the sources instead of the build time. See [UPGRADING](UPGRADING.md#to-153).

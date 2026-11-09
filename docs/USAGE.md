@@ -17,6 +17,7 @@ Regenerate with `make -C demo/symfony8 demo-screenshots` (REQ-DEMO-013).
 - [Translations](#translations)
 - [Assets](#assets)
 - [Customization](#customization)
+- [Using it from a DDD / hexagonal application](#using-it-from-a-ddd--hexagonal-application)
 
 ## Form type
 
@@ -120,3 +121,35 @@ The widget is `<nowo-tag-input>` (light DOM: native input wrapped by Tagify). Le
 - `dropdown_enabled`: Tagify dropdown for whitelist suggestions
 - `placeholder`: input placeholder (translation key or text, translated with the field `translation_domain`; defaults to `nowo_tag_input.placeholder`, i.e. `tag.placeholder`)
 - `container_class`, `input_class`: CSS classes
+
+## Using it from a DDD / hexagonal application
+
+TagInputBundle is a **presentation-layer** component: one form type (`TagType`) and its assets. It has no entities, no
+persistence, no events and no Doctrine dependency, so it never touches your domain model.
+
+- **Model value:** a `list<string>` (default) or a comma-separated `string` (`value_format: string`). Trim, `pattern`,
+  `whitelist`, `duplicates` and `max_tags` are enforced again on the server when the form is submitted.
+- **Keep the domain free of the bundle:** bind the form to a command / DTO with a plain `array $tags` property, and let
+  your application service turn the strings into domain value objects or tag entities.
+
+```php
+final class TagArticleCommand
+{
+    /** @var list<string> */
+    public array $tags = [];
+}
+
+$builder->add('tags', TagType::class, ['max_tags' => 10]);   // form with data_class: TagArticleCommand
+
+// Application service (your code): map strings to the domain
+$article->retag(array_map(Tag::fromString(...), $command->tags));
+```
+
+- **Suggestions from your own repository:** query it when building the form and pass the result as `whitelist`.
+
+Known limitations:
+
+- The whitelist is a static array. There is no suggestion port or remote endpoint yet, so large or per-user vocabularies
+  must be resolved in your form type.
+- Domain rules about tags (allowed values, ownership, uniqueness across aggregates) stay in your domain. The field only
+  normalises input.
