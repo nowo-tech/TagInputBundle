@@ -26,12 +26,12 @@ async function boxOf(
 
 /** Navbar → main → profiler (union), padded. Fixed toolbar uses viewport bottom. */
 async function clipDemoFrame(page: import('@playwright/test').Page): Promise<Box> {
-  const nav = await boxOf(page, 'nav.navbar');
+  const nav = await boxOf(page, 'header.nowo-ui-header');
   const main = await boxOf(page, 'main');
   const profiler =
     (await boxOf(page, '.sf-toolbar')) ?? (await boxOf(page, '.sf-minitoolbar'));
   if (!nav || !main) {
-    throw new Error('Missing nav.navbar or main for TagInput screenshot clip');
+    throw new Error('Missing header.nowo-ui-header or main for TagInput screenshot clip');
   }
   const boxes = [nav, main, profiler].filter(Boolean) as Box[];
   const vp = page.viewportSize();
@@ -52,8 +52,8 @@ async function clipDemoFrame(page: import('@playwright/test').Page): Promise<Box
 async function prepareDemoPage(page: import('@playwright/test').Page) {
   await page.setViewportSize({ width: 1280, height: 640 });
   await page.goto('/demo/tags/basic');
-  await expect(page.locator('nav.navbar .navbar-brand')).toBeVisible();
-  await expect(page.locator('main .tag-demo-card nowo-tag-input').first()).toBeVisible();
+  await expect(page.locator('header.nowo-ui-header .nowo-ui-brand')).toBeVisible();
+  await expect(page.locator('main [data-testid="demo-case"] nowo-tag-input').first()).toBeVisible();
   await page
     .locator('.sf-toolbar .sf-toolbar-block, .sf-toolbar-status, .sf-minitoolbar')
     .first()
