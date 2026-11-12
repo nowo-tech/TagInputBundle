@@ -3,8 +3,8 @@
 | Field | Value |
 |-------|-------|
 | Package | `nowo-tech/tag-input-bundle` (`symfony-bundle`) |
-| Audited revision | `v1.2.1` / `HEAD` at audit time |
-| Audit date | 2026-09-25 |
+| Audited revision | `v1.5.3` (kept-alive test and rule-7 note re-checked 2026-11-12; earlier manual review kept below) |
+| Audit date | 2026-11-12 (first audit 2026-09) |
 | Target runtime | FrankenPHP **worker** with **`FRANKENPHP_RESET_KERNEL=false`** (sticky Kernel / “Friendly Worker”) |
 | Method | Manual review of every file under `src/` (form type, data transformer, DI extension, configuration, compiler pass, `services.yaml`, Twig themes, frontend assets) + PHPStan classic + worker-strict + hardening |
 | **Verdict** | ✅ **100% compatible** under Scenario B (`reset_kernel: false`) — no remediations required for sticky Kernel |
@@ -15,6 +15,7 @@
 - [Summary](#summary)
 - [Services reviewed](#services-reviewed)
 - [Findings](#findings)
+- [Kept-alive test (REQ-RUNTIME-002)](#kept-alive-test-req-runtime-002)
 - [Usage recommendations in worker mode](#usage-recommendations-in-worker-mode)
 - [Re-audit triggers](#re-audit-triggers)
 
@@ -69,6 +70,14 @@ No open findings.
 `TagType::buildView()` writes Tagify/`data-nowo-tag-input-*` attributes into the `FormView` of the current request only, and `configureOptions()` reads the `readonly` defaults. Under Scenario B the same `TagType` instance is reused; consecutive form builds with different options cannot poison later requests (covered by unit regression `testSharedInstanceDoesNotLeakOptionsAcrossConsecutiveBuilds`).
 
 Submitted tags are parsed and validated per `reverseTransform()` call; whitelist / pattern / `max_tags` come from immutable options on the per-build transformer, not from earlier requests.
+
+## Kept-alive test (REQ-RUNTIME-002)
+
+Test: `Nowo\TagInputBundle\Tests\Integration\Worker\WorkerKeptAliveKernelTest` (`tests/Integration/Worker/WorkerKeptAliveKernelTest.php`). It uses one booted kernel, host form with the tag widget built, submitted and rendered through Twig; `services_resetter` / `kernel.reset` is **never** called. It runs 1,200 iterations alternating two inputs (tags, options, placeholder), asserts every result contains only its own data (no value of the other input appears), and that memory growth after a 100-iteration warm-up stays below 4 MiB.
+
+Result: no state is carried between requests, so the bundle is **safe with kernel reset false**.
+
+Rule 7: the bundle never clears or resets the host's default EntityManager (it uses no persistence), and nothing in `TagType` depends on it.
 
 ## Usage recommendations in worker mode
 
