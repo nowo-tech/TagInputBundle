@@ -2,3 +2,11 @@ services:
     _defaults:
         autowire: true
         autoconfigure: true
+
+    # Public aliases so the kept-alive worker test can fetch the (private) form factory and Twig once and keep them.
+    test.form.factory:
+        alias: form.factory
+        public: true
+    test.twig:
+        alias: twig
+        public: true
