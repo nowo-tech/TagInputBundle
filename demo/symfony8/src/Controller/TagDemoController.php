@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Nowo\TagInputBundle\Form\TagType;
+use App\Form\TagDemoType;
 use Nowo\TagInputBundle\Form\ValueFormat;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -25,9 +25,7 @@ final class TagDemoController extends AbstractController
             'help'    => 'Free-form tags stored as a PHP array of strings.',
             'initial' => ['php', 'symfony'],
             'options' => [
-                'label'       => 'Tags',
-                'placeholder' => 'Add a tag and press Enter',
-                'input_class' => 'form-control',
+                'label' => 'Tags',
             ],
         ],
         'whitelist' => [
@@ -38,8 +36,6 @@ final class TagDemoController extends AbstractController
                 'label'            => 'Technologies',
                 'whitelist'        => ['php', 'symfony', 'twig', 'doctrine', 'vite'],
                 'dropdown_enabled' => true,
-                'placeholder'      => 'Pick from the list or type',
-                'input_class'      => 'form-control',
             ],
         ],
         'comma-string' => [
@@ -50,8 +46,6 @@ final class TagDemoController extends AbstractController
                 'label'        => 'Keywords',
                 'value_format' => ValueFormat::STRING,
                 'max_tags'     => 5,
-                'placeholder'  => 'Up to 5 keywords',
-                'input_class'  => 'form-control',
             ],
         ],
     ];
@@ -79,13 +73,10 @@ final class TagDemoController extends AbstractController
 
         $cfg = self::EXAMPLES[$slug];
 
-        $fieldOptions              = $cfg['options'];
-        $fieldOptions['help']      = $cfg['help'];
-        $fieldOptions['help_attr'] = ['class' => 'form-text text-muted small'];
-
-        $form = $this->createFormBuilder(['tags' => $cfg['initial']])
-            ->add('tags', TagType::class, $fieldOptions)
-            ->getForm();
+        $form = $this->createForm(TagDemoType::class, ['tags' => $cfg['initial']], [
+            'tag_options' => $cfg['options'],
+            'tag_help'    => $cfg['help'],
+        ]);
 
         $form->handleRequest($request);
 
