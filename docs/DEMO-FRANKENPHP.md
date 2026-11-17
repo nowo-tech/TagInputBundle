@@ -12,6 +12,15 @@ To run a demo, follow the README inside `demo/symfony8`.
 
 This bundle is **100% compatible** with FrankenPHP worker mode when `FRANKENPHP_RESET_KERNEL=false` (see the main [README](../README.md) banner and the [worker audit](FRANKENPHP-WORKER-AUDIT.md)). Demos default to `FRANKENPHP_MODE=worker`.
 
+## Table of contents
+
+- [Files](#files)
+- [Start the demo in development](#start-the-demo-in-development)
+- [Start the demo in production mode](#start-the-demo-in-production-mode)
+- [Troubleshooting](#troubleshooting)
+- [Demo smoke (REQ-TEST-011)](#demo-smoke-req-test-011)
+- [Switching classic vs worker (`FRANKENPHP_MODE`)](#switching-classic-vs-worker-frankenphp_mode)
+
 ## Files
 
 | File | Role |
