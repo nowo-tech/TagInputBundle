@@ -3,9 +3,7 @@ import { mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 /**
- * REQ-DEMO-013 — full demo frame: navbar + tag demo card + Symfony WebProfiler.
- *
- * Playwright clips to the viewport, so we enlarge the viewport before capture.
+ * REQ-DEMO-013 — full demo frame: the demo platform shell + tag demo card (toolbar hidden).
  */
 const outDir = process.env.SCREENSHOT_DIR
   ? resolve(process.env.SCREENSHOT_DIR)
@@ -13,52 +11,18 @@ const outDir = process.env.SCREENSHOT_DIR
 
 type Box = { x: number; y: number; width: number; height: number };
 
-async function boxOf(
-  page: import('@playwright/test').Page,
-  selector: string,
-): Promise<Box | null> {
-  const loc = page.locator(selector).first();
-  if ((await loc.count()) === 0) {
-    return null;
-  }
-  return loc.boundingBox();
-}
-
-/** Navbar → main → profiler (union), padded. Fixed toolbar uses viewport bottom. */
+/** The demo platform shell fills the viewport; the Symfony toolbar is hidden (it is not part of the demo). */
 async function clipDemoFrame(page: import('@playwright/test').Page): Promise<Box> {
-  const nav = await boxOf(page, 'header.nowo-ui-header');
-  const main = await boxOf(page, 'main');
-  const profiler =
-    (await boxOf(page, '.sf-toolbar')) ?? (await boxOf(page, '.sf-minitoolbar'));
-  if (!nav || !main) {
-    throw new Error('Missing header.nowo-ui-header or main for TagInput screenshot clip');
-  }
-  const boxes = [nav, main, profiler].filter(Boolean) as Box[];
-  const vp = page.viewportSize();
-  const x = Math.min(...boxes.map((b) => b.x));
-  const y = Math.min(...boxes.map((b) => b.y));
-  const right = Math.max(...boxes.map((b) => b.x + b.width), vp?.width ?? 0);
-  // Profiler is position:fixed — always extend clip to the viewport bottom.
-  const bottom = Math.max(...boxes.map((b) => b.y + b.height), vp?.height ?? 0);
-  const pad = 8;
-  return {
-    x: Math.max(0, x - pad),
-    y: Math.max(0, y - pad),
-    width: right - x + pad * 2,
-    height: bottom - y + pad * 2,
-  };
+  const vp = page.viewportSize() ?? { width: 1280, height: 800 };
+  return { x: 0, y: 0, width: vp.width, height: vp.height };
 }
 
 async function prepareDemoPage(page: import('@playwright/test').Page) {
-  await page.setViewportSize({ width: 1280, height: 640 });
+  await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto('/demo/tags/basic');
-  await expect(page.locator('header.nowo-ui-header .nowo-ui-brand')).toBeVisible();
+  await page.addStyleTag({ content: '.sf-toolbar,.sf-minitoolbar,[id^="sfwdt"]{display:none!important}' });
+  await expect(page.getByTestId('demo-platform')).toBeVisible();
   await expect(page.locator('main [data-testid="demo-case"] nowo-tag-input').first()).toBeVisible();
-  await page
-    .locator('.sf-toolbar .sf-toolbar-block, .sf-toolbar-status, .sf-minitoolbar')
-    .first()
-    .waitFor({ state: 'visible', timeout: 10000 })
-    .catch(() => {});
 }
 
 test.beforeAll(() => {
@@ -66,18 +30,14 @@ test.beforeAll(() => {
 });
 
 test.describe('TagInput screenshots (full demo context)', () => {
-  test('overview — navbar + tag demo card', async ({ page }) => {
+  test('overview — platform shell + tag demo card', async ({ page }) => {
     await prepareDemoPage(page);
     await expect(page.locator('nowo-tag-input .tagify__tag').first()).toBeVisible();
     const clip = await clipDemoFrame(page);
-    if (clip.height >= 400) {
-      await page.screenshot({ path: resolve(outDir, 'overview.png'), clip });
-    } else {
-      await page.screenshot({ path: resolve(outDir, 'overview.png'), fullPage: true });
-    }
+    await page.screenshot({ path: resolve(outDir, 'overview.png'), clip });
   });
 
-  test('interaction — navbar + new tag added', async ({ page }) => {
+  test('interaction — platform shell + new tag added', async ({ page }) => {
     await prepareDemoPage(page);
     const host = page.locator('main nowo-tag-input').first();
     const input = host.locator('.tagify__input').first();
@@ -88,10 +48,6 @@ test.describe('TagInput screenshots (full demo context)', () => {
       timeout: 5000,
     });
     const clip = await clipDemoFrame(page);
-    if (clip.height >= 400) {
-      await page.screenshot({ path: resolve(outDir, 'interaction.png'), clip });
-    } else {
-      await page.screenshot({ path: resolve(outDir, 'interaction.png'), fullPage: true });
-    }
+    await page.screenshot({ path: resolve(outDir, 'interaction.png'), clip });
   });
 });

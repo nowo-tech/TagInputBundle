@@ -1,13 +1,26 @@
-{#- REQ-DEMO-014: the demo shell is UiKit's admin layout with UiKit's default theme (nowo-ui.css from the bundle's own
-    asset package, no CSS framework, no CDN). The tag widget's stylesheet and script are the bundle's own assets. -#}
-{% extends '@NowoUiKit/layout/admin.html.twig' %}
-
+{#- REQ-DEMO-014: the demo runs inside UiKit's shared demo platform shell. This file only declares the demo. The tag
+    widget's stylesheet and script are the bundle's own assets. -#}
+{% extends '@NowoUiKit/demo_platform/layout.html.twig' %}
+{% set nowo_ui_demo_platform = {
+    bundle: 'Tag Input',
+    home_route: 'app_demo_index',
+    repository: 'https://github.com/nowo-tech/TagInputBundle',
+    translation_domain: false,
+    nav: [
+        {label: 'All demos', route: 'app_demo_index', section: 'Tag Input'},
+        {label: 'Basic tags (array value)', route: 'app_demo_tags', params: {slug: 'basic'}, section: 'Examples', testid: 'demo-nav-app_demo_tags-basic'},
+        {label: 'Whitelist with dropdown', route: 'app_demo_tags', params: {slug: 'whitelist'}, section: 'Examples', testid: 'demo-nav-app_demo_tags-whitelist'},
+        {label: 'Comma-separated string output', route: 'app_demo_tags', params: {slug: 'comma-string'}, section: 'Examples', testid: 'demo-nav-app_demo_tags-comma-string'},
+    ],
+} %}
 {% block nowo_ui_document_title %}{% block title %}Tag Input Demo{% endblock %}{% endblock %}
 
-{% block nowo_ui_navigation %}
-    <header class="nowo-ui-header" data-testid="demo-masthead">
-        <a class="nowo-ui-brand" href="{{ path('app_demo_index') }}">Tag Input Bundle Demo</a>
-    </header>
+{% block nowo_ui_styles %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/nowotaginput/tag-input.css') }}">
 {% endblock %}
 
-{% block nowo_ui_content %}{% block body %}{% endblock %}{% endblock %}
+{% block nowo_ui_scripts %}
+    {{ parent() }}
+    <script src="{{ asset('tag-input.js', 'nowo_tag_input') }}"></script>
+{% endblock %}

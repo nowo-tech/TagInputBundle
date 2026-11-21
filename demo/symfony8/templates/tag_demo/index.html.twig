@@ -8,13 +8,13 @@
 {% endblock %}
 
 {% block body %}
-    <section class="nowo-ui-card">
-        <div class="nowo-ui-card__body">
+    {% embed '@NowoUiKit/demo_platform/_section.html.twig' with {title: 'Examples', intro: 'Each example is one tag field with its own options.', kind: 'table'} %}
+        {% block section_body %}
             <table class="nowo-ui-data-table">
                 <tbody>
                     {% for slug, cfg in examples %}
                         <tr>
-                            <td>
+                            <td class="nowo-ui-cell--wrap">
                                 <a class="nowo-ui-link" href="{{ path('app_demo_tags', { slug: slug }) }}">{{ cfg.title }}</a>
                                 <div class="nowo-ui-muted">{{ cfg.help }}</div>
                             </td>
@@ -23,6 +23,6 @@
                     {% endfor %}
                 </tbody>
             </table>
-        </div>
-    </section>
+        {% endblock %}
+    {% endembed %}
 {% endblock %}
