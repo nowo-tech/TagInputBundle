@@ -266,7 +266,7 @@
             "dist": {
                 "type": "path",
                 "url": "/var/tag-input-bundle",
-                "reference": "7882abd0d7a99bd75d23def69bb157c001d2c0cb"
+                "reference": "cc3dce70601b67b0b2389441ea0392b19948f897"
             },
             "require": {
                 "php": ">=8.2 <8.6",
