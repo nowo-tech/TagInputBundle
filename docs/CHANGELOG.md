@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## Table of contents
 
 - [[Unreleased]](#unreleased)
+- [[1.5.4] - 2026-11-22](#154---2026-11-22)
 - [[1.5.3] - 2026-10-25](#153---2026-10-25)
 - [[1.5.2] - 2026-10-20](#152---2026-10-20)
 - [[1.5.1] - 2026-10-18](#151---2026-10-18)
@@ -32,6 +33,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [1.5.4] - 2026-11-22
+
 ### Fixed
 
 - **CSP:** `tag-input.js` no longer injects Tagify's CSS as an inline `<style>` element without a nonce (Vite inlined the CSS imports of the IIFE entry), which raised a `style-src-elem` violation on every page with a tag input under a strict CSP. The entry imports no CSS; the rules are only in `tag-input.css`, which hosts must load with a `<link>`. A test asserts the bundle creates no `<style>` element. See [UPGRADING](UPGRADING.md#to-unreleased-csp-stylesheet).
@@ -54,6 +57,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Documentation
 
 - USAGE: new section "Using it from a DDD / hexagonal application" (where the bundle sits in a hexagonal host, the ports, events and DTOs to build an anti-corruption layer on, and the known limitations).
+
+[1.5.4]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.5.4
 
 ## [1.5.3] - 2026-10-25
 
@@ -369,7 +374,7 @@ First public release of **TagInputBundle** on [GitHub](https://github.com/nowo-t
 - CI (PHPUnit, PHP-CS-Fixer, PHPStan, Rector dry-run, coverage), release workflows, Dependabot (Composer, GitHub Actions, npm), and Scrutinizer integration.
 - Alignment with Nowo bundle standards (`REQ-*` traceability, Makefile `release-check`, Engram MCP).
 
-[Unreleased]: https://github.com/nowo-tech/TagInputBundle/compare/v1.5.3...HEAD
+[Unreleased]: https://github.com/nowo-tech/TagInputBundle/compare/v1.5.4...HEAD
 [1.0.6]: https://github.com/nowo-tech/TagInputBundle/compare/v1.0.5...v1.0.6
 [1.0.5]: https://github.com/nowo-tech/TagInputBundle/compare/v1.0.4...v1.0.5
 [1.0.4]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.0.4
