@@ -131,3 +131,31 @@ describe('tag-input entrypoint', () => {
     expect(document.querySelector('.tagify')).toBeNull();
   });
 });
+
+describe('tag-input CSP safety', () => {
+  it('does not inject any <style> element when the entry loads', async () => {
+    const { stopObserving } = await import('./tag-input-lib');
+    stopObserving();
+    vi.resetModules();
+    document.head.innerHTML = '';
+    document.body.innerHTML = '<input data-controller="nowo-tag-input" value="a,b">';
+    setReadyState('complete');
+
+    await import('./tag-input');
+
+    expect(document.querySelectorAll('style')).toHaveLength(0);
+    expect(document.querySelectorAll('style[nonce]')).toHaveLength(0);
+  });
+
+  it('ships a JS bundle that never creates a <style> element (CSS comes from tag-input.css)', async () => {
+    const { readFileSync } = await import('node:fs');
+    const { join } = await import('node:path');
+    const publicDir = join(process.cwd(), 'src/Resources/public');
+    const js = readFileSync(join(publicDir, 'tag-input.js'), 'utf8');
+    const css = readFileSync(join(publicDir, 'tag-input.css'), 'utf8');
+
+    expect(js).not.toMatch(/createElement\((['"`])style\1\)/);
+    expect(js).not.toContain('<style');
+    expect(css).toContain('.tagify');
+  });
+});

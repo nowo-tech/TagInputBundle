@@ -4,8 +4,9 @@
  */
 
 import Tagify from '@yaireo/tagify';
-import '@yaireo/tagify/dist/tagify.css';
-import './tag-input.css';
+// No CSS imports here: Vite would inline them into the IIFE as a nonce-less runtime `<style>` element, which a strict
+// `style-src` CSP refuses. The CSS ships as `tag-input.css` (`.scripts/copy-tagify-css.mjs`); hosts load it with a
+// `<link>`.
 
 import { createBundleLogger } from './logger';
 import { ensureNowoTagInputDefined } from './nowo-tag-input-element';
