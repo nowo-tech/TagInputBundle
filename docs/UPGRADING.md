@@ -23,6 +23,7 @@
 - [1.0.0 (2026-07-05)](#100-2026-07-05)
 - [Breaking changes](#breaking-changes)
 - [Unreleased](#unreleased)
+- [To Unreleased (CSP stylesheet)](#to-unreleased-csp-stylesheet)
 - [To 1.5.3](#to-153)
 - [To 1.5.2](#to-152)
 - [To 1.5.1](#to-151)
@@ -240,6 +241,17 @@ When a future release introduces BC breaks, this file will include:
 - migration steps
 
 ## Unreleased
+
+## To Unreleased (CSP stylesheet)
+
+`tag-input.js` no longer injects the Tagify CSS at runtime (it was an inline `<style>` without a nonce, refused by a strict `style-src` CSP). **Hosts must load the stylesheet**, which they should already do:
+
+```twig
+<link rel="stylesheet" href="{{ asset('tag-input.css', 'nowo_tag_input') }}">
+<script src="{{ asset('tag-input.js', 'nowo_tag_input') }}"></script>
+```
+
+Run `php bin/console assets:install public` again. A host that only loaded the JS would now see an unstyled input.
 
 ## To 1.5.3
 

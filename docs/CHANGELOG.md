@@ -32,6 +32,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Fixed
+
+- **CSP:** `tag-input.js` no longer injects Tagify's CSS as an inline `<style>` element without a nonce (Vite inlined the CSS imports of the IIFE entry), which raised a `style-src-elem` violation on every page with a tag input under a strict CSP. The entry imports no CSS; the rules are only in `tag-input.css`, which hosts must load with a `<link>`. A test asserts the bundle creates no `<style>` element. See [UPGRADING](UPGRADING.md#to-unreleased-csp-stylesheet).
+
 ### Changed
 
 - Demo: runs in UiKit's demo platform shell (`nowo-tech/ui-kit-bundle` ^2.60); the demo's own header is gone and the pages use the shell page headers and section cards. Demo only, no bundle change.
