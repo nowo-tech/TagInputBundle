@@ -45,9 +45,9 @@ describe('createBundleLogger', () => {
     logger.warn('msg', err);
     logger.error('msg', 3);
 
-    expect(spies.debug.mock.calls[0].slice(2)).toEqual(['msg', '{"a":1}']);
-    expect(spies.info.mock.calls[0].slice(2)).toEqual(['msg', null]);
-    expect(spies.warn.mock.calls[0].slice(2)).toEqual(['msg', err]);
-    expect(spies.error.mock.calls[0].slice(2)).toEqual(['msg', 3]);
+    expect(spies.debug.mock.calls[0]?.slice(2)).toEqual(['msg', '{"a":1}']);
+    expect(spies.info.mock.calls[0]?.slice(2)).toEqual(['msg', null]);
+    expect(spies.warn.mock.calls[0]?.slice(2)).toEqual(['msg', err]);
+    expect(spies.error.mock.calls[0]?.slice(2)).toEqual(['msg', 3]);
   });
 });
