@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## Table of contents
 
 - [[Unreleased]](#unreleased)
+- [[1.6.0] - 2026-11-23](#160---2026-11-23)
 - [[1.5.4] - 2026-11-22](#154---2026-11-22)
 - [[1.5.3] - 2026-10-25](#153---2026-10-25)
 - [[1.5.2] - 2026-10-20](#152---2026-10-20)
@@ -33,6 +34,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [1.6.0] - 2026-11-23
+
 ### Changed
 
 - **Console**: the script-loaded line of `tag-input.js` now reads `📦 [tag-input] script loaded, build: 2026-11-23 14:05 UTC`: a readable UTC build time instead of the opaque source hash. The time comes from the committed `build-info.json` (`{sourceHash, builtAt}`): the source hash stays the change detector, `builtAt` is reused while the sources are unchanged and renewed only when they change, so rebuilding unchanged sources never rewrites the committed assets (no wall-clock stamp, no git date).
@@ -40,6 +43,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Added
 
 - **Console**: quiet switch for the script-loaded line: `<html data-nowo-console="quiet">` or `globalThis.NOWO_CONSOLE = 'quiet'` prints nothing. The default is unchanged.
+
+[1.6.0]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.6.0
 
 ## [1.5.4] - 2026-11-22
 
@@ -382,7 +387,7 @@ First public release of **TagInputBundle** on [GitHub](https://github.com/nowo-t
 - CI (PHPUnit, PHP-CS-Fixer, PHPStan, Rector dry-run, coverage), release workflows, Dependabot (Composer, GitHub Actions, npm), and Scrutinizer integration.
 - Alignment with Nowo bundle standards (`REQ-*` traceability, Makefile `release-check`, Engram MCP).
 
-[Unreleased]: https://github.com/nowo-tech/TagInputBundle/compare/v1.5.4...HEAD
+[Unreleased]: https://github.com/nowo-tech/TagInputBundle/compare/v1.6.0...HEAD
 [1.0.6]: https://github.com/nowo-tech/TagInputBundle/compare/v1.0.5...v1.0.6
 [1.0.5]: https://github.com/nowo-tech/TagInputBundle/compare/v1.0.4...v1.0.5
 [1.0.4]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.0.4
