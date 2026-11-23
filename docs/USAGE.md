@@ -18,6 +18,7 @@ Regenerate with `make -C demo/symfony8 demo-screenshots` (REQ-DEMO-013).
 - [Assets](#assets)
 - [Customization](#customization)
 - [Using it from a DDD / hexagonal application](#using-it-from-a-ddd--hexagonal-application)
+- [Browser console](#browser-console)
 
 ## Form type
 
@@ -153,3 +154,7 @@ Known limitations:
   must be resolved in your form type.
 - Domain rules about tags (allowed values, ownership, uniqueness across aggregates) stay in your domain. The field only
   normalises input.
+
+## Browser console
+
+The bundle's script logs one line when it loads (`📦 [tag-input] script loaded, build: 2026-11-23 14:05 UTC`) so a developer can tell which build a page runs. To silence it, set `<html data-nowo-console="quiet">` or `globalThis.NOWO_CONSOLE = 'quiet'` before the script loads; nothing is printed then. The default is unchanged.
