@@ -23,6 +23,7 @@
 - [1.0.0 (2026-07-05)](#100-2026-07-05)
 - [Breaking changes](#breaking-changes)
 - [Unreleased](#unreleased)
+- [To 1.6.1](#to-161)
 - [To 1.6.0](#to-160)
 - [To 1.5.4](#to-154)
 - [To Unreleased (CSP stylesheet)](#to-unreleased-csp-stylesheet)
@@ -243,6 +244,14 @@ When a future release introduces BC breaks, this file will include:
 - migration steps
 
 ## Unreleased
+
+## To 1.6.1
+
+From **1.6.0**:
+
+```bash
+composer update nowo-tech/tag-input-bundle
+```
 
 ## To 1.6.0
 

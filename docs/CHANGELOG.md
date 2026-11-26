@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## Table of contents
 
 - [[Unreleased]](#unreleased)
+- [[1.6.1] - 2026-11-26](#161---2026-11-26)
 - [[1.6.0] - 2026-11-23](#160---2026-11-23)
 - [[1.5.4] - 2026-11-22](#154---2026-11-22)
 - [[1.5.3] - 2026-10-25](#153---2026-10-25)
@@ -34,9 +35,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [1.6.1] - 2026-11-26
+
 ### Fixed
 
 - The `📦 [name] script loaded` console banner now prints once per page, even when the script is loaded twice: per-name once-guard (a `Set` on `globalThis`) in `logger.ts`, with a Vitest test and rebuilt assets (REQ-ASSETS-005).
+
+[1.6.1]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.6.1
 
 ## [1.6.0] - 2026-11-23
 
@@ -391,7 +396,7 @@ First public release of **TagInputBundle** on [GitHub](https://github.com/nowo-t
 - CI (PHPUnit, PHP-CS-Fixer, PHPStan, Rector dry-run, coverage), release workflows, Dependabot (Composer, GitHub Actions, npm), and Scrutinizer integration.
 - Alignment with Nowo bundle standards (`REQ-*` traceability, Makefile `release-check`, Engram MCP).
 
-[Unreleased]: https://github.com/nowo-tech/TagInputBundle/compare/v1.6.0...HEAD
+[Unreleased]: https://github.com/nowo-tech/TagInputBundle/compare/v1.6.1...HEAD
 [1.0.6]: https://github.com/nowo-tech/TagInputBundle/compare/v1.0.5...v1.0.6
 [1.0.5]: https://github.com/nowo-tech/TagInputBundle/compare/v1.0.4...v1.0.5
 [1.0.4]: https://github.com/nowo-tech/TagInputBundle/releases/tag/v1.0.4
